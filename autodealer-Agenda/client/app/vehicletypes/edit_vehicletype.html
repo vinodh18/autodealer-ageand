@@ -1,0 +1,32 @@
+<!-- Page content -->
+
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Vehicle Type</h1>
+        <small class="text-muted">Edit VehicleType</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-car icon text-info-dker"></i> VehicleTypes</a></li>
+  <li>Edit VehicleType</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditVehicletype()">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <form name="vehicletypeForm" action="#" ng-submit = "updateVehicletype()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Edit VehicleType
+            </div>
+            <div class="panel-body">
+                    <div ng-include='"app/vehicletypes/form.html"'></div>
+             </div>
+          <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="vehicletypeForm.$invalid"> <i class="fa fa-edit"></i> Update</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>    
+        </div>
+        </form>
+    </div>    
+       <!-- END Page Content -->

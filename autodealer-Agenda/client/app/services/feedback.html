@@ -1,0 +1,39 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Services</h1>
+  <small class="text-muted">Manage Services</small>
+</div>
+
+<div class="wrapper-md" ng-init="initfeedback()">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">    
+       <!--  Services : {{services.total}} -->
+        <div class="blog-post">
+          <div ng-repeat="service in services">
+            <!-- <div ng-repeat="service_detail in service.service_details"> -->
+            <!-- <h4 class="m-t-none text-primary" >Service: {{service_detail.service_type.name}}</h4> -->
+            <p class="b wrapper-md  bg-light ">{{service.feedback}}</p>
+            <div class=" label bg-danger">Customer Name: {{service.customer.name}}</div>
+            <!-- <br><div class="pull-right">Customer Rating: {{service.customer_rating}}</div> -->
+            <div class="pull-right">
+            <rating ng-model="service.customer_rating" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null" style="color:gold"></rating>
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+          <!-- </div> -->
+        </div>
+      </div>
+      <pagination boundary-links="true" class="pull-right" total-items="totalItems" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxSize"></pagination>
+     <!--  <pagination direction-links="true" boundary-links="true" class="pull-right" total-items="totalItems" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxSize"></pagination> -->
+</div>
+</div>
+
+      </div>
+  
+    <div class="table-responsive">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+		{{alert.msg}}</alert>
+      
+    </div>
+  
+

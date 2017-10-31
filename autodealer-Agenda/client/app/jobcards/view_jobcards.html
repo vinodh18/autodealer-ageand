@@ -1,0 +1,331 @@
+ <div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="initViewJobCard()">
+  <div class="col">{{jobCard.job_cards}}
+  <div style="background:url(assets/images/c3.jpg) center center; background-size:cover">
+      <div class="wrapper-lg bg-white-opacity">
+      <a ui-sref="^.list"><b>All Job Cards</b></a>
+       <div class="row m-t">
+          <div class="col-sm-4">
+            <div class="thumb-lg pull-left m-r">
+              <img src="{{modelImgURL}}" class="img-square" style="margin-top: 30%">
+              <!-- <img src="assets/images/a0.jpg" class="img-circle"> -->
+            </div>
+            <div class="clear m-b">
+              <div class="m-b m-t-sm">
+                <span class="h3 text-black">JobCard: {{jobCard.job_card_no}}</span>
+              </div>
+              <p class="m-b" style="color: #000">
+                Service Date: {{jobCard.service_date | date: 'MMM dd , yyyy'}}
+              </p>
+              <div class="label bg-{{jobCardStatus(jobCard.job_status)}}">{{jobCard.job_status}}</div>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div>
+              <div href class="m-b-md" style="display: flex;">
+                <span class="h2 pull-left block font-bold" style="color: #0E0D0D;">Reg No: {{jobCard.customer_vehicle.reg_no}}</span>
+              </div>
+              <div href class="m-b-md">
+                <span class="h2 pull-left block font-bold" style="color: #0E0D0D;">Amount: <i class="fa fa-rupee"></i> {{formatNumber(jobCard.total_amt)}}</span>
+              </div>
+              
+              <small class="pull-right">Drop&nbsp;<span class="badge bg-success"style="background-color: {{drop(jobCard.drop)}}">{{jobCard.drop}}</span></small>
+
+              <small class="pull-right" style="margin-right: 2%">Pick-Up&nbsp;<span class="badge bg-success" style="background-color: {{pickup(jobCard.pick_up)}}">{{jobCard.pick_up}}</span></small>
+
+            </div>
+          </div>
+        </div>
+        <div ng-hide="staffOrCustomer" class="row m-t" ng-if="jobCard.job_status == 'SCHEDULED'">
+          <button class="btn m-b-xs btn-sm btn-primary pull-right" ng-click="inprogressJobcard(jobCard._id)"><i class="fa fa-send"></i> Inprogress JobCard</button>
+        </div>
+        <div ng-hide="staffOrCustomer" class="row m-t" ng-if="jobCard.job_status == 'INPROGRESS'">
+          <button class="btn m-b-xs btn-sm btn-primary pull-right" ng-click="completeJobcard(jobCard._id)"><i class="fa fa-send"></i> Complete JobCard</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 customer_detail">
+        <h3>Customer Details
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+         <div ng-controller="CDModalCtrl"> 
+          <script type="text/ng-template" id="CDModalContent.html">
+            <div ng-include="'app/jobcards/edit_customer_jobcards.html'"></div>
+        </script>        
+        <button ng-hide="staffOrCustomer" class="btn m-b-xs btn-sm btn-primary btn-addon pull-right" ng-click="open(jobCard.customer)"><i class="fa fa-pencil"></i>Edit</button>
+        </div> 
+        </h3>
+        <p><b>{{jobCard.customer.name}}</b></p>
+        <p style="line-height: 2">
+        {{jobCard.customer.address}}
+        </p>
+        <p>
+          Telephone:  <div ng-repeat="phone in jobCard.customer.phone">
+          <p>{{phone}}</p>
+          </div>
+        </p>
+          <p>E-Mail:  {{jobCard.customer.email}}
+        </p>
+         <div class="row">
+        <div class="col-xs-12">
+          <div class="panel">
+            <div class="panel-heading pos-rlt b-b b-light">
+              <strong><h3>Job Cards</h3></strong>
+              <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+               <span class="m-l-sm pull-right" ng-controller="JCModalCtrl">
+        <script type="text/ng-template" id="JCModalContent.html">
+            <div ng-include="'app/jobcards/edit_master_jobcards.html'"></div>
+          </script>
+        <button ng-hide="staffOrCustomer" class="btn m-l-xs btn-xs btn-primary btn-addon pull-right" ng-click="open('lg',jobCard)"><i class="fa fa-plus" style="background-color: rgba(0,0,0,0);"></i>Add</button>
+              </span> 
+            </div>
+            <div ng-repeat="jobcard in jobCard.job_card">
+            <div class="panel-body">
+             <div class="panel jobmaster">
+             <h5>{{jobcard.desc}}</h5>
+             <div>{{jobcard.comments}}</div>
+             </div>             
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6 customer_vehicle">
+        <h3>Customer Vehicle
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+         <span ng-controller="CVModalCtrl">
+        <script type="text/ng-template" id="CVModalContent.html">
+            <div ng-include="'app/jobcards/edit_vehicle_jobcards.html'"></div>
+          </script>
+        <button ng-hide="staffOrCustomer" class="btn m-b-xs btn-sm btn-primary btn-addon pull-right" ng-click="open(jobCard.customer_vehicle)"><i class="fa fa-pencil"></i>Edit</button>
+        </span> 
+        </h3>     
+        <p>Vehicle Type: {{jobCard.customer_vehicle.vehicle_type.name}}</p>
+        <p>{{make.name}} {{model.name}} {{jobCard.customer_vehicle.year | date: 'yyyy'}}</p>
+        <p>Chassis No: {{jobCard.customer_vehicle.chassis_no}}</p>
+        <p>Engine No: {{jobCard.customer_vehicle.engine_no}}</p>
+        <p>Purchase Date: {{jobCard.customer_vehicle.purchase_date | date: 'yyyy-MM-dd'}}</p>
+        <p>Insurance Expiry Date: {{jobCard.customer_vehicle.insurance_expiry_date | date: 'yyyy-MM-dd'}}</p>
+        <b>Warranty:</b>
+        <p>{{warrantyType.name}}</p>
+        <p>From: {{jobCard.customer_vehicle.warranties.from | date: 'yyyy-MM-dd'}}
+        <span>To: {{jobCard.customer_vehicle.warranties.to | date: 'yyyy-MM-dd'}}</span></p>        
+      </div>
+    </div>
+   
+    <div class="row row-sm">
+    <div class="col-lg-12">
+      <div class="panel b-a">
+        <div class="panel-heading no-border">
+          <h2 class="text-u-c m-b-none">Part Charges
+         
+        <span ng-controller="PartsModalCtrl">
+        <script type="text/ng-template" id="partsModalContent.html">
+            <div ng-include="'app/jobcards/edit_part_jobcards.html'"></div>
+          </script>
+        <button ng-hide="isCustomer" class="pull-right btn btn-info font-bold m" ng-click="open('lg',jobCard)">Add Parts</button>
+        </span>
+          </h2>
+        </div>
+
+        <table class="table table-striped bg-white" style="margin-bottom: 0">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Description</th>
+          <th>Qty * Rate</th>
+          <th style="width: 1px;">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in parts.items">
+          <td>{{item.no}}</td>
+          <td>{{item.desc}}</td>
+          <td>{{item.qty}} * {{item.rate}}</td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(item.amt)}}</td>
+        </tr>
+        
+        <tr>
+          <td colspan="3" class="text-right no-border"><strong>Subtotal</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(partsSubTotal)}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-right no-border"><strong>Discount</strong></td>
+          <td>{{parts.discount}}%</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-right no-border"><strong>Discount Amount</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(parts.discount_amt)}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-right no-border"><strong>Taxes Included in Total</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(parts.tax_amt)}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-right no-border"><strong style="font-size: xx-large">Total</strong></td>
+          <td><strong style="font-size: xx-large">{{formatNumber(parts.total)}}</strong></td>
+        </tr>
+      </tbody>
+    </table>        
+      </div>
+    </div>
+    
+    
+    <div class="col-lg-12">
+      <div class="panel b-a">
+        <div class="panel-heading no-border">
+          <h2 class="text-u-c m-b-none">Labour Charges
+         
+          <span ng-controller="LCModalCtrl">
+        <script type="text/ng-template" id="LCModalContent.html">
+            <div ng-include="'app/jobcards/edit_labour_jobcards.html'"></div>
+          </script>
+        <button ng-hide="isCustomer" class="pull-right btn btn-info font-bold m" ng-click="open('lg', jobCard)">Add Labour Charge</button>
+        </span>
+          </h2>
+        </div>
+
+
+        <table class="table table-striped bg-white">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th style="width: 1px;">Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in labour_charges.items">
+          <td>{{item.desc}}</td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(item.rate)}}</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong>Subtotal</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(labourSubTotal)}}</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong>Discount</strong></td>
+          <td>{{labour_charges.discount}}%</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong>Discount Amount</strong></td>
+          <td><i class="fa fa-rupee"></i> {{labour_charges.discount_amt}}</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong>Taxes Included in Total</strong></td>
+          <td><i class="fa fa-rupee"></i> {{labour_charges.tax_amt}}</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong style="font-size: xx-large">Total</strong></td>
+          <td><strong style="font-size: xx-large">{{formatNumber(labour_charges.total)}}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="panel b-a">
+        <div class="panel-heading no-border">
+          <h2 class="text-u-c m-b-none">Accessories Charges
+         
+          <span ng-controller="AccessoriesModalCtrl">
+        <script type="text/ng-template" id="AModalContent.html">
+            <div ng-include="'app/jobcards/edit_accessories_jobcards.html'"></div>
+          </script>
+        <button ng-hide="isCustomer" class="pull-right btn btn-info font-bold m" ng-click="open('lg', jobCard)">Add Accessories</button>
+        </span> 
+          </h2>
+        </div>
+
+        <table class="table table-striped bg-white">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Description</th>
+          <th style="width: 1px;">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in accessories.items">
+          <td>{{item.no}}</td>
+          <td>{{item.desc}}</td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(item.rate)}}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-right no-border"><strong>Subtotal</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(accessoriesSubTotal)}}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-right no-border"><strong>Discount</strong></td>
+          <td>{{accessories.discount}}%</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-right no-border"><strong>Discount Amount</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(accessories.discount_amt)}}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-right no-border"><strong>Taxes Included in Total</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(accessories.tax_amt)}}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-right no-border"><strong style="font-size: xx-large">Total</strong></td>
+          <td><strong style="font-size: xx-large">{{formatNumber(accessories.total)}}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="panel b-a">
+        <div class="panel-heading no-border">
+          <h2 class="text-u-c m-b-none">Misc Charges
+         
+          <span ng-controller="MCModalCtrl">
+        <script type="text/ng-template" id="MCModalContent.html">
+            <div ng-include="'app/jobcards/edit_misc_jobcards.html'"></div>
+          </script>
+        <button ng-hide="isCustomer" class="pull-right btn btn-info font-bold m" ng-click="open('lg', jobCard)">Add Misc Charge</button>
+        </span>
+          </h2>
+        </div>
+        <table class="table table-striped bg-white">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th style="width: 1px;">Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in misc_charges.items">
+          <td>{{item.desc}}</td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(item.rate)}}</td>
+        </tr>        
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong>Subtotal</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(miscSubTotal)}}</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong>Discount</strong></td>
+          <td>{{misc_charges.discount}}%</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong>Discount Amount</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(misc_charges.discount_amt)}}</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong>Taxes Included in Total</strong></td>
+          <td><i class="fa fa-rupee"></i> {{formatNumber(misc_charges.tax_amt)}}</td>
+        </tr>
+        <tr>
+          <td colspan="1" class="text-right no-border"><strong style="font-size: xx-large">Total</strong></td>
+          <td><strong style="font-size: xx-large">{{formatNumber(misc_charges.total)}}</strong></td>
+        </tr>
+      </tbody>
+    </table>      
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

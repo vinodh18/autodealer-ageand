@@ -1,0 +1,661 @@
+<!-- <div class="form-group" ng-class="{'has-error':jobcardsForm.customer.$invalid && !jobcardsForm.customer.$pristine }">
+<label class="col-sm-2 control-label" for="customer">Customer
+<span style="color: red" >*</span></label>
+<div class="col-sm-10">
+
+	<select ng-init="initAllCustomers()"
+		ng-model="jobcards.customer._id" id="customer"
+		name="customer" class="form-control" size="1" ng-disabled="isCustomer"
+		ng-options="customer._id as (customer.name) for customer in allCustomers" required ng-disabled="hide">
+		<option value="">Select Customer Name</option>
+	</select>
+	
+<p ng-show="jobcardsForm.customer.$invalid && !jobcardsForm.customer.$pristine" class="help-block  m-b-none">customer Name is required.</p>
+</div>
+</div> 
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>  -->	  	
+
+
+
+<div class="form-group" ng-class="{'has-error':jobcardsForm.customer.$invalid && !jobcardsForm.customer.$pristine }">
+<label class="col-sm-2 control-label" for="customer">Customer <span style="color:red">*</span></label>
+<div class="col-sm-10" ng-class="{'has-error':!jobcardsForm.customer.$pristine && jobcardsForm.customer.$error.required}" ng-init="initAllCustomers()">	
+	<ui-select ng-model="jobcards.customer._id" ng-change="getCustomerVehicle(jobcards.customer._id)" search-enable="true" theme="bootstrap" reset-search-input="false">
+    <ui-select-match name="customer" placeholder="Enter Customer Name">{{$select.selected.name}} {{$select.selected.email}}</ui-select-match>
+    <ui-select-choices repeat="customer._id as customer in allCustomers | filter: { name: $select.search }" name="customer" refresh="refreshCustomer($select.search)" refresh-delay="0">
+    <div ng-bind-html="customer.name + ' - ' + customer.email  | highlight: $select.search"></div>
+    </ui-select-choices>
+	</ui-select>
+	<p ng-show="jobcardsForm.customer.$invalid && !jobcardsForm.customer.$pristine" class="help-block  m-b-none">customer Name is required.</p>
+	<p ng-show="customerNotFound" class="help-block"><span style="color:#a94442">Customer Not Found</span></p>		
+</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+
+
+			
+<div class="form-group" ng-class="{'has-error':jobcardsForm.customer_vehicles.$invalid && !jobcardsForm.customer_vehicles.$pristine }" >
+	<label class="col-sm-2 control-label" for="dealer_name">Customer Vehicle
+	No<span style="color: red">*</span></label>
+	<div class="col-sm-10">
+		<select ng-init="initAllCustomervehicle()"  ng-disabled="isCustomer"
+			ng-model="jobcards.customer_vehicle._id" id="customer_vehicles"
+			name="customer_vehicles" class="form-control" size="1"
+			ng-options="customer_vehicle._id as (customer_vehicle.reg_no) for customer_vehicle in allCustomervehicles" required>
+			<option value="">Select Customer Vehicle No</option>
+		</select>
+	<p ng-show="jobcardsForm.customer_vehicles.$invalid && !jobcardsForm.customer_vehicles.$pristine" class="help-block  m-b-none">Customer Vehicle No is required.</p>
+	</div>
+</div> 	
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<!-- <div class="form-group" ng-class="{'has-error':jobcardsForm.branch.$invalid && !jobcardsForm.branch.$pristine }">
+	<label class="col-sm-2 control-label" for="branch">Branch
+	<span style="color: red">*</span></label>
+	<div class="col-sm-10">
+
+		<select ng-init="initAllBranches()"
+			ng-model="jobcards.branch" id="branch"
+			name="branch" class="form-control" size="1"
+			ng-options="branch.name as (branch.name) for branch in allBranches" required>
+			<option value="">Select Branch Name</option>
+		</select>
+		
+	<p ng-show="jobcardsForm.branch.$invalid && !jobcardsForm.branch.$pristine" class="help-block  m-b-none">Branch Name is required.</p>
+	</div>
+</div> 
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div> -->							
+
+<!-- <div class="form-group" ng-class="{'has-error':jobcardsForm.make.$invalid && !jobcardsForm.make.$pristine }" >
+	<label class="col-sm-2 control-label" for="make">Make
+	<span style="color: red">*</span></label>
+	<div class="col-sm-10">
+		<select ng-init="initAllMakes()" 
+			ng-model="jobcards.make" id="make"
+			name="make" class="form-control" size="1"
+			ng-options="make._id as (make.name) for make in allMakes" required>
+			<option value="">Select Make</option>
+		</select>
+	<p ng-show="jobcardsForm.make.$invalid && !jobcardsForm.make.$pristine" class="help-block  m-b-none">Make is required.</p>
+	</div>
+</div> 
+<div class="line line-dashed b-b line-lg pull-in ng-scope" ></div>
+
+<div class="form-group" ng-class="{'has-error':jobcardsForm.model.$invalid && !jobcardsForm.model.$pristine }" >
+	<label class="col-sm-2 control-label" for="model">Model
+	<span style="color: red" >*</span></label>
+	<div class="col-sm-10">
+		<select ng-init="initAllModels()" 
+			ng-model="jobcards.model" id="model"
+			name="model" class="form-control" size="1"
+			ng-options="model._id as (model.name) for model in allModels" required>
+			<option value="">Select Models</option>
+		</select>
+	<p ng-show="jobcardsForm.model.$invalid && !jobcardsForm.model.$pristine" class="help-block  m-b-none">Model is required.</p>
+	</div>
+</div> 
+<div class="line line-dashed b-b line-lg pull-in ng-scope" ></div> -->
+
+<div class="form-group">
+	<label class="col-sm-2 control-label" for="name">Millage
+	</label>
+	<div class="col-sm-10">
+		<input type="number" ng-disabled="isCustomer" ng-model="jobcards.mileage" id="millage"
+		name="millage" class="form-control" placeholder="Millage" >
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+		<label class="col-sm-2 control-label" for="fuel">Fuel
+		</label>
+		<div class="col-sm-10">
+			<input type="number" ng-disabled="isCustomer" ng-model="jobcards.fuel" id="fuel"
+			name="fuel" class="form-control" placeholder="Fuel" >
+		</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group" >
+		<label class="col-sm-2 control-label" for="name">Service Date
+		</label>
+		<div class="col-sm-10">
+			<input type="text" ng-disabled="isCustomer" ng-model="jobcards.service_date" datepicker-popup="dd-MMM-yyyy" is-open="sOpen" ng-click="sOpen = true" id="service_date" name="service_date" class="form-control"  placeholder="Service Date" show-button-bar="false">
+			
+		</div>
+</div>		
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label" for="drop">
+	Next Service Date</label>
+	<div class="col-sm-10">
+		<input type="text" ng-disabled="isCustomer" ng-model="jobcards.next_service_date" datepicker-popup="dd-MMM-yyyy" is-open="nOpen" ng-click="nOpen = true" id="scheduled_at" name="next_service_date" class="form-control"  placeholder="Next Service Date" show-button-bar="false"> 
+	</div>
+</div>	
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="col-xs-12">				
+	<div class="col-xs-5">
+		<div class="form-group" ng-class="{'has-error':jobcardsForm.pick_up.$invalid && !jobcardsForm.pick_up.$pristine }">
+			<label class="col-sm-4 control-label" for="pick_up">
+				Pick Up <span style="color: red">*</span></label>
+			<div class="col-sm-8">
+				<div class="radio" required>
+				  <label><input type="radio" name="pick_up" ng-disabled="isCustomer" ng-model="jobcards.pick_up" value="Y">
+				    Yes </label>
+				  <label><input type="radio" name="pick_up" ng-disabled="isCustomer" ng-model="jobcards.pick_up" value="N">
+				    No </label>
+				</div>						
+				<p ng-show="jobcardsForm.pick_up.$invalid && !jobcardsForm.pick_up.$pristine"
+				class="help-block">Pick Up is required.</p>
+			</div>
+		</div>
+	</div>				
+	<div class="col-xs-5">
+		<div class="form-group" ng-class="{'has-error':jobcardsForm.drop.$invalid && !jobcardsForm.drop.$pristine }">
+			<label class="col-sm-4 control-label" for="drop">
+				Drop <span style="color: red">*</span></label>
+			<div class="col-sm-8">
+				<div class="radio" required>
+		  			<label><input type="radio" name="drop" ng-disabled="isCustomer" ng-model="jobcards.drop" value="Y">
+				    	Yes </label>
+				  	<label><input type="radio" name="drop" ng-disabled="isCustomer" ng-model="jobcards.drop" value="N">
+		    			No </label>
+				</div>						
+				<p ng-show="jobcardsForm.drop.$invalid && !jobcardsForm.drop.$pristine"
+				class="help-block">Drop is required.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+
+<div class="form-group" ng-class="{'has-error':jobcardsForm.job_status.$invalid && !jobcardsForm.job_status.$pristine }">
+	<label class="col-sm-2 control-label" for="job_status">
+		Job Status <span style="color: red">*</span></label>
+	<div class="col-sm-10">
+		<select id="job_status" ng-disabled="isCustomer" name="job_status" class="form-control" size="1" ng-model="jobcards.job_status" required>
+			<option value="">Select Job Status</option>
+			<option value="SCHEDULED">SCHEDULED</option>
+			<option value="INPROGRESS">IN PROGRESS</option>		
+			<option value="PAYMENT_DUE">PAYMENT DUE</option>
+			<option value="PAID">PAID</option>
+		</select>
+		<p ng-show="jobcardsForm.job_status.$invalid && 
+			 		!jobcardsForm.job_status.$pristine"
+				class="help-block">Job Status is required.</p>
+	</div>
+</div>
+
+<!-- <div class="form-group" ng-class="{'has-error':jobcardsForm.drop.$invalid && !jobcardsForm.drop.$pristine }">
+	<label class="col-sm-2 control-label" for="drop">
+		Drop <span style="color: red">*</span></label>
+	<div class="col-sm-10">
+		<div class="radio" required>
+		  <label>
+		    <input type="radio" name="drop" ng-model="jobcards.drop" value="Y">
+		    Yes 
+		  </label>
+		  <label>
+		    <input type="radio" name="drop" ng-model="jobcards.drop" value="N">
+		    No
+		  </label>
+		</div>											
+		<p ng-show="jobcardsForm.drop.$invalid && 
+			 		!jobcardsForm.drop.$pristine"
+				class="help-block">Drop is required.</p>
+	</div>
+</div>-->
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div> 
+
+
+	<div class="panel panel-default" ng-init="initAllJobCardMasters()">
+        <div class="panel-heading font-bold">
+            Job Card Masters
+        </div>
+        <div class="panel-body">
+        	<div class="col-md-1">
+        	</div>
+        	<div class="col-md-11">
+			<div ng-repeat="jobcardmaster in allJobCardMasters track by $index">			
+			<div class="checkbox">
+              <label class="i-checks">
+              	<br>
+                <input type="checkbox" value="{{jobcardmaster.desc}}" ng-checked="searchJCMaster(jobcardmaster) > -1" id="jobcard{{$index}}" ng-click="JCMasterSelection(jobcardmaster, $index)">
+                <i></i>
+                {{jobcardmaster.desc}}
+              </label>
+            </div><!-- <br>   
+              <input ng-show="checkJobCard[{{$index}}]" type="text" id="comments{{$index}}" name="comments{{$index}}" class="form-control col-md-6" ng-model="JCMcomments" Placeholder="Comments"> -->
+            </div>              	
+			</div>
+        </div>
+    </div>        
+
+	<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+			
+			<!-- <div class="form-group">
+				<label class="col-sm-2 control-label" for="job_card">Job Card</label>
+				   <div class="col-md-10">
+				   	<div class="row">
+				   	<div ng-repeat="jobcard in jobcards.job_card">
+				   	 <div class="col-md-6">
+				   	 	<textarea type="text" ng-disabled="isCustomer" name="desc" class="form-control" style="resize:none" ng-model="jobcard.desc" Placeholder="Desc..">
+				   	 	</textarea>
+				   	 </div>
+				   	 <div class="col-md-5">
+				   	 	<textarea type="text" ng-disabled="isCustomer" name="comments" class="form-control" style="resize:none" ng-model="jobcard.comments" Placeholder="Comments..">
+				   	 		
+				   	 	</textarea>
+				   	 </div>
+				   	 <div class="col-sm-1" ng-show="$index > 0">
+						<a  ng-hide="isCustomer" href="javascript:void(0)" class="btn btn-danger btn-xs" ng-click="removeJobcard($index)" style="color: red"> <span class="glyphicon glyphicon-remove" title="remove"></span></a>			
+					 </div>
+				   	</div>
+				   	<a ng-hide="isCustomer" href="javascript:void(0)" ng-click="addNewJobCard()" style="color:green" class="btn btn-sm btn-dark">
+					<i class="fa fa-plus" ></i> Add</a>
+				   	</div>
+				  	</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div> -->
+
+		<!--			
+	 <div class="panel panel-default">
+        <div class="panel-heading font-bold">Parts
+
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+           	<div class="panel panel-default">
+           	<a href="javascript:void(0)" ng-click="addNewPartsItems()" class="btn btn-	sm btn-dark pull-right bg-primary">
+			<i class="fa fa-plus"></i> Add Parts Items</a>
+           <div ng-repeat="partsItems in jobcards.parts.items">
+	        	<div class="panel-heading font-bold">Items
+	        		<div class="pull-right" ng-show="$index > 0">
+						<a  href="javascript:void(0)" ng-click="removePartsItems($count)" style="color: red"> <span class="glyphicon glyphicon-remove" title="remove"></span></a>			
+					 </div>	
+				</div>
+
+       		<div class="panel-body">
+       		    <div class="row">
+                <div class="col-md-12">
+                	<div class="col-md-3">
+                		<input type="number" name="no" class="form-control" ng-model="partsItems.no" placeholder="No">
+                	</div>
+                	<div class="col-md-3">
+                		<input type="number" name="rate" class="form-control" ng-model="partsItems.rate" placeholder="rate">
+                	</div>
+                	<div class="col-md-3">
+                		<input type="number" name="qty" class="form-control" ng-model="partsItems.qty" placeholder="Qty">
+                	</div>
+
+                	<div class="col-md-3">
+                		<input type="number" name="amt" class="form-control" ng-model="partsItems.amt" placeholder="Amount">
+                	</div>
+                	</div>
+                	</div>
+               <br>
+                <div class="col-md-12">
+            		<textarea type="text" name="desc" class="form-control" ng-model="partsItems.desc" placeholder="Desc" style="resize:none"></textarea>
+                	
+           		    </div>
+                 </div>
+             </div>
+           </div>
+          
+        
+           	<label class="col-sm-2 control-label" for="comments">Discount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.parts.discount" id="discount" name="discount" class="form-control" placeholder="Discount">
+
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+            <label class="col-sm-2 control-label" for="comments">Discount Amount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.parts.discount_amt" id="discount_amt" name="discount_amt" class="form-control" placeholder="Discount Amount">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+             <label class="col-sm-2 control-label" for="comments">Tax
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.parts.tax" id="tax" name="tax" class="form-control" placeholder="Tax">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+				  <label class="col-sm-2 control-label" for="comments">Tax Amount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.parts.tax_amt" id="tax_amt" name="tax_amt" class="form-control" placeholder="Tax Amount">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            	
+            	 <label class="col-sm-2 control-label" for="comments">Total
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.parts.total" id="tax_amt" name="total" class="form-control" placeholder="Total">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+			</div>
+         </div>
+ 	</div>
+
+
+	<div class="panel panel-default">
+		<div class="panel-heading font-bold">Labour Charges</div>
+        <div class="panel-body">
+          <div class="form-group">
+           <div class="panel panel-default">
+           	<a href="javascript:void(0)" ng-click="addNewLabourChargeItems()" class="btn btn-	sm btn-dark pull-right bg-primary">
+			<i class="fa fa-plus"></i> Add Labour Items</a>
+			<div ng-repeat="labourCharge in jobcards.labour_charges.items">
+
+        	<div class="panel-heading font-bold">Items
+
+        		<div class="pull-right" ng-show="$index > 0">
+					<a  href="javascript:void(0)" ng-click="removeLabourChargeItems($add)" style="color: red"> <span class="glyphicon glyphicon-remove" title="remove"></span></a>			
+				 </div>
+        	</div>
+       		<div class="panel-body">
+              <div class="col-md-12">
+                <label class="col-sm-2 control-label" for="rate">Rate</label>
+                	<div class="col-md-10">
+                		<input type="number" name="rate" class="form-control" ng-model="labourCharge.rate" placeholder="rate">
+                	</div>	
+                </div>
+                <div class="col-md-12">
+                <br><label class="col-sm-2 control-label" for="rate">Desc</label>
+            	<div class="col-md-10">
+            		<textarea type="text" name="desc" class="form-control" ng-model="labourCharge.desc" placeholder="Desc"></textarea>
+            	</div>
+                </div>
+              </div>
+             </div>
+            </div>
+           	<label class="col-sm-2 control-label" for="discount">Discount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.labour_charges.discount" id="discount" name="discount" class="form-control" placeholder="Discount">
+
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+            <label class="col-sm-2 control-label" for="dicount_amt">Discount Amount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.labour_charges.discount_amt" id="discount_amt" name="discount_amt" class="form-control" placeholder="Discount Amount">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+             <label class="col-sm-2 control-label" for="tax">Tax
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.labour_charges.tax" id="tax" name="tax" class="form-control" placeholder="Tax">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+				  <label class="col-sm-2 control-label" for="tax_amt">Tax Amount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.labour_charges.tax_amt" id="tax_amt" name="tax_amt" class="form-control" placeholder="Tax Amount">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            	
+            	 <label class="col-sm-2 control-label" for="Total">Total
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.labour_charges.total" id="tax_amt" name="total" class="form-control" placeholder="Total">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+			</div>
+         </div>
+ 	</div>
+ 
+
+ 	<div class="panel panel-default">
+        <div class="panel-heading font-bold">Accessories</div>
+        <div class="panel-body">
+            <div class="form-group">
+             <div class="panel panel-default">
+	       		<a href="javascript:void(0)" ng-click="addNewAccessoriesItems()" class="btn btn-	sm btn-dark pull-right bg-primary">
+				<i class="fa fa-plus"></i> Add Accessories Items</a>
+			<div ng-repeat="accessories in jobcards.accessories.items">
+
+        	<div class="panel-heading font-bold">Items
+    		<div class="pull-right" ng-show="$index > 0">
+				<a  href="javascript:void(0)" ng-click="removeAccessoriesItems($accCount)" style="color: red"> <span class="glyphicon glyphicon-remove" title="remove"></span></a>			
+			 </div>
+        	</div>
+       		<div class="panel-body">
+              <div class="col-md-12">
+                <div class="row">
+                	<div class="col-md-6">
+                		<input type="number" name="no" class="form-control" ng-model="accessories.no" placeholder="No">
+                	</div>
+                	<div class="col-md-6">
+                		<input type="number" name="rate" class="form-control" ng-model="accessories.rate" placeholder="rate">
+                	</div>
+                	
+                </div>
+                </div>
+
+                <div class="col-md-12">
+            		<br><textarea type="text" name="desc" class="form-control" ng-model="accessories.desc" placeholder="Desc"></textarea>
+                </div>
+             </div>
+            </div>
+          </div>
+        
+           	<label class="col-sm-2 control-label" for="discount">Discount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.accessories.discount" id="discount" name="discount" class="form-control" placeholder="Discount">
+
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+            <label class="col-sm-2 control-label" for="discount_amt">Discount Amount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.accessories.discount_amt" id="discount_amt" name="discount_amt" class="form-control" placeholder="Discount Amount">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+             <label class="col-sm-2 control-label" for="tax">Tax
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.accessories.tax" id="tax" name="tax" class="form-control" placeholder="Tax">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+				  <label class="col-sm-2 control-label" for="tax_amt">Tax Amount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.accessories.tax_amt" id="tax_amt" name="tax_amt" class="form-control" placeholder="Tax Amount">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            	
+            	 <label class="col-sm-2 control-label" for="Total">Total
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.accessories.total" id="tax_amt" name="total" class="form-control" placeholder="Total">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+			</div>
+         </div>
+ 	</div>
+
+ 	<div class="panel panel-default">
+        <div class="panel-heading font-bold">Misc Charges</div>
+        <div class="panel-body">
+          <div class="form-group">
+           <div class="panel panel-default">
+           	<a href="javascript:void(0)" ng-click="addNewMiscItems()" class="btn btn-	sm btn-dark pull-right bg-primary">
+				<i class="fa fa-plus"></i> Add Misc Charges</a>
+			<div ng-repeat="misc in jobcards.misc_charges.items">
+
+        	<div class="panel-heading font-bold">Items
+        		<div class="pull-right" ng-show="$index > 0">
+				<a  href="javascript:void(0)" ng-click="removeMiscItems($miscCount)" style="color: red"> <span class="glyphicon glyphicon-remove" title="remove"></span></a>			
+			 </div>
+        	</div>
+       		 <div class="panel-body">
+              <div class="col-md-12">
+            		<input type="number" name="rate" class="form-control" ng-model="misc.rate" placeholder="rate">
+            	</div>
+                
+                 <div class="col-md-12">
+            		<br><textarea type="text" name="desc" class="form-control" ng-model="misc.desc" placeholder="Desc"></textarea>
+                  </div>
+                </div>
+              </div>
+             </div>
+           
+          
+        
+           	<label class="col-sm-2 control-label" for="discoutn">Discount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.misc_charges.discount" id="discount" name="discount" class="form-control" placeholder="Discount">
+
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+            <label class="col-sm-2 control-label" for="discount_amt">Discount Amount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.misc_charges.discount_amt" id="discount_amt" name="discount_amt" class="form-control" placeholder="Discount Amount">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+             <label class="col-sm-2 control-label" for="tax">Tax
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.misc_charges.tax" id="tax" name="tax" class="form-control" placeholder="Tax">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            
+				  <label class="col-sm-2 control-label" for="tax_amt">Tax Amount
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.misc_charges.tax_amt" id="tax_amt" name="tax_amt" class="form-control" placeholder="Tax Amount">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+				
+            	
+            	 <label class="col-sm-2 control-label" for="total">Total
+						</label>
+					<div class="col-sm-10">
+						<input type="number" ng-model="jobcards.misc_charges.total" id="tax_amt" name="total" class="form-control" placeholder="Total">
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					</div>
+			</div>
+         </div>
+ 	</div> -->
+
+ 	<!-- <div class="form-group" ng-class="{'has-error':jobcardsForm.scheduled_at.$invalid && !jobcardsForm.scheduled_at.$pristine }">
+			<label class="col-sm-2 control-label" for="name">Scheduled At</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="jobcards.scheduled_at" datepicker-popup="dd-MMM-yyyy" is-open="cOpen" ng-click="cOpen = true" id="scheduled_at" name="scheduled_at" class="form-control"  placeholder="Scheduled Date (DD-MM-YYYY)" show-button-bar="false"> 
+			</div>
+		</div>
+	<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+	<div class="form-group" ng-class="{'has-error':jobcardsForm.Completed_on.$invalid && !jobcardsForm.Completed_on.$pristine }">
+	<label class="col-sm-2 control-label" for="name">Completed On</label>
+		<div class="col-sm-10">
+			<input type="text" ng-model="jobcards.completed_on" datepicker-popup="dd-MMM-yyyy" is-open="rOpen" ng-click="rOpen = true" id="completed_on" name="completed_on" class="form-control"  placeholder="Completd Date (DD-MM-YYYY)" show-button-bar="false">
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in ng-scope"></div> -->		
+	
+	<!-- <div class="form-group">
+			<label class="col-sm-2 control-label" for="name">Total Amount</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="jobcards.total_amt" id="total_amt" name="scheduled_at" class="form-control"  placeholder="Total Amt"> 
+			</div>
+		</div>
+	<div class="line line-dashed b-b line-lg pull-in ng-scope"></div> -->
+
+	<!-- <div class="panel panel-default">
+		<a href="javascript:void(0)" ng-click="addPostServiceComplaints()" class="btn btn-	sm btn-dark pull-right bg-primary">
+				<i class="fa fa-plus"></i> Add ServiceComplaints</a>
+			<div ng-repeat="serviceComplaints in jobcards.post_service_complaints">
+
+        <div class="panel-heading font-bold">Post Service Complaints
+        	<div class="pull-right" ng-show="$index > 0">
+				<a  href="javascript:void(0)" ng-click="removePostServiceComplaints($postCount)" style="color: red"> <span class="glyphicon glyphicon-remove" title="remove"></span></a>			
+			 </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">              
+              <div class="col-lg-12">
+	            <div class="row">
+	              	<div class="col-md-6">
+	                <input type="status" class="form-control" ng-model="serviceComplaints.status" placeholder="status">
+	              </div>
+	              <div class="col-md-6">
+	                <input type="text" ng-model="serviceComplaints.resolve_date" datepicker-popup="dd-MMM-yyyy" is-open="rOpen" ng-click="rOpen = true" id="scheduled_at" name="resolve_date" class="form-control"  placeholder="Resolve Date (DD-MM-YYYY)" show-button-bar="false"> 
+	              </div>
+             </div>
+             <br><textarea name="desc" ng-model="serviceComplaints.desc" class="form-control"
+             placeholder="Desc">
+             </textarea>
+             <br><textarea name="comments" ng-model="serviceComplaints.comments" class="form-control" placeholder="comments" style="resize:none">
+             </textarea>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+</div> -->
+<div ng-show="isCustomer">
+	<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="feedback">Feed Back</label>
+		<div class="col-sm-10">
+			<input type="text" ng-model="jobcards.feedback" id="feedback" name="feedback" class="form-control"  placeholder="Feedback"> 
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="drop">
+			Customer Rating</label>
+		<div class="col-sm-10">
+			<input type="number" ng-model="jobcards.customer_rating" id="customer_rating"  class="form-control" placeholder="Customer Rating">
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>		
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="comments">Comments
+		</label>
+		<div class="col-sm-10">
+			<textarea type="text" ng-model="jobcards.comments" id="comments" name="comments" class="form-control" style="resize:none" placeholder="Comments..">
+			</textarea>
+		</div>
+	</div>
+</div>	

@@ -1,0 +1,34 @@
+
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Services</h1>
+  <small class="text-muted">Manage Requested Services</small>
+</div>
+
+<div class="wrapper-md" ng-init="initRequest()">
+  <div class="row m-b-sm">
+    <div class="col-md-6" >
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary">
+    	<i class="fa fa-plus space-6"></i> Request</a>
+		 
+		 	<span><a ng-click="multiDelete()" ng-show="customer || access" class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span>
+    </div>
+    <div class="col-md-6">
+   <!--  <date-range-picker style="cursor: default" ng-model="dateRange" class="btn btn-md btn-info daterange pull-right" ranges="ranges"> <i
+					class="fa fa-calendar fa-lg"></i> <span>{{dateRange.startDate
+					| amDateFormat: 'MMM D, YYYY'}} - {{dateRange.endDate |
+					amDateFormat: 'MMM D, YYYY'}}</span> <b class="caret"></b> </date-range-picker> -->
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Requested Services: {{services.total}}
+    </div>
+    <div class="table-responsive">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+		{{alert.msg}}</alert>
+      <div ng-grid="gridOptions" style="min-height:420px"></div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,116 @@
+	<div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Dealer</h1>
+        <small class="text-muted">View Dealer</small>
+    </div>
+     
+		<ul class="breadcrumb bg-white b-a">
+		  <li><a ui-sref="^.list">
+		  <i class="fa fa-user-md icon text-info-dker"></i> Dealers</a></li>
+		  <li>View Dealer</li>
+		</ul>
+						<div class="wrapper-md" ng-init="initEditDealer()">
+
+						<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Dealer
+							Name
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="dealer.name" id="name"
+								name="name" class="form-control" disabled="true" />
+							
+						</div>
+					</div>
+
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label"
+							for="dealer-email">Email</label>
+						<div class="col-sm-10">
+							<input type="email" ng-model="dealer.email" id="dealer-email" name="dealer-email" class="form-control" disabled="true">
+						</div>
+					</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label"
+							for="applicants"><br>Phone</label>
+						<div class="col-sm-10">
+						 <div ng-repeat="phone in dealer.phone track by $index">
+						
+							<br><input type="text" ng-model="dealer.phone[$index]"
+								id="phone" name="phone"
+								class="form-control" disabled="true">
+								</div>
+					</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>	
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label"
+							for="website">Website</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="dealer.website"
+								id="website" name="website"
+								class="form-control" disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>			
+
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label"
+							for="applicants"><br>Applicants</label>
+						<div class="col-sm-10">
+						 <div ng-repeat="applicant in dealer.applicants track by $index">
+						
+							<br><input type="text" ng-model="dealer.applicants[$index]"
+								id="applicant" name="applicant"
+								class="form-control"  disabled="true">
+								</div>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>	
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label"
+							for="unique_feature"><br>Unique Feature</label>
+						<div class="col-sm-10">
+						<div ng-repeat="unique in dealer.unique_feature track by $index">
+						 <br><input type="text" ng-model="dealer.unique_feature[$index]"
+								id="unique_feature" name="unique_feature"
+								class="form-control" disabled="true">
+						</div>
+						</div>
+					</div>
+
+
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>
+					<div class="form-group" ng-init="initAllMakes()">
+					<label class="col-sm-2 control-label"><br>Makes
+					</label>
+					<div class="col-sm-10">
+						<div ng-repeat="make in dealer.makes" id="makes">
+
+						 <br><input type="text" ng-model="make.name"
+								id="unique_feature" name="unique_feature"
+								class="form-control" disabled="true">
+						</div>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="example-logo-input">Logo</label>
+						<div class="col-sm-10">
+							<canvas id="dealerImage" width="400" height="200"></canvas>	
+						</div>
+					</div>
+					
+				</div>

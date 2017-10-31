@@ -1,0 +1,32 @@
+<div class="form-group"
+	ng-class="{'has-error':emailTemplateForm.name.$invalid && !emailTemplateForm.name.$pristine }">
+	<label class="col-sm-3 control-label"> Name <span style="color:red">*</span></label>
+	<div class="col-sm-9">
+		<input ng-model="emailTemplate.name" type="text" name="name"
+			class="form-control" placeholder="Name" required />
+		<p ng-show="emailTemplateForm.name.$invalid && !emailTemplateForm.name.$pristine"
+			class="help-block m-b-none">Name is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="form-group"
+	ng-class="{'has-error':emailTemplateForm.subject.$invalid && !emailTemplateForm.subject.$pristine }">
+	<label class="col-sm-3 control-label"> Subject <span style="color:red">*</span></label>
+	<div class="col-sm-9">
+		<input ng-model="emailTemplate.subject" type="text" name="subject"
+			class="form-control" placeholder="Subject" required />
+		<p ng-show="emailTemplateForm.subject.$invalid && !emailTemplateForm.subject.$pristine"
+			class="help-block m-b-none">Subject is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="form-group"
+	ng-class="{'has-error':emailTemplateForm.body.$invalid && !emailTemplateForm.body.$pristine }">
+	<label class="col-sm-3 control-label"> Body <span style="color:red">*</span></label>
+	<div class="col-sm-9">
+		<input ng-model="emailTemplate.body" type="text" name="body"
+			class="form-control" placeholder="Body" required />
+		<p ng-show="emailTemplateForm.body.$invalid && !emailTemplateForm.body.$pristine"
+			class="help-block m-b-none">Body is required.</p>
+	</div>
+</div>

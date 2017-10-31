@@ -1,0 +1,32 @@
+<!-- Page content -->
+
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Parts</h1>
+        <small class="text-muted">Edit Part</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-wrench icon text-info-dker"></i> Parts</a></li>
+  <li>Edit Part</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditParts()">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <form name="partForm" action="#" ng-submit = "updateParts()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Edit Part
+            </div>
+            <div class="panel-body">
+                    <div ng-include='"app/parts/form.html"'></div>
+             </div>
+              
+          <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="partForm.$invalid"> <i class="fa fa-edit"></i> Update</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>    
+        </div>
+        </form>
+    </div>    
+       <!-- END Page Content -->

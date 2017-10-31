@@ -1,0 +1,158 @@
+				<style>
+				    .cropArea {
+				      background: #E4E4E4;
+				      overflow: hidden;
+				      width:250px;
+				      height:250px;
+				    }
+				</style>
+
+				<!-- <div class="form-group" ng-class="{'has-error':vehicleForm.dealer.$invalid && !vehicleForm.dealer.$pristine }">
+					<label class="col-sm-2 control-label" for="dealer_name">Dealer Name
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select ng-init="initAllDealers()"
+							ng-model="vehicle.dealer" id="dealer"
+							name="dealer" class="form-control" size="1"
+							ng-options="dealer._id as (dealer.name) for dealer in allDealers" required>
+							<option value="">Select Dealer Name</option>
+						</select>
+					<p ng-show="vehicleForm.dealer.$invalid && !vehicleForm.dealer.$pristine" class="help-block  m-b-none">Dealer Name is required.</p>
+					</div>
+				</div> 
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+ -->
+				<div class="form-group" ng-class="{'has-error':vehicleForm.make.$invalid && !vehicleForm.make.$pristine }">
+					<label class="col-sm-2 control-label" for="make">Make
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						
+						<select ng-init="initAllMakes()"
+							ng-model="vehicle.make" id="make"
+							name="make" class="form-control" size="1" ng-change="initAllModel(vehicle.make._id)" ng-options="make._id as (make.name) for make in allMakes" required>
+							<option value="">Select Make</option>
+						</select>
+					
+					<p ng-show="vehicleForm.make.$invalid && !vehicleForm.make.$pristine" class="help-block  m-b-none">Make is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+				<div class="form-group" ng-class="{'has-error':vehicleForm.model.$invalid && !vehicleForm.model.$pristine }">
+					<label class="col-sm-2 control-label" for="model">Model
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+					<select ng-model="vehicle.model" id="model"
+							name="model" class="form-control" size="1"
+							ng-options="model._id as (model.name) for model in allModels" required>
+							<option value="">Select Model</option>
+						</select>
+			
+					<p ng-show="vehicleForm.model.$invalid && !vehicleForm.model.$pristine" class="help-block  m-b-none">Model is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="year">From
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="vehicle.year" datepicker-popup="dd-MMM-yyyy" is-open="fOpen" ng-click="fOpen = true" id="from" name="from" class="form-control"  placeholder="From (DD-MM-YYYY)" show-button-bar="false">
+						</div>
+					</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="ex_Showroom_price">Ex-Showroom Price
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.ex_Showroom_price" id="ex_Showroom_price" name="ex_Showroom_price" class="form-control"  placeholder="Ex-Showroom Price.." ng-blur="calcAmount()" min="0">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="rto">RTO
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.rto" id="rto" 
+							name="rto" class="form-control"  placeholder="Rto Price" 
+							ng-blur="calcAmount()" min="0">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="insurence">Insurance
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.insurance" id="insurence" name="insurence" class="form-control"  ng-blur="calcAmount()" placeholder="insurance" min="0">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="on_road _price">On Road Price
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.on_road_price"  id="on_road_price" name="on_road_price" class="form-control"  placeholder="On Road Price.."  min="0" ng-disabled="true" autofocus >
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					
+
+					<div class="form-group" ng-class="{'has-error':vehicleForm.fuel_type.$invalid && !vehicleForm.fuel_type.$pristine }">
+					<label class="col-sm-2 control-label" for="fuel_type">
+						Type <span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select id="type" name="fuel_type" class="form-control" size="1" ng-model="vehicle.fuel_type" required>
+							<option value="">Select Fuel Type</option>
+							<option value="PETROL">Petrol</option>
+							<option value="DIESEL">Diesel</option>
+						</select>
+						<p ng-show="vehicleForm.fuel_type.$invalid && 
+							 		!vehicleForm.fuel_type.$pristine"
+								class="help-block">Fuel Type is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="Seat_capacity">Seat Capacity
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.seat_capacity" id="seat_capacity" name="seat_capacity" class="form-control"  placeholder="seat_capacity" min="0">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="image">Image
+						</label>
+						<div class="col-sm-10">
+							<input type="file" ngf-select="onFileSelect($files)">
+						</div>
+						<div class="col-md-4">
+						   <img id="vehicleImage" width="200" height="100" ng-src="{{image}}">
+						</div>
+					  </div>
+					</div>
+
+				<div class="row" ng-show="imgExists">
+					<div class="col-sm-2">
+					</div>
+					<div class="col-sm-5">	
+					
+						<div class="cropArea" style="padding-right: 100px; padding-left: 100px; padding-top: 100px; padding-bottom: 100px;">
+						    <img-crop ng-show="myImage" image="myImage" result-image="myCroppedImage" area-type="square"></img-crop>
+						</div>
+					</div>
+
+					<div class="col-sm-5">
+						<div class="cropArea" style="padding-right: 25px; padding-left: 25px; padding-top: 25px; padding-bottom: 25px;">
+							<img id="croppedImage" ng-src="{{myCroppedImage}}" />
+						</div>
+					</div>	
+				</div>	
+				<footer class="panel-footer text-right bg-light lter" ng-show="blob">

@@ -1,0 +1,154 @@
+					<div class="form-group" ng-class="{'has-error':customervehicleForm.customer.$invalid && !customervehicleForm.customer.$pristine }">
+					<label class="col-sm-2 control-label" for="customer_name">Customer Name
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select ng-init="initAllCustomer()"
+							ng-model="customervehicles.customer._id" id="customer"
+							name="customer" class="form-control" size="1"
+							ng-options="customer._id as (customer.name) for customer in allCustomers" required>
+							<option value="">Select Customer Name</option>
+						</select>
+					<p ng-show="customervehicleForm.customer.$invalid && !customervehicleForm.customer.$pristine" class="help-block  m-b-none">Customer Name is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group" ng-class="{'has-error':customervehicleForm.vehicletype.$invalid && !customervehicleForm.vehicletype.$pristine }">
+					<label class="col-sm-2 control-label" for="customervehicle">Vehicle Type
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select ng-init="initAllVehicletype()"
+							ng-model="customervehicles.vehicle_type._id" id="vehicletype"
+							name="vehicletype" class="form-control" size="1"
+							ng-options="vehicletype._id as (vehicletype.name) for vehicletype in allVehicletypes" required>
+							<option value="">Select Vehicle Type</option>
+						</select>
+					<p ng-show="customervehicleForm.vehicletype.$invalid && !customervehicleForm.vehicletype.$pristine" class="help-block  m-b-none">Vehicle Type is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+				<div class="form-group" ng-class="{'has-error':customervehicleForm.make.$invalid && !customervehicleForm.make.$pristine }">
+					<label class="col-sm-2 control-label" for="make">Make
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select ng-init="initAllMake()"
+							ng-model="customervehicles.make" id="make"
+							name="make" class="form-control" size="1"
+							ng-options="make._id as (make.name) for make in allMakes" required>
+							<option value="">Select Make</option>
+						</select>
+					<p ng-show="customervehicleForm.make.$invalid && !customervehicleForm.make.$pristine" class="help-block  m-b-none">Make is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+
+				<div class="form-group" ng-class="{'has-error':customervehicleForm.model.$invalid && !customervehicleForm.model.$pristine }">
+					<label class="col-sm-2 control-label" for="model">Model
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select ng-init="initAllModel()"
+							ng-model="customervehicles.model" id="model"
+							name="model" class="form-control" size="1"
+							ng-options="model._id as (model.name) for model in allModels" required>
+							<option value="">Select Model</option>
+						</select>
+					<p ng-show="customervehicleForm.model.$invalid && !customervehicleForm.model.$pristine" class="help-block  m-b-none">Model is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+				
+				<div class="form-group" ng-class="{'has-error':customervehicleForm.warranty_type.$invalid && !customervehicleForm.warranty_type.$pristine ||
+				 customervehicleForm.from.$invalid && !customervehicleForm.from.$pristine ||
+				  customervehicleForm.to.$invalid && !customervehicleForm.to.$pristine}">
+
+				<label class="col-sm-2 control-label" for="warranty_type">Warranties
+				<span style="color: red">*</span></label>
+
+				  <div class="col-sm-10">
+					
+						<select ng-init="initAllWarrantytype()"
+							ng-model="customervehicles.warranties.warranty_type" id="warranty_type" name="warranty_type" class="form-control" size="1" ng-options="warrantytype._id as (warrantytype.name) for warrantytype in allWarrantytypes" required>
+							<option value="">Select Warranty Type</option>
+						</select>
+						<p ng-show="customervehicleForm.warranty_type.$invalid && !customervehicleForm.warranty_type.$pristine" class="help-block  m-b-none">Warranty Type is required.</p>
+					
+						<br>
+					  <div class="row">
+						 <div class="col-sm-6">
+							<input type="text" ng-model="customervehicles.warranties.from" datepicker-popup="dd-MMM-yyyy" is-open="fOpen" ng-click="fOpen= true" id="from" name="from" class="form-control" placeholder="From Date (DD-MM-YYYY)" show-button-bar="false" required>
+						<p ng-show="customervehicleForm.from.$invalid && !customervehicleForm.from.$pristine" class="help-block  m-b-none">From Date is required.
+						</p>
+						 </div>
+						 <div class="col-sm-6">
+							<input type="text" ng-model="customervehicles.warranties.to" datepicker-popup="dd-MMM-yyyy" is-open="tOpen" ng-click="tOpen = true" id="to" name="to" class="form-control"  placeholder="To Date (DD-MM-YYYY)" show-button-bar="false" required>
+							<p ng-show="customervehicleForm.to.$invalid && !customervehicleForm.to.$pristine" class="help-block  m-b-none">To Date is required.
+						</p>
+						</div>
+					</div>
+				 </div>
+			</div>
+			<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="year">Year
+					</label>
+					<div class="col-sm-10">
+						<input type="text" ng-model="customervehicles.year" datepicker-popup="dd-MMM-yyyy" is-open="startOpen" ng-click="startOpen = true" id="year" name="year" class="form-control"  placeholder="Year (DD-MM-YYYY)" show-button-bar="false">
+					</div>
+					
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group"  ng-class="{'has-error':customervehicleForm.purchase_date.$invalid && !customervehicleForm.purchase_date.$pristine }">
+
+					<label class="col-sm-2 control-label"> Purchase Date
+					<span style="color: red">*</span> </label>
+					<div class="col-sm-10">
+						<input type="text" ng-model="customervehicles.purchase_date" datepicker-popup="dd-MMM-yyyy" is-open="eOpen" ng-click="eOpen = true" id="purchase_Date" name="purchase_date" class="form-control"  placeholder="Purchase_date (DD-MM-YYYY)" show-button-bar="false" required>
+						<p ng-show="customervehicleForm.purchase_date.$invalid && !customervehicleForm.purchase_date.$pristine" class="help-block  m-b-none">Purchase Date is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group" ng-controller="DatepickerDemoCtrl">
+					<label class="col-sm-2 control-label">Insurance Expiry Date</label>
+					<div class="col-sm-10"   >
+						<input type="text" ng-model="customervehicles.insurance_expiry_date" datepicker-popup="dd-MMM-yyyy" is-open="iOpen" ng-click="iOpen = true" id="insurance_expiry_date" name="insurance_expiry_date" class="form-control"  placeholder="Insurance Expiry Date (DD-MM-YYYY)" show-button-bar="false">
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="chassis_no">Chassis No
+					</label>
+					<div class="col-sm-10">
+					<input type="text" name="chassis_no" ng-model="customervehicles.chassis_no"
+					class="form-control" placeholder="chassis no">
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="engine_no">Engine No
+					</label>
+					<div class="col-sm-10">
+					<input type="text" name="engine_no" ng-model="customervehicles.engine_no"
+					class="form-control" placeholder="Engine no">
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				
+				<div class="form-group" ng-class="{'has-error':customervehicleForm.reg_no.$invalid && !customervehicleForm.reg_no.$pristine }">
+					<label class="col-sm-2 control-label">Reg No
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<input type="text" ng-model="customervehicles.reg_no" id="reg_no" name="reg_no" class="form-control"  placeholder="Reg No" required>
+
+						<p ng-show="customervehicleForm.reg_no.$invalid && !customervehicleForm.reg_no.$pristine" class="help-block  m-b-none">Reg No is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>

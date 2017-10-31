@@ -1,0 +1,106 @@
+					<style>
+				    .cropArea {
+				      background: #E4E4E4;
+				      overflow: hidden;
+				      width:250px;
+				      height:250px;
+				      /*padding-bottom: 25px;
+				      padding-left: 25px;
+				      padding-top: 25px;
+				      padding-right: 25px;*/
+				    }
+				</style>
+
+					<div class="form-group"
+						ng-class="{'has-error':adsmediaForm.title.$invalid && 
+												!adsmediaForm.title.$pristine }">
+						<label class="col-sm-2 control-label" for="name">Title
+							<span style="color: red">*</span>
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="adsmedia.title" id="title"
+								name="title" class="form-control" placeholder="Title Name"
+								required />
+							<p ng-show="adsmediaForm.title.$invalid && !adsmediaForm.title.$pristine"
+								class="help-block m-b-none">Title is required.</p>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Youtube Id
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="adsmedia.youtube_id" id="youtube"
+							name="youtube" class="form-control" placeholder="Youtube Id (www.youtube.com/watch) "/>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					
+					<div class="form-group" ng-class="{'has-error':adsmediaForm.type.$invalid && !adsmediaForm.type.$pristine }">
+					<label class="col-sm-2 control-label" for="pick_up">
+						Type <span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select id="type" name="type" class="form-control" size="1" ng-model="adsmedia.type" required>
+							<option value="">Select Type</option>
+							<option value="IMAGE">Image</option>
+							<option value="VIDEO">Video</option>
+						</select>
+						<p ng-show="adsmediaForm.type.$invalid && 
+							 		!adsmediaForm.type.$pristine"
+								class="help-block">Type is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Description
+						</label>
+						<div class="col-sm-10">
+							<textarea type="text" ng-model="adsmedia.description" id="description" name="description" class="form-control" style="resize:none" placeholder="Description.."></textarea>
+						</div>
+					</div>
+			<!-- 
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="example-email-input"> Image <span style="color:red">*</span></label>
+				<div class="col-sm-10">
+					<input id="inputImage2" type="file" accept="image/*" to-resize-image="image2" onchange="angular.element(this).scope().fileChange(this)"
+						resize-max-height="100"
+						resize-max-width="100"
+						resize-quality="0.7"/><br>
+						<div class="row-sm-12" ng-show="createImage">
+							<div class="col-sm-6">
+								<img id="facilityOriginalImg" ng-show="image2" ng-src="{{image2.dataURL}}" type="{{image2.file.type}}"/>
+							</div>
+							<br>
+							<div class="col-sm-6">
+								<center><img id="facilityThumbImg" ng-show="image2" ng-src="{{image2.resized.dataURL}}"/></center>
+							</div>
+						</div>						
+				</div>
+			</div>   -->
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="example-email-input"> Image </label>
+				<div class="col-sm-10">
+					<input id="inputImage2" type="file" accept="image/*" to-resize-image="image2" onchange="angular.element(this).scope().fileChange(this)"
+						resize-max-height="100"
+						resize-max-width="100"
+						resize-quality="0.7"/><br>
+						
+						<div class="row-sm-12" ng-show="createImage">
+							<div class="col-sm-6">
+								<img id="OriginalImg" ng-show="image2" ng-src="{{image2.dataURL}}" type="{{image2.file.type}}"/>
+							</div>
+							<br>
+							<div class="col-sm-6">
+								<center><img id="ThumbImg" ng-show="image2" ng-src="{{image2.resized.dataURL}}"/></center>
+							</div>
+						</div>	
+						<div class="col-md-12">
+							<img width="200" height="100" ng-src="{{adsmedia.image_url}}">
+							</div>					
+				</div>
+			</div> 
+					

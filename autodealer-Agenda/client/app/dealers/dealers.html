@@ -1,0 +1,159 @@
+<div ng-init="initViewDealer()">
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+  <div class="col">
+    <div style="background:url(assets/images/c3.jpg) center center; background-size:cover">
+      <div class="wrapper-lg bg-white-opacity">
+      <div class="row m-t">
+      <button ng-show="isDealerAdmin" class="btn m-b-xs btn-xs btn-dark pull-left" ui-sref="^.edit({dealerId: dealer._id})"><i class="fa fa-pencil"></i> Edit Delear Info</button>
+      </div>
+        <div class="row m-t">
+          <div class="col-sm-6">
+            <a href class="thumb-lg pull-left m-r">
+              <img src="{{image}}" class="img-circle" style="margin-top: 30%">
+            </a>
+            <div class="clear m-b">
+              <div class="m-b m-t-sm">              
+                <span class="h3" style="color: rgb(58, 2, 9)">{{dealer.name}}</span>
+              </div>
+              <p class="m-b" style="color: rgb(58, 2, 9)">
+                <i class="icon-envelope"></i>&nbsp; {{dealer.email}}
+              </p>
+              <p class="m-b" style="color: rgb(58, 2, 9)">                                
+                  <div style="color: rgb(58, 2, 9)" ng-repeat="phone in dealer.phone">
+                  <i class="icon-call-in"></i> {{phone}}
+                  </div>                              
+              </p>
+              <p class="m-b" style="color: rgb(58, 2, 9)">
+                <i class="icon-info"></i>&nbsp; {{dealer.website}}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="pull-right pull-none-xs text-center">
+              <div href class="m-b-md m" style="color: rgb(58, 2, 9); margin-top: auto;">
+                <br>
+                <span class="h3 block font-bold">Currency</span>
+                <small>{{dealer.currency.code}}</small><br>
+                <small>{{dealer.currency.name}}</small><br>                  
+              </div>
+              <div href class="m-b-md m" style="color: rgb(58, 2, 9)">
+                <span class="h3 block font-bold">TimeZone</span>
+                <small>{{dealer.timezone}}</small>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+      <div class="col-xs-12">
+      <div class="m-t-xs m-b-xs">        
+        <div class="row">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        {{alert.msg}}</alert>
+        <div class="panel panel-default">
+        <div class="panel-heading font-bold"><h3>Branch Details
+        <span ng-controller="BranchModalCtrl">
+          <script type="text/ng-template" id="myAddBranchModel.html">
+            <div ng-include="'app/dealers/add_branch_model.html'"></div>
+          </script><button ng-show="isDealerAdmin" class="btn m-b-xs btn-sm btn-primary btn-addon pull-right" ng-click="open('lg', dealer._id)"><i class="fa fa-plus"></i>Add Branch</button></span>
+        </h3></div>
+        <div class="panel-body">
+        <div class="col-xs-6" ng-repeat="branch in dealer.branches">        
+        <div class="panel panel-default">
+        <div class="panel-heading font-bold">Name: {{branch.name}}
+          <span ng-controller="BranchModalCtrl">
+              <script type="text/ng-template" id="myEditBranchModel.html">
+                <div ng-include="'app/dealers/edit_branch_model.html'"></div>
+              </script>
+            <button ng-show="isDealerAdmin" class="btn m-b-xs btn-xs btn-danger pull-right" ng-click="removeBranch(dealer._id, branch._id)"><i class="fa fa-remove"></i></button>
+            <button ng-show="isDealerAdmin" class="btn m-b-xs btn-xs btn-primary pull-right" ng-click="editBranch('lg',dealer._id,branch._id)"><i class="fa fa-pencil"></i></button>
+            </span>
+        </div> 
+        <div class="panel-body">  
+                        
+            <div class="col-xs-6" style="height: 250px;">
+            <p>
+              <b>Address:</b><br>
+              {{branch.address.line1}}<br>
+              {{branch.address.line2}}<br>
+              {{branch.address.city}}<br>
+              {{branch.address.zip}}
+            </p>
+            <p>
+              <b>Telephone:</b> <div ng-repeat="phone in branch.phone">{{phone}}</div>
+            </p>    
+            <p>
+              <b>E-Mail:</b> {{branch.email}}
+            </p>
+            <p><b>Working Hours:</b> 
+                <div ng-repeat="working_hour in branch.working_hours">
+                  {{working_hour.start | date: 'hh:mm a'}} - {{working_hour.end | date: 'hh:mm a'}}
+                </div>
+            </p>
+            <!-- <p><b>Serviceable Vehicle:</b> Bike, Car, Heavy vehicle -->
+           
+            </div>
+            <!-- <div class="col-xs-6" style="height: 250px;">
+              <span><center><b>Location</b></center></span>                                  
+              <div id="map_canvas" style="min-height:350px" ui-map="myMap"
+               ui-event="{'map-click': 'addMarker($event, $params)', 'map-zoom_changed': 'setZoomMessage(myMap.getZoom())' }"
+               ui-options="mapOptions">
+              </div>
+            </div> -->
+        </div> <br>              
+        </div>
+        </div>
+      </div>              
+     </div>
+    </div>
+
+    </div>
+      <div class="col-xs-12">
+        <div class="m-t-xs m-b-xs">
+        <h3>Make And Models
+        <span ng-controller="MakeModalCtrl">
+        <script type="text/ng-template" id="myMakeModal.html">
+            <div ng-include="'app/dealers/add_make_modal.html'"></div>
+          </script>
+        <button ng-show="isDealerAdmin" class="btn m-b-xs btn-sm btn-primary btn-addon pull-right" ng-click="open('lg', 'dealer._id')"><i class="fa fa-plus"></i>Add Make</button>
+        </span>
+        </h3>
+        <div class="row">
+        <div class="col-xs-6" ng-repeat="make in dealer.makes">         
+        <div class="panel" style="padding: 5px">   
+        <div class="panel-heading">
+          Make : {{make.name}}
+          <button ng-show="isDealerAdmin" class="btn m-b-xs btn-sm btn-danger pull-right" ng-click="deleteMake(make._id)"><i class="fa fa-trash"></i></button>
+        </div>        
+         <img src="{{make.img_url}}" alt="..." width="100px" height="100px" class="img-square make">         
+
+        <div class="panel b-a" set-ng-animate="false">
+        <div class="panel-heading">
+          Model
+           <span ng-controller="ModelModalCtrl">
+          <script type="text/ng-template" id="myModelModal.html">
+            <div ng-include="'app/dealers/add_model_modal.html'"></div>
+          </script>
+        <button ng-show="isDealerAdmin" class="btn m-b-xs btn-sm btn-primary pull-right" ng-click="open('lg',make._id)"><i class="fa fa-plus"></i></button>
+        </span>
+        </div>
+        <carousel interval="myInterval">
+          <slide ng-repeat="slide in make.models" active="slide.active">          
+            <center>
+            <img ng-src="{{slide.img_url}}" width="350px" height="350px" class="img-responsive">
+            </center>          
+            <div class="carousel-caption bottom wrapper bg-gd-dk text-white">              
+              <span class="label"><h2>{{slide.name}}</h2></span>
+              <span class="pull-right"><button ng-show="isDealerAdmin" class="btn btn-sm btn-icon btn-rounded btn-danger"><a ng-click="deleteModel(make._id, slide._id)"><i class="fa fa-trash"></i></a></button></span>
+            </div>
+          </slide>
+        </carousel>        
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
+    </div>
+    </div>

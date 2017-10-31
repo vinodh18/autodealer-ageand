@@ -1,0 +1,24 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Feedbacks</h1>
+  <small class="text-muted">Manage Feedbacks</small>
+</div>
+
+<div class="wrapper-md" ng-init="initfeedback()">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">    
+        Feedbacks : {{jobcards.total}}
+        <div class="blog-post">
+          <div ng-repeat="jobcard in jobcards">           
+            <p class="b wrapper-md  bg-light ">{{jobcard.feedback}}</p>
+            <div class=" label bg-danger">Customer Name: {{jobcard.customer.name}}</div>            
+            <div class="pull-right">
+            <rating ng-model="jobcard.customer_rating" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null" style="color:gold"></rating>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+        </div>
+      </div>      
+      <pagination boundary-links="true" class="pull-right" total-items="totalJobcards" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>
+</div>
+</div>
+</div>

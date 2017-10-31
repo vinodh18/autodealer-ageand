@@ -1,0 +1,120 @@
+
+<div class="modal-body wrapper-lg" ng-init="initAddParts()">      
+  <a class="btn btn-xs btn-dark pull-right" ng-click="cancel()"><i class="fa fa-times"></i></a>
+  <div class="row">
+    <div class="col-sm-12 b-r">
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        {{alert.type}} {{alert.msg}}</alert>
+        <h3 class="m-t-none m-b font-thin">Add Parts</h3>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+      <form name="customerPartsForm" action="#" ng-submit = "addParts()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+         
+          <div class="form-group">
+          <label class="col-sm-2 control-label" style="padding-top: 10px" for="example-email-input" style="top:20px">Parts</label>
+          <div class="col-sm-10">
+            <div class="row m-b-sm" ng-repeat="items in parts.items">
+            <div class="panel panel-default">
+              <div class="panel-heading font-bold">Items</div>
+              <div class="panel-body">
+              <div class="row m-b-sm">
+              <div class="col-md-5">
+                <input type="text" id="example-registration-input"
+                  ng-model="items.no" name="example-registration-input"
+                  class="form-control" placeholder="No">
+              </div>
+              <div class="col-md-5">    
+                <input type="text" id="example-registration-input" ng-model="items.desc" name="example-registration-input" class="form-control" placeholder="Description">
+              </div>
+              <div class="col-md-2">                
+                  <a href="javascript:void(0)" ng-show="{{parts.items.length > 1}}" class="btn btn-sm btn-danger" ng-click="deletePart($index)" style="color: red"><i class="fa fa-remove" title="remove"></i></a>                
+              </div>
+              </div>
+              <div class="row m-b-sm">
+                <div class="col-md-4">
+                <input type="Number" id="example-registration-input"
+                  ng-model="items.qty" name="example-registration-input"
+                  class="form-control" placeholder="Quantity" min="0">
+                </div>
+                <div class="col-md-4">
+                <input type="Number" id="example-registration-input"
+                  ng-model="items.rate" ng-blur="itemAmount(items)" name="example-registration-input" class="form-control" placeholder="Rate" min="0">
+                </div>
+                <div class="col-md-4">
+                <input type="Number" id="example-registration-input"
+                  ng-model="items.amt" ng-disabled="true" name="example-registration-input"
+                  class="form-control" placeholder="Amount" min="0">
+                </div>
+              </div>
+              </div>
+              </div>              
+            </div>
+            <a href="javascript:void(0)" class="btn btn-sm btn-dark" ng-click="addNewPart()"><i class="fa fa-plus"></i> Add</a>
+          </div>
+        </div>                  
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="from">Discount
+          </label>
+          <div class="col-sm-10">
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" for="from">Percentage</label>
+                <div class="col-sm-9">  
+                  <input type="Number" ng-blur="discountAmount(parts)" ng-model="parts.discount" id="discount" name="discount" class="form-control" min="0">
+                </div> 
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" for="from">Amount</label>
+                <div class="col-sm-9">  
+                  <input type="Number" ng-disabled="true" ng-model="parts.discount_amt" id="discount_amt" name="discount_amt" class="form-control" min="0">
+                </div> 
+              </div>
+            </div>  
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="from">Tax
+          </label>
+          <div class="col-sm-10">
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" for="from">No</label>
+                <div class="col-sm-9">  
+                  <input type="Number" ng-model="parts.tax" id="tax" name="tax"
+                  class="form-control" min="0">
+                </div> 
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" for="from">Amount</label>
+                <div class="col-sm-9">  
+                  <input type="Number" ng-blur="totalPartsAmount(parts)" ng-model="parts.tax_amt" id="tax_amt" name="tax_amt" class="form-control" min="0">
+                </div> 
+              </div>
+            </div>  
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div> 
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="from">Total</label>
+          <div class="col-sm-10">  
+            <input type="Number" ng-disabled="true" ng-model="parts.total" id="total" name="total" class="form-control" min="0">
+          </div> 
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div> 
+
+        <div class="text-right lter">
+            <button type="submit" class="btn btn-success" ng-disabled="customerPartsForm.$invalid">
+            <i class="fa fa-edit"></i> Update</button>          
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

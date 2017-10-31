@@ -1,0 +1,82 @@
+	<div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Ads Media</h1>
+        <small class="text-muted">View Ads Media</small>
+    </div>
+	    <ul class="breadcrumb bg-white b-a">
+	    <li><a ui-sref="^.list">
+	    <i class="fa fa-bullhorn icon text-info-dker"></i> Ads Media</a></li>
+	    <li>View Ads Media</li>
+	  </ul>	
+
+		<div class="wrapper-md" ng-init="initEditAdsmedia()">
+		  <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                View Ads Media
+           		 </div>
+            	<div class="panel-body">
+					<div class="form-group" >
+						<label class="col-sm-2 control-label" for="name">Title
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="adsmedia.title" id="title"
+								name="title" class="form-control" placeholder="Title Name"
+								 ng-disabled="true" />
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Youtube Id
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="adsmedia.youtube_id" id="youtube"
+							name="youtube" class="form-control" placeholder="Youtube Id (www.youtube.com/watch) " ng-disabled="true"/>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					
+					<div class="form-group" >
+					<label class="col-sm-2 control-label" for="pick_up">
+						Type</label>
+					<div class="col-sm-10">
+						<select id="type" name="type" class="form-control" size="1" ng-model="adsmedia.type" ng-disabled="true">
+							<option value="">Select Pick up</option>
+							<option value="IMAGE">Image</option>
+							<option value="VIDEO">Video</option>
+						</select>
+						
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Image Url
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="adsmedia.image_url" id="image"
+							name="image" class="form-control" placeholder="Imange Url (c:/desktop/watch.jpg)" ng-disabled="true"/>
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="thumbnail_url">Thumbnail Url
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="adsmedia.thumbnail_url" id="thumbnail_url" name="thumbnail_url" class="form-control" placeholder="Thumbnail Url"ng-disabled="true" />
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Description
+						</label>
+						<div class="col-sm-10">
+							<textarea type="text" ng-model="adsmedia.description" id="description" name="description" class="form-control" style="resize:none" placeholder="Description.." ng-disabled="true"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+

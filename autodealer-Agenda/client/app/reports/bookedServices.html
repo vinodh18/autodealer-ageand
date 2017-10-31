@@ -1,0 +1,193 @@
+
+ <!-- Charts Header -->
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3 text-black">Booked Reports</h1>
+    <small class="text-muted">Manage Reports</small>
+</div>
+<ul class="breadcrumb bg-white b-a">
+	<i class="glyphicon glyphicon-stats icon text-info-dker"></i>
+	<li> Reports</li>
+</ul>
+
+<div class="wrapper-md" ng-init="initStats()">
+<div class="panel panel-default">
+<div class="panel-heading font-bold">Booked Service Reports</div>
+<div class="panel-body">
+
+	<form action="#" ng-submit="getServices()" method="post" enctype="multipart/form-data" class="form-horizontal " onsubmit="return false;">
+	
+		<div class="row">
+			<div class="col-md-12" id="services-div">
+			
+				<div class="col-md-6 pull-right">
+					<div class="form-group ">
+					<label class="col-md-3 control-label" for="service_date">Service Date
+						</label>
+						<div class="col-md-9">	
+							<date-range-picker style="cursor: default" ng-model="dateRange" class="btn btn-md btn-info daterange pull-right" ranges="ranges">
+							<i class="fa fa-calendar fa-lg"></i>
+    						<span>{{dateRange.startDate | amDateFormat: 'MMM D, YYYY'}} - {{dateRange.endDate | amDateFormat: 'MMM D, YYYY'}}</span>
+    						<b class="caret"></b>
+							</date-range-picker>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12" id="services-div">
+			  <div class="col-md-6">
+					<div class="form-group">
+						<label class="col-md-3 control-label" for="make">Make
+						</label>
+						<div class="col-md-9">
+						<select ng-init="initAllMake()"
+							ng-model="params.make" id="make"
+							name="make" class="form-control" size="1"
+							ng-options="make._id as (make.name) for make in allMakes">
+							<option value="">Select Make</option>
+						</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-md-3 control-label" for="service_type">Model
+						</label>
+						<div class="col-md-9">
+							<select ng-init="initAllModel()"
+							ng-model="params.model" id="model"
+							name="model" class="form-control" size="1"
+							ng-options="model._id as (model.name) for model in allModels">
+							<option value="">Select Model</option>
+						</select>
+						</div>
+					</div>
+					</div>
+				
+				</div>
+			</div>
+
+				<footer class="panel-footer text-right bg-light lter">
+	              <button type="submit" class="btn btn-success">
+	               <i class="fa fa-share"></i> Submit</button>
+	              <button type="reset" class="btn btn-warning" ng-click="resetStatus()">
+	                <i class="fa fa-repeat"></i> Reset</button>
+	            </footer>
+		
+
+			</form>
+		</div>
+  </div>
+	<div class="row m-b-sm">
+		<div class="btn btn-sm btn-dark pull-right" ng-click="serviceStatusExport()">
+			<i class="fa fa-download"></i> Export
+		</div>
+	</div>
+	<!-- <div class="row m-b-sm">
+		<div class="btn btn-sm btn-dark pull-right" ng-click="invoiceStatusExport()">
+			<i class="fa fa-download"></i> Export
+		</div>
+	</div> -->
+	
+			<div class="row row-sm text-center">
+				
+		
+				<div class="col-xs-3" ng-repeat = "serviceStatus in testCountReport">
+				<div class="panel padder-v item" style="background: {{serviceStatus.colors}}">
+						<div class="text-white font-thin h1">{{serviceStatus.total}}
+						<!-- <span><i class="fa fa-inr"></i>
+							{{serviceStatus.amount | currency:""}}
+						</span> -->
+						</div>
+						<span class="text-white text-lg">{{serviceStatus.name}}</span>	
+					</div>
+				</div>	
+
+				<div class="col-xs-3">
+					<div class="panel padder-v bg-info item">
+						<div class="h1 text-white font-thin h1">{{result.total_service}}
+						<!-- <span><i class="fa fa-inr"></i> 
+									{{total_amount | currency:""}}
+								</span> --></div>
+						<div class="text-lg">Total Services</div>		
+					</div>
+				</div>
+				<!-- </div>
+				</div>
+			</div>
+ -->			</div>
+		<!-- </div>
+	</div> -->
+
+	<div class="row m-b-sm">
+		<div class="panel panel-default">											
+				<div class="panel-heading font-bold">Booked Services</div>
+				<div class="panel-body" id="line_chart">
+					<div ui-jq="plot" ui-options="
+						mychart, chartOptions" ui-refresh="mychart" style="height:300px;">
+					</div>					
+				</div>	
+		</div>
+	</div>
+
+
+	<!-- <div class="row m-b-sm">
+		<div class="panel panel-default">											
+				<div class="panel-heading font-bold">Services Status Bar Chart</div>
+				<div class="panel-body" id="line_chart">
+					<div ui-jq="plot" ui-options="
+						mychart, barOptions" ui-refresh="mychart" style="height:300px;">
+					</div>					
+				</div>	
+		</div>
+	</div> -->
+</div>
+
+<div class="wrapper-md" ng-init="initBooked()">
+  <!-- <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary" ng-show="{{access}} || {{accessSales}}">
+    	<i class="fa fa-plus space-6"></i> Create</a>
+		 
+		 	<span ng-show="{{access}}"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span>
+    </div>
+   </div> -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Booked Services: {{totalServerItems}}
+    </div>
+    <div class="table-responsive">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+		{{alert.msg}}</alert>
+      <div ng-grid="gridOptions" style="min-height:420px"></div>
+    </div>
+  </div>
+</div>
+  
+	<div class="wrapper-md" ng-init="topvehicles()">
+	  <div class="panel panel-default">
+		<div class="panel panel-heading font-bold">Top Vehicle</div>
+	    	<div class="panel-body">
+		        <div  ui-jq="plot" ui-refresh="pieCountReport" ui-options="pieCountReport,pieOptions" style="height: 500px; padding: 0px; position: relative;">
+
+				</div>
+			 </div>
+		  </div>
+		</div>
+
+	<div class="wrapper-md" ng-init="initPiechart()">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      Top Vehicles: {{totalPieItems}}
+	    </div>
+	    <div class="table-responsive">
+	    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+			{{alert.msg}}</alert>
+	      <div ng-grid="gridOption" style="min-height:420px"></div>
+	    </div>
+	  </div>
+	</div>
+<!-- TAble recors -->
+
+

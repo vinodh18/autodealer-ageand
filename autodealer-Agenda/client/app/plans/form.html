@@ -1,0 +1,224 @@
+
+<div class="form-group"
+	ng-class="{'has-error':planForm.plan_code.$invalid && !planForm.plan_code.$pristine }">
+	<label class="col-sm-2 control-label">Plan Code
+	<span style="color:red">*</span></label>
+	<div class="col-sm-10">
+		<input type="text" ng-model="plan.plan_code"
+			name="plan_code" class="form-control"
+			placeholder="Plan Code" required autofocus/>
+	<p ng-show="planForm.plan_code.$invalid && !planForm.plan_code.$pristine"
+			class="help-block">Plan code is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group"
+	ng-class="{'has-error':planForm.plan_name.$invalid && !planForm.plan_name.$pristine }">
+	<label class="col-sm-2 control-label">Plan Name
+	<span style="color:red">*</span></label>
+	<div class="col-sm-10">
+		<input type="text" ng-model="plan.plan_name"
+			name="plan_name" class="form-control"
+			placeholder="Plan Name" required autofocus/>
+	<p ng-show="planForm.plan_name.$invalid && !planForm.plan_name.$pristine"
+			class="help-block">Plan name is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">Plan Description</label>
+	<div class="col-sm-10">
+		<input type="text" ng-model="plan.plan_description"
+			name="plan_description" class="form-control"
+			placeholder="Plan Description" autofocus/>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group"
+	ng-class="{'has-error':planForm.price.$invalid && !planForm.price.$pristine }">
+	<label class="col-sm-2 control-label">Price
+	<span style="color:red">*</span></label>
+	<div class="col-sm-10">
+		<input type="number" ng-model="plan.price" name="price" class="form-control"
+			placeholder="Price" required  min="0"/>
+	<p ng-show="planForm.price.$invalid && !planForm.price.$pristine"
+			class="help-block">Price is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">Unlimited</label>
+	<div class="col-sm-10">	
+		<div class="radio">
+		  <label>
+		    <input type="radio" ng-model="plan.unlimited" ng-value="true">
+		    Yes 
+		  </label>
+		  <label>
+		    <input type="radio" ng-model="plan.unlimited" ng-value="false">
+		    No
+		  </label>
+		</div>  
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">Plan Limits</label>
+	<div class="col-sm-10">
+		<div class="row">
+		<div class="col-sm-4">
+		<input type="number" ng-model="plan.plan_limits.branches" name="branches" class="form-control" placeholder="Branches"/>
+			</div>
+			<div class="col-sm-4">
+			<input type="number" ng-model="plan.plan_limits.job_cards" name="job_cards" class="form-control" placeholder="Job Cards"  min="0"/>
+			</div>
+			<div class="col-sm-4">
+			<input type="number" ng-model="plan.plan_limits.makes" name="makes" class="form-control" placeholder="Makes" min="0"/>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-sm-4">
+			<input type="number" ng-model="plan.plan_limits.models" name="models" class="form-control" placeholder="Models" min="0"/>
+			</div>
+			<div class="col-sm-4">
+			<input type="number" ng-model="plan.plan_limits.vehicles" name="Vehicles" class="form-control" placeholder="Vehicles"  min="0"/>
+			</div>
+			<div class="col-sm-4">
+			<input type="number" ng-model="plan.plan_limits.customers" name="customers" class="form-control" placeholder="Customers"  min="0"/>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">Currency</label>
+	<div class="col-sm-10">
+		<div class="row">
+		
+			<div class="col-sm-6">
+			<input type="text" ng-model="plan.currency.code" name="code" class="form-control" placeholder="Code"/>
+			</div>
+			<div class="col-sm-6">
+			<input type="number" ng-model="plan.currency.numeric_code" name="numeric_code" class="form-control" placeholder="Numeric Code" min="0"/>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-sm-6">
+			<input type="text" ng-model="plan.currency.name" name="name" class="form-control" placeholder="Name"/>
+			</div>
+			<div class="col-sm-6">
+			<input type="text" ng-model="plan.currency.decimals" name="Decimals" class="form-control" placeholder="Decimals"/>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">Country</label>
+	<div class="col-sm-10">
+		<input type="text" ng-model="plan.country" name="country" class="form-control"
+			placeholder="Country" />
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group" ng-class="{'has-error':planForm.is_paid.$invalid && !planForm.is_paid.$pristine }">
+	<label class="col-sm-2 control-label">Is Paid
+	 <span style="color:red">*</span></label>
+	<div class="col-sm-10">
+		<select name="is_paid" ng-model="plan.is_paid" id="is_paid" size="1" class="form-control" required>
+			<option value="">Select Is Paid</option>
+			<option value="PAID">Paid</option>
+			<option value="FREE">Free</option>
+		</select>
+		<p ng-show="planForm.is_paid.$invalid && !planForm.is_paid.$pristine"
+			class="help-block">Is Paid is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">Yearly Price</label>
+	<div class="col-sm-10">
+		<input type="number" ng-model="plan.yearly_price" name="yearly_price" class="form-control" placeholder="Yearly Price" min="0"/>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+<div class="form-group"
+	ng-class="{'has-error':planForm.status.$invalid && !planForm.status.$pristine }">
+	<label class="col-sm-2 control-label">Status <span style="color:red">*</span></label>
+	<div class="col-sm-10">
+		<select ng-model="plan.status" name="status" id="status" size="1" class="form-control" required>
+			<option value="">Select Status</option>
+			<option value="ACTIVE">Active</option>
+			<option value="DISCONTINUED">Discontinued</option>
+		</select>
+	<p ng-show="planForm.status.$invalid && !planForm.status.$pristine"
+			class="help-block">Status is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group"
+	ng-class="{'has-error':planForm.trail_period.$invalid && !planForm.trail_period.$pristine }">
+	<label class="col-sm-2 control-label">Trail Period <span style="color:red">*</span></label>
+	<div class="col-sm-10">
+		<input type="text" ng-model="plan.trail_period" name="trail_period" class="form-control"
+			placeholder="Trail Period" required autofocus/>
+	<p ng-show="planForm.trail_period.$invalid && !planForm.trail_period.$pristine"
+			class="help-block">Trail Period is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group"
+	ng-class="{'has-error':planForm.trail_period_unit.$invalid && !planForm.trail_period_unit.$pristine }">
+	<label class="col-sm-2 control-label">Trail Period Unit <span style="color:red">*</span></label>
+	<div class="col-sm-10">
+		<select name="trail_period_unit" ng-model="plan.trail_period_unit" id="trail_period_unit" class="form-control" 
+		size="1" required>
+			<option value="">Select Trail Period Unit</option>
+			<option value="DAY">Day</option>
+			<option value="MONTH">Month</option>
+		</select>
+	<p ng-show="planForm.trail_period_unit.$invalid && !planForm.trail_period_unit.$pristine"
+			class="help-block">Trial Period Unit is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label"><br>Feature</label>
+	<div class="col-sm-10">
+	<div ng-repeat="feature in plan.feature">
+		<div class="row">
+			<br>
+			<div class="col-sm-5">
+				<input type="text" name="feature_key" class="form-control"
+						ng-model="feature.key" placeholder="Key" />
+			</div>
+			<div class="col-sm-5">			
+				<input type="text" name="feature_value" class="form-control"
+						ng-model="feature.value" placeholder="Value"/>		
+			</div>
+			<div class="col-sm-1" ng-show="$index > 0">
+						<a  href="javascript:void(0)" class="btn btn-danger btn-xs" ng-click="removeFeature($index)" style="color: red"> <span class="glyphicon glyphicon-remove" title="remove"></span></a>			
+					 </div>
+				</div>
+			</div>		
+		<br>
+		<a href="javascript:void(0)" ng-click="addFeature()" class="btn btn-sm btn-dark">Add</a>	
+	</div>	
+</div>

@@ -1,0 +1,99 @@
+			
+<div class="form-group" ng-class="{'has-error':userForm.name.$invalid && !userForm.name.$pristine }">
+	<label class="col-sm-2 control-label" for="name">Name <span style="color: red">*</span></label>
+	<div class="col-sm-10">
+		<input type="text" ng-model="user.name" id="name" name="name" class="form-control" placeholder="Name" required>
+		<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block  m-b-none">Name is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group" ng-class="{'has-error':userForm.username.$invalid && 				!userForm.username.$pristine }">
+	<label class="col-sm-2 control-label" for="name">Username <span style="color: red">*</span></label>
+	<div class="col-sm-10">
+		<input ng-model="user.username" type="text" id="username" name="username" ng-blur = "checkUsername(user)" class="form-control" placeholder="Username"  ng-minlength="6" ng-maxlength="15" required/>
+		<p ng-show="userForm.username.$invalid && !userForm.username.$pristine && userForm.username.$error.required" class="help-block">Username is required.</p>
+		<p ng-show="userForm.username.$error.minlength" class="help-block m-b-none">Username is too short. Min. 6 chars.</p>
+		<p ng-show="userForm.username.$error.maxlength" class="help-block m-b-none">Username is too long. Max. 15 chars.</p>
+		<p ng-show="userForm.username.$error.exists" class="help-block m-b-none">Username already exists.</p>
+		<p ng-show="userForm.username.$error.available" class="help-block m-b-none"><span style="color:#27c24c">Username Avaliable</span></p>		
+		<div ng-show="usernameSpinner">
+			<span us-spinner="{radius:5, width:3, length: 7}"></span>	
+		</div>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+<div class="form-group" ng-class="{'has-error':userForm.email.$invalid && !userForm.email.$pristine }">
+	<label class="col-sm-2 control-label" for="example-email-input">Email
+	 <span style="color:red">*</span> </label>
+	<div class="col-sm-10">
+		<input type="email" name="email" id="email" class="form-control" ng-blur ="checkEmail(user)" ng-model="user.email" placeholder="Email" required ng-disabled="false"/>
+		<!-- <input type="email" ng-model="user.email"  name="email" 		
+		class="form-control" placeholder="Email" required> -->
+		<p ng-show="userForm.email.$invalid && !userForm.email.$pristine && userForm.email.$error.required" class="help-block m-b-none">Email is required.</p>	
+		<p ng-show="userForm.email.$error.exists" class="help-block m-b-none">Email already exists.</p>
+		<p ng-show="userForm.email.$error.available" class="help-block m-b-none"><span style="color:#27c24c">Email Avaliable</span></p>			
+		<div ng-show="emailSpinner">
+		<span us-spinner="{radius:5, width:3, length: 7}"></span>		
+		</div>			
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+<div class="form-group" ng-class="{'has-error':userForm.password.$invalid && 
+								!userForm.password.$pristine }">
+	<label class="col-sm-2 control-label" for="password">Password
+	<span style="color: red">*</span></label>
+	<div class="col-sm-10">
+		<input type="password" ng-model="user.password" id="password"
+			name="password" class="form-control"
+			placeholder="password" ng-minlength="6" ng-maxlength="15" required/>
+			<p ng-show="userForm.password.$invalid && !userForm.password.$pristine && userForm.password.$error.required"class="help-block">password is required.</p>
+			
+			<p ng-show="userForm.password.$error.minlength"class="help-block">password is min 6 chars.</p>
+
+			<p ng-show="userForm.password.$error.maxlength"class="help-block">password is max 15 chars.</p>
+	</div>
+</div>	
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group" ng-class="{'has-error':userForm.confirm_password.$invalid && !userForm.confirm_password.$pristine }">
+	<label class="col-sm-2 control-label" for="example-email-input"> Confirm Password
+	 <span style="color:red">*</span></label>
+	<div class="col-sm-10">			
+      <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required ng-model="user.confirm_password" ui-validate="'$value==user.password' " ui-validate-watch=" 'user.password' ">
+      <p ng-show='userForm.confirm_password.$error.validator' class="help-block"><span style="color:#a94442">Passwords do not match!</span></p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in"></div>   
+
+<div class="form-group" ng-class="{'has-error':userForm.role.$invalid 
+		&& !userForm.role.$pristine }">
+	<label class="col-sm-2 control-label" for="role">
+		Role <span style="color: red">*</span></label>
+	<div class="col-sm-10">
+		<select id="role" name="role" class="form-control" size="1" 
+				ng-model="user.role" required>
+			<option value="">Select Role</option>							
+			<option value="DEALER_ADMIN">DEALER ADMIN</option>
+			<option value="BRANCH_ADMIN">BRANCH ADMIN</option>
+			<option value="MANAGER">MANAGER</option>
+			<option value="STAFF">STAFF</option>							
+		</select>
+		<p ng-show="userForm.role.$invalid && !userForm.role.$pristine"
+				class="help-block">Role is required.</p>
+	</div>
+</div>
+<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="example-text-input">
+    Branch Name
+    </label>
+    <div class="col-md-10">
+   	<select ng-init="initAllBranches()"  ng-model="user.branch" name="branch" ng-options="branch.branch_code as branch.name for branch in allBranches" class="form-control" size="1">
+   	<option value="">All Branch</option>             
+	</select>	
+    </div>
+</div>

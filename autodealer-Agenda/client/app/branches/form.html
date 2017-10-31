@@ -1,0 +1,217 @@
+				<!-- 	<div class="form-group" ng-class="{'has-error':branchForm.dealer.$invalid && !branchForm.dealer.$pristine }">
+					<label class="col-sm-2 control-label" for="dealer_name">Dealer Name
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select ng-init="initAllDealers()"
+							ng-model="branch.dealer" id="branch"
+							name="dealer" class="form-control" size="1"
+							ng-options="dealer._id as (dealer.name) for dealer in allDealers" required>
+							<option value="">Select Dealer Name</option>
+						</select>
+					<p ng-show="branchForm.dealer.$invalid && !branchForm.dealer.$pristine" class="help-block  m-b-none">Dealer Name is required.</p>
+					</div>
+				</div> 
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+ -->
+
+					<div class="form-group" ng-class="{'has-error':branchForm.name.$invalid && !branchForm.name.$pristine }">
+						<label class="col-sm-2 control-label"
+							for="name">Branch Name
+							<span style="color: red">*</span></label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="branch.name"
+								id="name" name="name"
+								class="form-control" placeholder="Branch Name" required>
+							<p ng-show="branchForm.name.$invalid && !branchForm.name.$pristine" class="help-block  m-b-none">Branch Name is required.</p>
+						</div>
+					</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="phone">
+						<br>Phone<span style="color: red">*</span></label>
+						<div class="col-sm-10">
+						 <div ng-repeat="phone in branch.phone track by $index">
+						<div class="row" ng-class="{'has-error':branchForm.phone{{$index}}.$invalid && 						!branchForm.phone{{$index}}.$pristine}">
+						<div class="col-md-11">
+							<br><input type="text" ng-model="branch.phone[$index]"
+								id="phone" name="phone{{$index}}" class="form-control" placeholder="phone" ng-disabled="hide" required>
+								<p ng-show="branchForm.phone{{$index}}.$invalid && !branchForm.phone{{$index}}.$pristine" class="help-block  m-b-none">
+								Phone Number is required.</p>
+								</div>
+								<div class="col-sm-1" ng-show="$index > 0">
+								 <br><a href="javascript:void(0)" ng-show="access || accessSales" ng-click="deletePhone($index)" style="color: red"><i class="fa fa-remove" title="remove"></i> </a>
+								 </div>
+								 </div>
+						</div>
+						<br><a href="javascript:void(0)" ng-show="access || accessSales" ng-click="addNewPhone()" style="color:green" class="btn btn-sm btn-dark">
+						<i class="fa fa-plus" ></i> Add</a>
+						</div>
+					</div>
+
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="email">Email</label>
+						<div class="col-sm-10">
+							<input type="email" ng-model="branch.email"
+								id="email" name="email"
+								class="form-control" placeholder="Email">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>	
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="customer-name">Address
+						</label>
+						<div class="col-sm-10">
+						<div class="row">
+						<div class="col-sm-6">
+						<input type="text" ng-model="branch.address.line1" id="line1"
+							name="line1" class="form-control m-b" placeholder="line 1"/>
+							<div ng-class="{'has-error':branchForm.city.$invalid && !branchForm.city.$pristine }">
+							</div>
+							</div>
+							<!-- <span style="color: red">*</span> -->
+							<div class="col-sm-6">
+							<input type="text" ng-model="branch.address.line2" id="line2"
+							name="line2" class="form-control m-b" placeholder="line 2"/>
+							
+							</div>
+							</div>
+						<div class="row">
+						<div class="col-sm-6">
+
+							<input type="text" ng-model="branch.address.city" id="city"
+							name="city" class="form-control m-b" placeholder="City">
+							</div>
+							<div class="col-sm-6">
+							<input type="text" ng-model="branch.address.zip" id="zip"
+							name="zip" class="form-control m-b" placeholder="zip"/>
+						</div>
+						</div>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+		  <div class="form-group">
+			<label class="col-sm-2 control-label" >Working Hours
+				<span style="color: red">*</span></label>
+				   <div calss="col-sm-10">
+					<div class="datetimepicker-input input-group">
+						<div ng-repeat="working in branch.working_hours">
+						<div class="col-md-12">
+						  <div class="col-sm-5" ng-class="{'has-error':branchForm.start.$invalid && !branchForm.start.$pristine }">
+							<div class="input-group w-md">
+								<timepicker date-format="dd-MM-yyyy" ng-model="working.start" name="start" readonly-time="false" show-button-bar="false" required></timepicker>
+								<p ng-show="branchForm.start.$invalid && !branchForm.start.$pristine" class="help-block  m-b-none">Start Date is required.</p>
+							</div>
+						  </div>
+						 <div class="col-sm-6" ng-class="{'has-error':branchForm.end.$invalid && !branchForm.end.$pristine }">
+						   <div class="input-group w-md">
+							 <timepicker date-format="dd-MM-yyyy" ng-model="working.end" name="end" readonly-time="false" show-button-bar="false" 
+							  required></timepicker>
+							  <p ng-show="branchForm.end.$invalid && !branchForm.end.$pristine" class="help-block  m-b-none">Start Date is required.</p>
+						   </div> 
+						 </div>
+						 <div class="col-sm-1">
+						 <a href="javascript:void(0)"  ng-show="($index > 0)" ng-click="deleteWorking_hours($index)" style="color: red"><i class="fa fa-remove" title="remove"></i> </a>
+						 </div>
+						</div>
+					</div>
+						<a href="javascript:void(0)" ng-click="addNewWorking_hours()"  
+						style="color:green" class="btn btn-sm btn-dark">
+						<i class="fa fa-plus"></i> Add</a>
+				</div>
+			</div>
+		</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>			
+
+				<!--<div class="form-group" >
+					<label class="col-sm-2 control-label" for="dealer_name">
+					<br>Serviceable Vehicles
+					<span style="color: red">*</span></label>
+					 <div class="col-sm-10">
+					 <div ng-repeat="vehicle in branch.serviceable_vehicles">
+					 <div class="row">
+
+					  <div class="col-sm-11" ng-class="{'has-error':branchForm.vehicle_type{{$index}}.$invalid && !branchForm.vehicle_type{{$index}}.$pristine }">
+					 	<br><select ng-init="initAllVehicleTypes()"
+							ng-model="vehicle.vehicle_type" id="vehicle_type"
+							name="vehicle_type{{$index}}" class="form-control" size="1"
+							ng-options="vehicle_type._id as (vehicle_type.name) for vehicle_type in allVehicletypes" required>
+							<option value="">Select Vehicle Type</option>
+						</select>
+					<p ng-show="branchForm.vehicle_type{{$index}}.$invalid && !branchForm.vehicle_type{{$index}}.$pristine" class="help-block  m-b-none">Vehicle Type is required.</p> -->
+
+					<div class="form-group" >
+					<label class="col-sm-2 control-label" for="dealer_name">
+					<br>Serviceable Vehicles
+					<span style="color: red">*</span></label>
+					 <div class="col-sm-10">
+					 <div ng-repeat="vehicle in branch.serviceable_vehicles">
+					 <div class="row">
+
+					 <div class="col-sm-11" ng-class="{'has-error':branchForm.vehicle_type{{$index}}.$invalid && !branchForm.vehicle_type{{$index}}.$pristine }">
+					 	<br><select ng-init="initAllVehicleTypes()"
+							ng-model="vehicle.vehicle_type" id="vehicle_type"
+							name="vehicle_type{{$index}}" class="form-control" size="1"
+							ng-options="vehicle_type._id as (vehicle_type.name) for vehicle_type in allVehicletypes" required>
+							<option value="">Select Vehicle Type</option>
+						</select>
+					<p ng-show="branchForm.vehicle_type{{$index}}.$invalid && !branchForm.vehicle_type{{$index}}.$pristine" class="help-block  m-b-none">Vehicle Type is required.</p>
+					
+					</div>
+					<div class="col-sm-1">
+					<br> <a href="javascript:void(0)" ng-show="$index > 0" ng-click="deleteServiceable_vehicles($index)" style="color: red"><i class="fa fa-remove" title="remove"></i> </a>
+					</div>
+					</div>
+					</div>
+					<br><a href="javascript:void(0)" ng-click="addNewServiceable_vehicles()"  style="color:green" class="btn btn-sm btn-dark">
+						<i class="fa fa-plus" ></i> Add</a>
+					
+					</div>
+				</div> 
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>	
+
+			<div class="form-group" >
+				<label class="col-sm-2 control-label">Makes
+				<span style="color: red">*</span></label>
+				<div class="col-sm-10" ng-init="initAllMakes()">
+					<div class="col-xs-3" ng-repeat="make in allMakes" id="makes">
+						<div class="checkbox">
+			              <label class="i-checks i-checks-sm" for="{{make._id}}">
+			                <input id="{{make._id}}" type="checkbox" value="{{make._id}}" 
+							ng-checked="searchMake(make._id) > -1" name="make" ng-click="makeSelection(make._id)" />
+			                <i></i>
+			                {{make.name}}
+			              </label>
+			            </div>			
+					</div>
+				</div>
+
+				<p ng-show="makesRequired" class="help-block m-b-none" align="center" ><span style="color:#a94442">Select atleast one Make.</span></p>
+			</div>
+			<div class="line line-dashed b-b line-lg pull-in"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="latitude">Latitude</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="branch.latitude"
+								id="latitude" name="latitude"
+								class="form-control" placeholder="latitude" min="0">
+						</div>
+					</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>	
+
+					<div class="form-group">
+					<label class="col-sm-2 control-label" for="longitude">Longitude</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="branch.longitude"
+								id="longitude" name="longitude"
+								class="form-control" placeholder="longitude" min="0">
+						</div>
+					</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>	

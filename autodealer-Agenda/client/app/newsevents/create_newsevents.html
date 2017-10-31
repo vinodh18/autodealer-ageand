@@ -1,0 +1,34 @@
+<!-- Page content -->
+
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">News Event</h1>
+        <small class="text-muted">Create new News Event</small>
+    </div>
+     
+<ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-youtube-play icon text-info-dker"></i> News Events</a></li>
+  <li>Create new News Event</li>
+</ul>
+    <div class="wrapper-md" ng-init="initCreateNewsevent()">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <form name="newseventForm" action="#" ng-submit = "addNewsevents()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Create new News Event
+            </div>
+            <div class="panel-body">
+                                   
+                  <div ng-include='"app/newsevents/form.html"'></div>
+            </div>
+              
+          <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="newseventForm.$invalid"> <i class="fa fa-save"></i> Submit</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>    
+        </div>
+        </form>
+    </div>    
+       <!-- END Page Content -->

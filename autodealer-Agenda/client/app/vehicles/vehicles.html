@@ -1,0 +1,105 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Vehicles</h1>
+  <small class="text-muted">Manage Vehicles</small>
+</div>
+
+<div class="wrapper-md" ng-init="initVehicles()">
+<div ng-init="initAllVehicles()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary" >
+    	<i class="fa fa-plus space-6"></i> Create</a>
+		 
+		 	<span ng-show="{{access}}"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span>
+    </div>
+
+     <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+      <div class="form-group">
+      <div class="row">
+           <div class="col-md-4">
+           
+            <select ng-init="initAllMakes()" ng-model="params.make" id="make"
+              name="make" class="form-control" size="1" ng-change="initAllModel(params.make)"
+              ng-options="make._id as (make.name) for make in allMakes">
+              <option value="">Select Make</option>
+            </select>
+            </div>
+
+            <div class="col-md-4">
+              <select ng-model="params.model" id="model" name="model" class="form-control" 
+              size="1" ng-options="model._id as (model.name) for model in allModels">
+              <option value="">Select Models</option>
+            </select>
+            </div>
+
+            <div class="col-md-4">
+            <button type="submit" class="btn btn-sm btn-success btn-sm ">
+            <i class="fa fa-search"></i>
+               Search
+            </button>
+
+            <button type="reset" ng-click="reset()" class="btn btn-danger btn-sm">
+            <i class="fa fa-undo"> Reset</i></button>
+          </div>
+          </div>
+          </div>
+    </div>
+    </form>
+
+   </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Vehicles : {{totalVehicles}}
+    </div>
+    <div class="row" >
+      <div  ng-repeat="vehicle in vehicles track by $index">
+        <div class="col-md-3">
+      <div class="panel b-a">
+        <div class="panel-heading no-border bg-primary vehicle">          
+          <span class="text-lt">{{Make[$index]}}</span>
+          <span class="text-lt pull-right">{{Model[$index]}}</span>
+        </div>
+        <div class="vehicle-hover">
+        <div class="item m-l-n-xxs m-r-n-xxs">
+          <div ng-init="x = 3" class="top text-right padder m-t-xs w-full">
+            <span class="label bg-dark">{{vehicle.year | date: 'yyyy'}}</span>
+          </div>
+          <div class="bottom wrapper bg-gd-dk text-white vehicle">            
+            <div class="text-u-c h3 m-b-sm">INR-{{vehicle.on_road_price}}</div>
+            <div>{{vehicle.fuel_type}}</div>
+            <div>{{vehicle.seat_capacity}} Seater</div>
+          </div>
+          <!-- <img src="assets/images/c0.jpg" class="img-full"> -->
+           <img id="vehiclesImage" class="img-full" ng-src="{{vehicle.image_url}}">
+          <div class="vehicle-hover-div">
+          <div class="list-side-by-side">
+          <dl>
+            <dt>On Road Price - <i class="icon-rupee"></i>{{vehicle.on_road_price}}</dt>
+            <dt>Ex Showroom Price - <i class="icon-rupee"></i>{{vehicle.ex_Showroom_price}}</dt>
+            <dt>RTO - {{vehicle.rto}}</dt>
+          </dl>
+          </div>
+          </div>
+        </div>
+        </div>
+        <div class="hbox text-center b-b b-light text-sm" ng-show="deleteAction">          
+          <a href="javascript:void(0)" ui-sref="^.edit({vehiclesId: vehicle._id})"class="col padder-v b-r b-light" >
+            <i class="icon-pencil  block m-b-xs fa-2x"></i>
+          </a>
+          <a href class="col padder-v b-r b-light">
+          </a>
+          <a ng-click="deleteVehicles(vehicle._id, row)" class="col padder-v">
+            <i class="icon-trash block m-b-xs fa-2x"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+<pagination boundary-links="true" class="pull-right" total-items="totalVehicles" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>

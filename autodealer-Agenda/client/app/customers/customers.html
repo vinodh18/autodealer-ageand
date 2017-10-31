@@ -1,0 +1,57 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Customers</h1>
+  <small class="text-muted">Manage Customers</small>
+</div>
+<!-- <ul class="breadcrumb bg-white b-a">
+	<li>Customers</li>
+</ul> -->
+<div class="wrapper-md" ng-init="initCustomers()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary">
+    	<i class="fa fa-plus space-6"></i> Create</a>		 		
+    </div>   
+  </div>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+    {{alert.msg}}</alert>
+    <div class="panel panel-default">
+    <div class="panel-heading">
+      Customers : {{totalCustomers}}
+    </div>
+    <div class="row">
+    <div ng-repeat="customer in customers">
+    <div class="col-lg-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+              <div class="clearfix">
+                <div class="clear">
+                  <div class="h3 m-t-xs m-b-xs">
+                    {{customer.name}}
+                  <a ui-sref="^.edit({customerId: customer._id})"><i class="icon-view pull-right" style="font-size: initial"></i><br></a>
+                  <a class="icon-trash pull-right" style="font-size: initial" ng-click="deleteCustomer(customer._id)"></a>
+                  <small class="text-muted">{{customer.address}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-group no-radius alt">
+              <span class="list-group-item" href>
+                <span class="pull-right">{{customer.email}}</span>
+                <i class="fa fa-envelope fa-fw text-muted"></i> 
+                E-mail
+              </span>
+              <span class="list-group-item" href>
+                <span class="pull-right">{{customer.phone[0]}}</span>
+                <i class="fa fa-phone fa-fw text-muted"></i> 
+                Phone 
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>    
+      </div>    
+    </div>
+</div>
+
+
+<pagination boundary-links="true" class="pull-right" total-items="totalCustomers" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>

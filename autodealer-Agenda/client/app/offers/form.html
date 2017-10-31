@@ -1,0 +1,95 @@
+				<style>
+				    .cropArea {
+				      background: #E4E4E4;
+				      overflow: hidden;
+				      width:250px;
+				      height:250px;
+				      /*padding-bottom: 25px;
+				      padding-left: 25px;
+				      padding-top: 25px;
+				      padding-right: 25px;*/
+				    }
+				</style>
+
+				<div class="form-group" ng-class="{'has-error':offerForm.branch.$invalid && 
+												!offerForm.branch.$pristine }">
+					    <label class="col-sm-2 control-label" for="example-text-input">
+					    Branch Name<span style="color: red">*</span>
+					    </label>
+					    <div class="col-md-10">
+				       <select ng-init="initAllBranches()"  ng-model="offers.branch" name="branch" ng-options="branch.branch_code as branch.name for branch in allBranches" class="form-control" size="1" required>
+				       	<option value="">All Branch</option>             
+				    	</select>         
+				    	<p ng-show="offerForm.branch.$invalid && !offerForm.branch.$pristine" class="help-block m-b-none">Branch is required.</p>
+					    </div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+				<div class="form-group"
+						ng-class="{'has-error':offerForm.name.$invalid && 
+												!offerForm.name.$pristine }">
+						<label class="col-sm-2 control-label" for="name">Offer Name
+							<span style="color: red">*</span>
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="offers.name" id="name"
+								name="name" class="form-control" placeholder="Offer Name"
+								required />
+							<p ng-show="offerForm.name.$invalid && !offerForm.name.$pristine" class="help-block m-b-none">Offer is required.</p>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="from">From
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="offers.from" datepicker-popup="dd-MMM-yyyy" is-open="fOpen" ng-click="fOpen = true" id="from" name="from" class="form-control"  placeholder="From (DD-MM-YYYY)" show-button-bar="false">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="to">To
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="offers.to" datepicker-popup="dd-MMM-yyyy" is-open="tOpen" ng-click="tOpen = true" id="from" name="to" class="form-control"  placeholder="To (DD-MM-YYYY)" show-button-bar="false">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Description
+						</label>
+						<div class="col-sm-10">
+							<textarea type="text" ng-model="offers.description" id="description" name="description" class="form-control" style="resize:none" placeholder="Description.."></textarea>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Image
+						</label>
+						<div class="col-sm-10">
+							<input type="file" ngf-select="onFileSelect($files)" >
+						</div>
+						<div class="col-md-4">
+							<img id="offerImage" width="200" height="100" ng-src="{{image}}"></div>
+					</div>
+
+					<div class="row" ng-show="imgExists">
+					<div class="col-sm-2">
+					</div>
+					<div class="col-sm-5">	
+						<div class="cropArea" style="padding-right: 100px; padding-left: 100px; padding-top: 100px; padding-bottom: 100px;">
+						    <img-crop ng-show="myImage" image="myImage" result-image="myCroppedImage" area-type="square"></img-crop>
+						</div>
+					</div>
+
+					<div class="col-sm-5">
+						<div class="cropArea" style="padding-right: 25px; padding-left: 25px; padding-top: 25px; padding-bottom: 25px;">
+							<img id="croppedImage" ng-src="{{myCroppedImage}}" />
+						</div>
+					</div>	
+				</div>	
+				<footer class="panel-footer text-right bg-light lter" ng-show="blob">

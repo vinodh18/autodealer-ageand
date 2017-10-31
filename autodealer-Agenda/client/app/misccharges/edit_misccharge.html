@@ -1,0 +1,33 @@
+<!-- Page content -->
+
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Misc Charge</h1>
+        <small class="text-muted">Edit MiscCharge</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-pagelines icon text-info-dker"></i>Misc Charge</a></li>
+  <li>Edit Misc Charge</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditMiscCharge()">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <form name="miscForm" action="#" ng-submit = "updateMiscCharge()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Edit Model
+            </div>
+            <div class="panel-body">
+                    <div ng-include='"app/misccharges/form.html"'></div>
+             </div>
+              
+          <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="miscForm.$invalid"> 
+              <i class="fa fa-edit"></i> Update</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>    
+        </div>
+        </form>
+    </div>    
+       <!-- END Page Content -->

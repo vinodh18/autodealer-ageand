@@ -1,0 +1,183 @@
+			<div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Branch</h1>
+        <small class="text-muted">View Branch</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-wordpress icon text-info-dker"></i> Branches</a></li>
+  <li>View Branch</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditBranch()">
+    	 <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                View Branch
+            </div>
+            <div class="panel-body">
+
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label"
+							for="name">Branch Name
+							</label>
+						<div class="col-sm-10">
+						<input type="text" ng-model="branch.name" id="name" name="name"
+								class="form-control" placeholder="Branch Name" ng-disabled="true">
+						</div>
+					</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+					<div class="form-group" >
+						<label class="col-sm-2 control-label"
+							for="phone">Phone No
+							</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="branch.phone"id="phone"
+								name="phone" class="form-control"
+								placeholder="Phone Number (044-222222 / 9998585984)" ng-disabled="true">
+							
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="email">Email</label>
+						<div class="col-sm-10">
+							<input type="email" ng-model="branch.email"
+								id="email" name="email"
+								class="form-control" placeholder="Email"  ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>	
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="customer-name">Address
+						</label>
+						<div class="col-sm-10">
+						<div class="row">
+						<div class="col-sm-6">
+						<input type="text" ng-model="branch.address.line1" id="line1"
+							name="line1" class="form-control m-b" placeholder="line 1"  ng-disabled="true"/>
+							<div ng-class="{'has-error':branchForm.city.$invalid && !branchForm.city.$pristine }">
+							</div>
+							</div>
+							<!-- <span style="color: red">*</span> -->
+							<div class="col-sm-6">
+							<input type="text" ng-model="branch.address.line2" id="line2"
+							name="line2" class="form-control m-b" placeholder="line 2"  ng-disabled="true"/>
+							
+							</div>
+							</div>
+						<div class="row">
+						<div class="col-sm-6">
+
+							<input type="text" ng-model="branch.address.city" id="city"
+							name="city" class="form-control m-b" placeholder="City"  ng-disabled="true">
+							</div>
+							<div class="col-sm-6">
+							<input type="text" ng-model="branch.address.zip" id="zip"
+							name="zip" class="form-control m-b" placeholder="zip"  ng-disabled="true"/>
+						</div>
+						</div>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>	
+
+					<div class="form-group" >
+					<label class="col-sm-2 control-label" >Working Hours
+					</label>
+						<div calss="col-sm-10">
+						<div class="datetimepicker-input input-group">
+						<div ng-repeat="working in branch.working_hours">
+						<div class="row">
+						  <div class="col-sm-5">
+							<div class="input-group w-md">
+								<datetimepicker date-format="dd-MM-yyyy" ng-model="working.start" name="start" readonly-time="false" show-button-bar="false" ng-disabled="true"></datetimepicker>
+								
+							</div>
+						  </div>
+						 <div class="col-sm-6" >
+						   <div class="input-group w-md">
+							 <datetimepicker date-format="dd-MM-yyyy" ng-model="working.end" name="end" readonly-time="false" show-button-bar="false" 
+							  ></datetimepicker>
+							 
+						   </div> 
+						 </div>
+						
+						 </div>
+						</div>
+						
+						</div>
+						
+					</div>
+				</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>			
+
+				<div class="form-group" >
+					<label class="col-sm-2 control-label" for="dealer_name">
+					<br>Serviceable Vehicles
+					</label>
+					 <div class="col-sm-10">
+					 <div ng-repeat="vehicle in branch.serviceable_vehicles">
+					 
+
+					 <div class="col-sm-12" >
+					 	<br><select ng-init="initAllVehicleTypes()"
+							ng-model="vehicle.vehicle_type" id="vehicle_type"
+							name="vehicle_type{{$index}}" class="form-control" size="1"
+							ng-options="vehicle_type._id as (vehicle_type.name) for vehicle_type in allVehicletypes" ng-disabled="true">
+							<option value="">Select Vehicle Type</option>
+						</select>
+				    	</div>
+					</div>
+				  </div>
+				</div> 
+		<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>	
+
+				<div class="form-group" ng-init="initAllMakes()" >
+				<label class="col-sm-2 control-label">Makes
+				</label>
+				<div class="col-sm-10">
+					<div class="col-xs-3" ng-repeat="make in allMakes" id="makes">
+
+					  	<div class="checkbox">
+			              <label class="i-checks i-checks-sm" for="{{make._id}}">
+			                <input id="{{make._id}}" type="checkbox" value="{{make._id}}" 
+							ng-checked="searchMake(make._id) > -1" name="make" ng-click="makeSelection(make._id)" ng-disabled="true"/>
+			                <i></i>
+			                {{make.name}}
+			              </label>
+			             
+			            </div>			
+					</div>
+				</div>
+			</div>
+			<div class="line line-dashed b-b line-lg pull-in"></div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="latitude">Latitude</label>
+						<div class="col-sm-10">
+						<input type="number" ng-model="branch.latitude" id="latitude" name="latitude" class="form-control" placeholder="latitude" min="0" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>	
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="longitude">Longitude</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="branch.longitude"
+								id="longitude" name="longitude"
+								class="form-control" placeholder="longitude" min="0" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope">
+					</div>	
+				</div>
+			</div>
+		</div>

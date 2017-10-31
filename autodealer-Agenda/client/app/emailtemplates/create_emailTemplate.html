@@ -1,0 +1,32 @@
+
+<!-- Forms General Header -->
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3 text-black">Email Templates</h1>
+    <small class="text-muted">Create New Email Template</small>
+</div>
+<ul class="breadcrumb bg-white b-a">
+	<li><a ui-sref="^.list"><i class="fa fa-envelope icon text-info-dker"></i> Email Templates</a></li>
+	<li>Create New Email Template</li>
+</ul>
+<!-- END Forms General Header -->
+
+<div class="wrapper-md" ng-init="initCreateEmailTemplate()">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <form name="emailTemplateForm" action="#" ng-submit = "addEmailTemplate(emailTemplateForm.$valid)" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">	
+    	<div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Create New Email Template
+            </div>
+            <div class="panel-body">
+            	<!-- Including form.html -->
+            	<div ng-include='"app/emailtemplates/form.html"'></div>               
+            </div>
+			
+            <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="emailTemplateForm.$invalid"> <i class="fa fa-save"></i> Submit</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>
+        </div>    			
+	</form>
+</div>

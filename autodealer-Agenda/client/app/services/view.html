@@ -1,0 +1,300 @@
+		 <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Service</h1>
+        <small class="text-muted">View Service</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-cogs icon text-info-dker"></i> Services</a></li>
+  <li>View Service</li>
+</ul>
+<div class="wrapper-md" ng-init="initEditService()">
+			
+<div class="panel panel-default">
+	<div class="panel-heading font-bold">View Service</div>
+   <div class="panel-body">
+	<div class="row">
+		<div class="panel panel-default">
+		 	<div class="panel-heading font-bold">Vehicle Details</div>
+		 	  <div class="panel-body">
+
+				<div class="form-group" >
+					<label class="col-sm-2 control-label" for="dealer_name">Customer Vehicle
+					No</label>
+					<div class="col-sm-10">
+						<select ng-init="initAllCustomervehicle()"
+							ng-model="service.customer_vehicles._id" id="customer_vehicles"
+							name="customer_vehicles" class="form-control" size="1"
+							ng-options="customer_vehicle._id as (customer_vehicle.reg_no) for customer_vehicle in allCustomervehicles"  ng-disabled="true">
+							<option value="">Select Customer Vehicle No</option>
+						</select>
+					</div>
+				</div> 
+				<div class="line line-dashed b-b line-lg pull-in ng-scope" ></div>
+
+				<div class="form-group" >
+					<label class="col-sm-2 control-label" for="branch">Branch
+					</label>
+					<div class="col-sm-10">
+
+						<select ng-init="initAllBranch()"
+							ng-model="service.branch._id" id="branch"
+							name="branch" class="form-control" size="1"
+							ng-options="branch._id as (branch.name) for branch in allBranches"  ng-disabled="true">
+							<option value="">Select Branch Name</option>
+						</select>
+					</div>
+				</div> 
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Millage
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="service.millage" id="millage"
+							name="millage" class="form-control" placeholder="Millage" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group" >
+						<label class="col-sm-2 control-label" for="name">Service Date
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="service.service_date" datepicker-popup="dd-MMM-yyyy" is-open="sOpen" ng-click="sOpen = true" id="service_date" name="service_date" class="form-control"  placeholder="Service_date (DD-MM-YYYY)" show-button-bar="false" ng-disabled="true" >
+							
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					
+					<div class="form-group" >
+						<label class="col-sm-2 control-label" for="scheduled_at">Scheduled
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="service.scheduled_at" datepicker-popup="dd-MMM-yyyy" is-open="SOpen" ng-click="SOpen = true" id="scheduled_at" name="scheduled_at" class="form-control"  placeholder="scheduled_at (DD-MM-YYYY)" show-button-bar="false"  ng-disabled="true">
+							
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-i	n ng-scope"></div>
+				
+					
+					<div class="form-group" ng-controller="DatepickerDemoCtrl" >
+					<label class="col-sm-2 control-label">Next Service Date
+					</label>
+					<div class="col-sm-10">
+						<input type="text" ng-model="service.next_service_date" datepicker-popup="dd-MMM-yyyy" is-open="sOpen" ng-click="sOpen = true" id="next_service_date" name="next_service_date" class="form-control"  placeholder="Next Service Date (DD-MM-YYYY)" show-button-bar="false" ng-disabled="true">
+	
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+
+				<div class="form-group" >
+						<label class="col-sm-2 control-label" for="name">Completed On
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="service.completed_on" datepicker-popup="dd-MMM-yyyy" is-open="cOpen" ng-click="cOpen = true" id="Completed_on" name="Completed_on" class="form-control"  placeholder="Completed_on (DD-MM-YYYY)" show-button-bar="false" ng-disabled="true"> 
+						
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+
+
+					<div class="form-group" >
+					<label class="col-sm-2 control-label" for="pick_up">
+						Pick Up</label>
+					<div class="col-sm-10">
+						<select id="pick_up" name="pick_up" class="form-control" size="1" ng-model="service.pick_up" required ng-disabled="true">
+							<option value="">Select Pick up</option>
+							<option value="Y">Yes</option>
+							<option value="N">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+				<div class="form-group" >
+					<label class="col-sm-2 control-label" for="drop">
+						Drop</label>
+					<div class="col-sm-10">
+						<select id="drop" name="drop" class="form-control" size="1" ng-model="service.drop" required ng-disabled="true">
+							<option value="">Select Drop</option>
+							<option value="Y">Yes</option>
+							<option value="N">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group" >
+					<label class="col-sm-2 control-label" for="drop">
+						Status</label>
+					<div class="col-sm-10">
+						<input type="text" ng-model="service.status" id="status"  class="form-control" placeholder="Status" ng-readonly="true" >
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<!-- <div class="form-group" ng-class="{'has-error':serviceForm.status.$invalid && !serviceForm.status.$pristine }">
+					<label class="col-sm-2 control-label" for="drop">
+						Status <span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select id="status" name="status" class="form-control" size="1" ng-model="service.status" required>
+							<option value="">Select Status</option>
+							<option value="REQUESTED">Requested</option>
+							<option value="SCHEDULED">Scheduled</option>
+							<option value="IN_SERVICE">InService</option>
+							<option value="COMPLETED">Completed</option>
+							<option value="CANCELLED">Cancelled</option>
+						</select>
+						<p ng-show="serviceForm.status.$invalid && 
+							 		!serviceForm.status.$pristine"
+								class="help-block">Status is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div> -->
+
+					
+					<!-- <div class="form-group" ng-class="{'has-error':serviceForm.dealer.$invalid && !serviceForm.dealer.$pristine }">
+					<label class="col-sm-2 control-label" for="dealer">Dealer
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+
+						<select ng-init="initAllDealer()"
+							ng-model="service.dealer" id="dealer"
+							name="dealer" class="form-control" size="1"
+							ng-options="dealer._id as (dealer.name) for dealer in allDealers" required ng-disabled="hide">
+							<option value="">Select Dealer Name</option>
+						</select>
+						
+					<p ng-show="serviceForm.dealer.$invalid && !serviceForm.dealer.$pristine" class="help-block  m-b-none">Dealer Name is required.</p>
+					</div>
+				</div> 
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				 -->
+
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="servicedetails">
+					<br>Serviceable Details
+					</label>
+					 <div class="col-sm-10">
+					 
+					 <div ng-repeat="services in service.service_details">
+					 <div class="row">
+
+					 <div class="col-sm-6">
+					 
+					 	<br><select ng-init="initAllServicetypes()" ng-change="changeServicetypes(services.service_type, services)"
+							ng-model="services.service_type" id="service_type"
+							name="service_type{{$index}}" class="form-control" size="1"
+							ng-options="service_type._id as (service_type.name) for service_type in allServicetypes"  ng-disabled="true">
+							<option value="">Select Service Type</option>
+						</select>
+					</div>
+
+
+					<div class="col-sm-5" >
+					
+					<br><input type="number" ng-model="services.amount" id="amount" name="amount{{$index}}" class="form-control" placeholder="Amount" ng-readonly="true" ng-blur="calcAmount()" >
+					
+					</div>
+					<!-- <div class="col-sm-1">
+					<br> <a href="javascript:void(0)"  ng-show="$index > 0" ng-click="deleteServiceType($index)" style="color: red"><i class="fa fa-remove" title="remove"></i> </a>
+					</div> -->
+					</div>
+					</div>
+
+					<!-- <br><a href="javascript:void(0)" ng-click="addNewService()" style="color:green" class="btn btn-sm btn-dark" ng-show="{{customer}}">
+						<i class="fa fa-plus" ></i> Add</a> -->
+					
+					</div>
+				</div> 
+
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Amount
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="service.amount" id="amount" name="amount" class="form-control" placeholder="Amount" ng-disabled="true" autofocus >
+						</div>
+					</div>
+			 <!-- <div class="line line-dashed b-b line-lg pull-in ng-scope" ng-show="{{customer}}">
+			 </div> -->
+		</div>
+	</div>
+</div>
+
+ <div class="row">
+	<div class=" panel panel-default">
+    	<div class="panel-heading font-bold">Customer Details</div>
+	 	   	 <div class="panel-body">
+				<div class="form-group" ng-show="{{access || staff || engineer}}">
+					<label class="col-sm-2 control-label" for="user">Customer
+					</label>
+					<div class="col-sm-10">
+
+						<select ng-init="initAllUsers()"
+							ng-model="service.user._id" id="user"
+							name="user" class="form-control" size="1"
+							ng-options="user._id as (user.name) for user in allUsers" ng-disabled="true">
+							<option value="">Select User Name</option>
+						</select>
+						
+					<!-- <p ng-show="serviceForm.user.$invalid && !serviceForm.user.$pristine" class="help-block  m-b-none">User Name is required.</p> -->
+					</div>
+				</div> 
+
+				<div class="line line-dashed b-b line-lg pull-in ng-scope" ng-show="{{access || staff || engineer}}"></div>
+
+					<div class="form-group" >
+						<label class="col-sm-2 control-label" for="name">Customer Name
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="service.customer_name" id="customer_name" name="customer_name" class="form-control" placeholder="customer Name" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Customer Contact
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="service.customer_contact" id="customer_contact" name="customer_contact" class="form-control" placeholder="customer Contact" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="customer_rating">Customer Rating
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="service.customer_rating" id="customer_rating" name="customer_rating" class="form-control" placeholder="Customer Rating" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Feed Back
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="service.feedback" id="feedback" name="feedback" class="form-control" placeholder="Feed Back" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+ -->					<div class="form-group">
+						<label class="col-sm-2 control-label" for="comments">Comments
+						</label>
+						<div class="col-sm-10">
+							<textarea type="text" ng-model="service.comments" id="comments" name="comments" class="form-control" style="resize:none" placeholder="Comments.." ng-disabled="true">
+							</textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	   </div>
+	</div>
+</div>

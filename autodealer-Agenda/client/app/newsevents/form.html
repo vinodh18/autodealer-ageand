@@ -1,0 +1,106 @@
+					<div class="form-group" ng-class="{'has-error':newseventForm.branch.$invalid && !newseventForm.branch.$pristine }">
+					    <label class="col-sm-2 control-label" for="example-text-input">
+					    Branch Name<span style="color: red">*</span>
+					    </label>
+					    <div class="col-md-10">
+				       <select ng-init="initAllBranches()"  ng-model="newsevents.branch" name="branch" ng-options="branch.branch_code as branch.name for branch in allBranches" class="form-control" size="1" required>
+				       	<option value="">All Branch</option>             
+				    	</select>         
+				    	<p ng-show="newseventForm.branch.$invalid && !newseventForm.branch.$pristine" class="help-block m-b-none">Branch is required.</p>
+					    </div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+
+					<div class="form-group"
+						ng-class="{'has-error':newseventForm.event_name.$invalid && 
+												!newseventForm.event_name.$pristine }">
+						<label class="col-sm-2 control-label" for="event_name">Event Name
+							<span style="color: red">*</span>
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.event_name" id="event_name"
+								name="event_name" class="form-control" placeholder="Event Name"
+								required />
+							<p ng-show="newseventForm.event_name.$invalid && !newseventForm.event_name.$pristine" class="help-block m-b-none">Event Name is required.</p>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="from">From
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.from" datepicker-popup="dd-MMM-yyyy" is-open="fOpen" ng-click="fOpen = true" id="from" name="from" class="form-control"  placeholder="From (DD-MM-YYYY)" show-button-bar="false">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="from">To
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.to" datepicker-popup="dd-MMM-yyyy" is-open="tOpen" ng-click="tOpen = true" id="from" name="to" class="form-control"  placeholder="To (DD-MM-YYYY)" show-button-bar="false">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="address">Address
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.address" id="address"
+							name="address" class="form-control" placeholder="address"/>
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="latitude">Latitude
+						</label>
+						<div class="col-sm-10">
+							<input type="Number" ng-model="newsevents.latitude" id="latitude"
+							name="latitude" class="form-control" placeholder="latitude" 
+							min="0"/>
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Longitude
+						</label>
+						<div class="col-sm-10">
+							<input type="Number" ng-model="newsevents.longitude" id="longitude" name="longitude" class="form-control" placeholder="longitude"/>
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+			
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Description
+						</label>
+						<div class="col-sm-10">
+							<textarea type="text" ng-model="newsevents.description" id="description" name="description" class="form-control" style="resize:none" placeholder="Description.."></textarea>
+						</div>
+					</div>
+				
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="example-email-input"> Image </label>
+				<div class="col-sm-10">
+					<input id="inputImage2" type="file" accept="image/*" to-resize-image="image2" onchange="angular.element(this).scope().fileChange(this)"
+						resize-max-height="100"
+						resize-max-width="100"
+						resize-quality="0.7"/><br>
+						<div class="row-sm-12" ng-show="createImage">
+							<div class="col-sm-6">
+								<img id="OriginalImg" ng-show="image2" ng-src="{{image2.dataURL}}" type="{{image2.file.type}}"/>
+							</div>
+							<br>
+							<div class="col-sm-6">
+								<center><img id="ThumbImg" ng-show="image2" ng-src="{{image2.resized.dataURL}}"/></center>
+							</div>
+						</div>						
+				</div>
+			</div> 

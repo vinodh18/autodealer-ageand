@@ -1,0 +1,53 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">News Events</h1>
+  <small class="text-muted">Manage News Events</small>
+</div>
+
+<div class="wrapper-md" ng-init="initNewsevents()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+      <a ng-hide="staffOrCustomer" ui-sref="^.create" class="btn btn-sm btn-primary">
+      <i class="fa fa-plus space-6"></i> Create</a>
+     
+      <!-- <span ng-show="{{access}}"><a ng-click="multiDelete()"  class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+      </span> -->
+    </div>
+     </div>
+  
+    <div class="row">
+     <div ng-repeat="newsevent in newsevents">
+     <div class="col-md-3">
+      <div class="panel b-a" style="min-height: 300px">
+        <div class="panel-heading no-border bg-primary">          
+          <span class="text-lt">{{newsevent.event_name}}</span>
+          <!-- <i class="icon-trash pull-right m-xs fa-1x" style="margin-left: 2%;"></i> -->
+          <a ng-show="deleteAction" ng-click="deleteNewsEvents(newsevent._id, row)">
+          <i class="icon-trash pull-right m-xs fa-1x" style="margin-left: 2%;"></i>
+          
+          <a ng-show="deleteAction" href="javascript:void(0)" ui-sref="^.edit({newseventsId: newsevent._id})"><i class="icon-pencil pull-right m-xs fa-1x"></i></a>
+          
+        </div>
+        <div class="item m-l-n-xxs m-r-n-xxs">
+        <div class="bottom wrapper bg-gd-dk offer">            
+            <div>{{newsevent.branch}}</div>
+            <div>{{newsevent.from}} - {{newsevent.to}}</div>
+          </div>
+          <img id="newsevents"  class="img-full news" ng-src="{{newsevent.image_url}}">
+        </div>
+        <div class="hbox text-center b-b b-light text-sm">          
+          <div href class="col padder-v b-r b-light">
+          <i class="icon-note m-b-xs fa-1x"></i>
+            <span>Description</span><br>
+            <span ui-jq="slimScroll" ui-options="{height:'50px', size:'3px'}" class="pull-left">
+              {{newsevent.description}}
+              </span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+<pagination boundary-links="true" class="pull-right" total-items="total" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>

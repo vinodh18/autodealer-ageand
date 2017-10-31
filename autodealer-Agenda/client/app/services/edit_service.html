@@ -1,0 +1,34 @@
+<!-- Page content -->
+
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Service</h1>
+        <small class="text-muted">Edit Service</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-cogs icon text-info-dker"></i> Services</a></li>
+  <li>Edit Service</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditService()">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <form name="serviceForm" action="#" ng-submit = "updateService()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Edit Service
+            </div>
+            <div class="panel-body">
+                    <div ng-include='"app/services/form.html"'></div>
+             </div>
+              
+          <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="serviceForm.$invalid"> 
+              <i class="fa fa-edit"></i> Update</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>    
+        </div>
+        </form>
+    </div>    
+       <!-- END Page Content -->

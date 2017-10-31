@@ -1,0 +1,33 @@
+<!-- Page content -->
+
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Service Type</h1>
+        <small class="text-muted">Edit ServiceType</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-anchor icon text-info-dker"></i> ServiceTypes</a></li>
+  <li>Edit ServiceType</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditServicetype()">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <form name="servicetypeForm" action="#" ng-submit = "updateServicetype()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Edit ServiceType
+            </div>
+            <div class="panel-body">
+                    <div ng-include='"app/servicetypes/form.html"'></div>
+             </div>
+              
+          <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="servicetypeForm.$invalid"> <i class="fa fa-edit"></i> Update</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>    
+        </div>
+        </form>
+    </div>    
+       <!-- END Page Content -->

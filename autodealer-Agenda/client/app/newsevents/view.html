@@ -1,0 +1,109 @@
+				 <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">News Event</h1>
+        <small class="text-muted">View News Event</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-youtube-play icon text-info-dker"></i> News Events</a></li>
+  <li>View News Event</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditNewsevent()">
+		 <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                View News Event
+           		 </div>
+            	<div class="panel-body">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="event_name">Event Name
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.event_name" id="event_name"
+								name="event_name" class="form-control" placeholder="Event Name"
+								ng-disabled="true"/>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="from">From
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.from" datepicker-popup="dd-MMM-yyyy" is-open="fOpen" ng-click="fOpen = true" id="from" name="from" class="form-control"  placeholder="From (DD-MM-YYYY)" show-button-bar="false" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="from">To
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.to" datepicker-popup="dd-MMM-yyyy" is-open="tOpen" ng-click="tOpen = true" id="from" name="to" class="form-control"  placeholder="To (DD-MM-YYYY)" show-button-bar="false" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="address">Address
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.address" id="address"
+							name="address" class="form-control" placeholder="address" ng-disabled="true"/>
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="latitude">Latitude
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.latitude" id="latitude"
+							name="latitude" class="form-control" placeholder="latitude" 
+							min="0" ng-disabled="true"/>
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Longitude
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.longitude" id="longitude" name="longitude" class="form-control" placeholder="longitude" min="0" ng-disabled="true"/>
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+	
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Image Url
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.image_url" id="image"
+							name="image" class="form-control" placeholder="Image Url (c:/desktop/watch.jpg)" ng-disabled="true"/>
+						</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="thumbnail_url">Thumbnail Url
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="newsevents.thumbnail_url" id="thumbnail_url" name="thumbnail_url" class="form-control" placeholder="Thumbnail Url" ng-disabled="true"/>
+						</div>
+				</div>
+
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Description
+						</label>
+						<div class="col-sm-10">
+							<textarea type="text" ng-model="newsevents.description" id="description" name="description" class="form-control" style="resize:none" placeholder="Description.." ng-disabled="true">
+							</textarea>
+						</div>
+				</div>
+				</div>
+			</div>
+		</div>

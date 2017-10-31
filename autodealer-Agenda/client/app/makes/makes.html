@@ -1,0 +1,43 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Makes</h1>
+  <small class="text-muted">Manage Makes</small>
+</div>
+<div class="wrapper-md" ng-init="initMakes()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary" ng-show="{{access}} || {{accessSales}}">
+    	<i class="fa fa-plus space-6"></i> Create</a>
+		 
+		 <!-- <a ng-click="multiDelete()" class="btn btn-sm btn-danger"> -->
+		 	<span ng-show="{{access}}"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span>
+    </div>
+    <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+    <div class="form-group">
+           <div class="col-md-9">
+              <input type="text" ng-model="params.name"
+                id="dealer" name="dealer"
+                class="form-control" placeholder="Make Name">
+            </div>
+            <button type="submit" class="btn btn-sm btn-success btn-sm ">
+            <i class="fa fa-search"></i>
+               Search
+            </button>
+          </div>
+    </div>
+    </form>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Makes : {{makes.total}}
+    </div>
+    <div class="table-responsive">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+		{{alert.msg}}</alert>
+      <div ng-grid="gridOptions" style="min-height:420px"></div>
+    </div>
+  </div>
+</div>
+

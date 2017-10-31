@@ -1,0 +1,64 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Parts</h1>
+  <small class="text-muted">Manage Parts</small>
+</div>
+<!-- <ul class="breadcrumb bg-white b-a">
+  <li>Customers</li>
+</ul> -->
+<div class="wrapper-md" ng-init="initParts()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+      <a ui-sref="^.create" class="btn btn-sm btn-primary">
+      <i class="fa fa-plus space-6"></i> Create</a>
+     
+     <!-- <a ng-click="multiDelete()" class="btn btn-sm btn-danger"> -->
+    <!--    <span ng-show="{{access}}"><a ng-click="multiDelete()"  class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+      </span> -->
+    </div>
+    <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+   
+      </div>
+    </form>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Parts : {{total}}
+    </div>
+   
+    <div class="row">
+      <div ng-repeat="part in parts">
+        <div class="col-md-3">
+          <div class="panel panel-info" style="margin: 1%">
+            <div class="panel-heading parts">
+              <div class="clearfix">
+                <div class="clear">
+                  <div class="h3 m-t-xs m-b-xs">
+                    <a ng-show="deleteAction" ui-sref="^.edit({partId: part._id})" class="icon-pencil pull-right sm" style="font-size: initial">
+                    </a>
+                    {{part.no}}<br>
+                    {{part.group.no}}
+                    <a ng-show="deleteAction" ng-click="deletePart(part._id)" class="icon-trash pull-right sm" style="font-size: initial"></a>
+                  </div>
+                  <small>{{part.qty}} {{part.units}}</small>
+                </div>
+              </div>
+            </div>
+            <div class="list-group no-radius alt" ui-jq="slimScroll" ui-options="{height:'100px', size:'3px'}">
+              <div ng-repeat="rate in part.rates">
+                <span class="list-group-item" href>
+                  {{rate.branch}}
+                  <span class="pull-right"><i class="fa fa-rupee"></i> {{rate.rate}}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+
+<pagination boundary-links="true" class="pull-right" total-items="totalParts" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>

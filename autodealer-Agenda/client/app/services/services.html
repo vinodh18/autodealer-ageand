@@ -1,0 +1,73 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Services</h1>
+  <small class="text-muted">Manage Services</small>
+</div>
+<!-- <ul class="breadcrumb bg-white b-a">
+	<li>Customers</li>
+</ul> -->
+<div class="wrapper-md" ng-init="initServices()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    <!-- 	<a ui-sref="^.create" class="btn btn-sm btn-primary" ng-show="{{access}} || {{accessSales}}">
+    	<i class="fa fa-plus space-6"></i> Request</a> -->
+		 
+		 <!-- <a ng-click="multiDelete()" class="btn btn-sm btn-danger"> -->
+		 	<span ng-show="{{access || customer}}"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span>
+    </div>
+    <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+    <div class="form-group">
+           <div class="col-sm-12">
+          <!--  <div class="row"> -->
+           <!-- <div class="col-sm-10"> -->
+              <date-range-picker style="cursor: default" ng-model="dateRange" class="btn btn-md btn-info daterange pull-right" ranges="ranges">
+              <i class="fa fa-calendar fa-lg"></i>
+                <span>{{dateRange.startDate | amDateFormat: 'MMM D, YYYY'}} - {{dateRange.endDate | amDateFormat: 'MMM D, YYYY'}}</span>
+                <b class="caret"></b>
+              </date-range-picker>
+            <!-- </div> -->
+ 
+            <!-- <div class="col-sm-6">
+              <select id="status" name="status" class="form-control" size="1" ng-model="params.status">
+              <option value="">Select All Status</option>
+              <option value="REQUESTED">Requested</option>
+              <option value="SCHEDULED">Scheduled</option>
+              <option value="IN_SERVICE">InService</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="CANCELLED">Cancelled</option>
+            </select>
+            </div> -->
+            <!-- <div class="col-sm-2">
+            <button type="submit" class="btn btn-sm btn-success btn-sm ">
+            <i class="fa fa-search"></i>
+               Search
+            </button>
+            </div> -->
+           <!--  </div> -->
+            </div>
+          </div>
+    </div>
+    </form>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Services : {{services.total}}
+    </div>
+    <div class="table-responsive">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+		{{alert.msg}}</alert>
+      <div ng-grid="gridOptions" style="min-height:420px"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/ng-template" id="modalContent">
+    <div>Are you sure</div>
+</script>
+<script type="text/ng-template" id="update.html">
+    <div ng-include="'app/services/update_feedback.html'"></div>
+</script>

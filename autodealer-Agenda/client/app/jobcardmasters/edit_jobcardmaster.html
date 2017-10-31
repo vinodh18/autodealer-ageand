@@ -1,0 +1,57 @@
+<!-- Page content -->
+
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">JobCard Master</h1>
+        <small class="text-muted">Edit JobCard Master</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-gear icon text-info-dker"></i>JobCard Master</a></li>
+  <li>Edit Jobcard Master</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditJobCardaster()">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <form name="jobcardMasterForm" action="#" ng-submit ="updateJBMaster()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Edit Jobcard Master
+            </div>
+            <div class="panel-body">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label" for="dealer_name">Description
+                      </label>
+                      <div class="col-sm-10">
+                        <textarea type="text" ng-model="jobcardmaster.desc" id="desc" name="desc" class="form-control" placeholder="Desc" no-resize/></textarea> 
+                      </div>
+                      </div> 
+                      <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="phone">Types</label>
+                        <div class="col-sm-10">
+                          <ul ui-sortable="sortableOptions" ng-model="list" class="list">
+                              <li class="list-group-item bg-info" ng-repeat="types in list  track by $index" class="item">
+                              <span class="pull-right" >              
+                                <a href="javascript:void(0)" ng-show="$index > 0" ng-click="deleteType($index)"><i class="fa fa-times fa-fw"></i></a>
+                              </span>
+                              <input type="text" ng-model="jobcardmaster.types[$index]" class="form-control">           
+                              </li>
+                            </ul>     
+                          <br>
+                          <a href="javascript:void(0)" ng-click="addNewType()" style="color:green" class="btn btn-sm btn-dark"><i class="fa fa-plus" ></i> Add</a>
+                        </div>
+                      </div>
+             </div>
+              
+          <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="jobcardMasterForm.$invalid"> 
+              <i class="fa fa-edit"></i> Update</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>    
+        </div>
+        </form>
+    </div>    
+       <!-- END Page Content -->

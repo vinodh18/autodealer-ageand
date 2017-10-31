@@ -1,0 +1,71 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Misc Charges</h1>
+  <small class="text-muted">Manage Misc Charges</small>
+</div>
+<!-- <ul class="breadcrumb bg-white b-a">
+  <li>Customers</li>
+</ul> -->
+<div class="wrapper-md" ng-init="initmiscCharge()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+      <a ui-sref="^.create" class="btn btn-sm btn-primary">
+      <i class="fa fa-plus space-6"></i> Create</a>
+     
+     <!-- <a ng-click="multiDelete()" class="btn btn-sm btn-danger"> -->
+    <!--    <span ng-show="{{access}}"><a ng-click="multiDelete()"  class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+      </span> -->
+    </div>
+    <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+   
+      </div>
+    </form>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Misc : {{totalMisc}}
+    </div>
+    <div class="row">
+    <div ng-repeat="misccharges in misccharge">
+        <div class="col-md-3">
+          <div class="panel panel-info" style="margin: 1%">
+            <div class="panel-heading parts">
+              <div class="clearfix">
+                <div class="row">
+                <div class="col-xs-12">
+                <div class="m-t-xs m-b-xs">
+                  <a ng-show="deleteAction" ng-click="deleteMisc(misccharges._id, row)">
+                  <i class="icon-trash pull-right sm" style="font-size: initial"></i></a>
+                  
+                   <a ng-show="deleteAction" href="javascript:void(0)" ui-sref="^.edit({miscchargeId: misccharges._id})"><i class="icon-pencil pull-right sm" style="font-size: initial; margin-right: 3%"></i></span></a>
+                </div>
+                </div>
+                <div class="col-xs-12">
+                  <div class="m-t-xs m-b-xs" ui-jq="slimScroll" ui-options="{height:'50px', size:'3px'}">
+                   {{misccharges.desc}}
+                   
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-group no-radius alt" ui-jq="slimScroll" ui-options="{height:'100px', size:'3px'}">
+            <div ng-repeat="rate in misccharges.rates">
+              <span class="list-group-item" href>
+                {{rate.branch}}
+                <span class="pull-right"><i class="fa fa-rupee"></i>{{rate.rate}}</span>
+              </span>
+            </div>
+          </div>
+          </div>
+          </div>
+    </div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<pagination boundary-links="true" class="pull-right" total-items="totalMisc" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>
+

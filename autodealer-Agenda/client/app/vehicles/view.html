@@ -1,0 +1,133 @@
+		  <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Vehicle</h1>
+        <small class="text-muted">View Vehicle</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-taxi icon text-info-dker"></i> Vehicles</a></li>
+  <li>View Vehicle</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditVehicle()">
+    		 <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                View Vehicle
+           		 </div>
+            	<div class="panel-body">
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="make">Make
+					</label>
+					<div class="col-sm-10">
+						<select ng-init="initAllMakeslist()"
+							ng-model="vehicle.make._id" id="make"
+							name="make" class="form-control" size="1"
+							ng-options="make._id as (make.name) for make in allMakes" ng-disabled="true">
+							<option value="">Select Make</option>
+						</select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					
+				<div class="form-group" >
+					<label class="col-sm-2 control-label" for="model">Model
+					</label>
+					<div class="col-sm-10">
+						<select ng-init="initAllModel()"
+							ng-model="vehicle.model._id" id="model"
+							name="model" class="form-control" size="1"
+							ng-options="model._id as (model.name) for model in allModels" ng-disabled="true">
+							<option value="">Select Model</option>
+						</select>
+					
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+				
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="year">From
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="vehicle.year" datepicker-popup="dd-MMM-yyyy" is-open="fOpen" ng-click="fOpen = true" id="from" name="from" class="form-control"  placeholder="From (DD-MM-YYYY)" show-button-bar="false" ng-disabled="true">
+						</div>
+					</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="ex_Showroom_price">Ex-Showroom Price
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.ex_Showroom_price" id="ex_Showroom_price" name="ex_Showroom_price" class="form-control"  placeholder="Ex-Showroom Price.." ng-blur="calcAmount()" min="0" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="rto">RTO
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.rto" id="rto" 
+							name="rto" class="form-control"  placeholder="Rto Price" 
+							ng-blur="calcAmount()" min="0" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="insurence">Insurance
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.insurance" id="insurence" name="insurence" class="form-control"  ng-blur="calcAmount()" placeholder="insurance" min="0" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="on_road _price">On Road Price
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.on_road_price"  id="on_road_price" name="on_road_price" class="form-control"  placeholder="On Road Price.."  min="0" ng-disabled="true" autofocus ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					
+					<div class="form-group" ng-class="{'has-error':vehicleForm.fuel_type.$invalid && !vehicleForm.fuel_type.$pristine }">
+					<label class="col-sm-2 control-label" for="fuel_type">
+						Type </label>
+					<div class="col-sm-10">
+						<select id="type" name="fuel_type" class="form-control" size="1" 
+						  ng-model="vehicle.fuel_type" ng-disabled="true">
+							<option value="">Select Fuel Type</option>
+							<option value="PETROL">Petrol</option>
+							<option value="DIESEL">Diesel</option>
+						</select>
+						<p ng-show="vehicleForm.fuel_type.$invalid && 
+							 		!vehicleForm.fuel_type.$pristine"
+								class="help-block">Fuel Type is required.</p>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label" for="Seat_capacity">Seat Capacity
+						</label>
+						<div class="col-sm-10">
+							<input type="number" ng-model="vehicle.seat_capacity" id="seat_capacity" name="seat_capacity" class="form-control"  placeholder="seat_capacity" min="0" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Image
+						</label>
+						<div class="col-sm-10">
+							
+						</div>
+						<div class="col-md-4">
+							<img  width="200" height="100" ng-src="{{image}}">
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>

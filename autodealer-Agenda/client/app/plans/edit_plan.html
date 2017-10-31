@@ -1,0 +1,32 @@
+<!-- Forms General Header -->
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3 text-black">Plans</h1>
+    <small class="text-muted">Edit Plan</small>
+</div>
+<ul class="breadcrumb bg-white b-a">
+    <li><a ui-sref="^.list"><i class="fa fa-briefcase icon text-info-dker"></i> Plans</a></li>
+    <li>Edit Plan</li>
+</ul>
+<!-- END Forms General Header -->
+
+<div class="wrapper-md" ng-init="initEditPlan()">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <form name="planForm" action="#" ng-submit = "updatePlan()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Edit Plan
+            </div>
+            <div class="panel-body">
+                <!-- Including form.html -->
+                <div ng-include='"app/plans/form.html"'></div>               
+            </div>
+
+            <footer class="panel-footer text-right bg-light lter">
+              <button ng-show="accessPlan" type="submit" class="btn btn-success" ng-disabled="palnForm.$invalid"> <i class="fa fa-edit"></i> Update</button>
+               <button ng-show="accessPlan" type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>
+        </div>              
+    </form>
+</div>

@@ -1,0 +1,47 @@
+<div class="form-group" ng-class="{'has-error':warrantytypeForm.name.$invalid && !warrantytypeForm.name.$pristine }">
+						<label class="col-sm-2 control-label"
+							for="name">Name
+							<span style="color: red">*</span></label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="warrantytype.name"
+								id="name" name="name"
+								class="form-control" placeholder="Warranty Type" required>
+							<p ng-show="warrantytypeForm.name.$invalid && !warrantytypeForm.name.$pristine" class="help-block  m-b-none">Name is required.</p>
+						</div>
+					</div>
+						<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="desc">Period</label>
+						<div class="col-sm-10">
+						<div class="row">
+						<div class="col-sm-6">
+							<input type="Number"  ng-model="warrantytype.period.n"
+								id="name" name="desc" class="form-control" 
+								placeholder="Number" style="resize:none" min="0">
+						</div>
+						<div class="col-sm-1"><span style="color: red" class="pull-right">*</span></div>
+						<div class="col-sm-5" ng-class="{'has-error':warrantytypeForm.unit.$invalid && !warrantytypeForm.unit.$pristine }">
+
+						<select id="unit" name="unit" class="form-control" size="1" ng-model="warrantytype.period.unit" required>
+							<option value="">Select Unit</option>
+							<option value="MONTH">Month</option>
+							<option value="YEAR">Year</option>
+						</select>
+						<p ng-show="warrantytypeForm.unit.$invalid && 
+							 		!warrantytypeForm.unit.$pristine"
+								class="help-block">Unit is required.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="desc">Desc </label>
+						<div class="col-sm-10">
+							<textarea  ng-model="warrantytype.desc"
+								id="name" name="desc" class="form-control" 
+								placeholder="Desc" style="resize:none">
+								</textarea>
+						</div>
+					</div>

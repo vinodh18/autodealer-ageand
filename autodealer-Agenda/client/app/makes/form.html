@@ -1,0 +1,14 @@
+		<div class="form-group" ng-class="{'has-error':makeForm.make_name.$invalid && !makeForm.make_name.$pristine }">
+			<label class="col-sm-2 control-label" for="name">Name
+				<span style="color: red">*</span>
+			</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="make.name" id="make_name" ng-blur="makeChange(make)"
+					name="make_name" class="form-control" placeholder="Name"
+					required />
+				
+		<p ng-show="makeForm.make_name.$invalid && !makeForm.make_name.$pristine && makeForm.make_name.$error.required" class="help-block">Make is required.</p>
+		<p ng-show="makeForm.make_name.$error.exists" class="help-block m-b-none">Make already exists.</p>
+		<p ng-show="makeForm.make_name.$error.available" class="help-block m-b-none"><span style="color:#27c24c">Make Avaliable</span></p>	
+			</div>
+		</div>

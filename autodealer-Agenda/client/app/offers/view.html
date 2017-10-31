@@ -1,0 +1,68 @@
+		 <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Offer</h1>
+        <small class="text-muted">View Offer</small>
+    </div>
+    <ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-tag icon text-info-dker"></i> Offers</a></li>
+  <li>View Offer</li>
+</ul>
+      
+    <div class="wrapper-md" ng-init="initEditOffer()">		
+    	 <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                View Offer
+            </div>
+            <div class="panel-body">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="name">Offer Name
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="offers.name" id="name"
+								name="name" class="form-control" placeholder="Offer Name"
+								ng-disabled="true" />
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="from">From
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="offers.from" datepicker-popup="dd-MMM-yyyy" is-open="fOpen" ng-click="fOpen = true" id="from" name="from" class="form-control"  placeholder="From (DD-MM-YYYY)" show-button-bar="false" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="to">To
+						</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="offers.to" datepicker-popup="dd-MMM-yyyy" is-open="tOpen" ng-click="tOpen = true" id="from" name="to" class="form-control"  placeholder="To (DD-MM-YYYY)" show-button-bar="false" ng-disabled="true">
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Description
+						</label>
+						<div class="col-sm-10">
+							<textarea type="text" ng-model="offers.description" id="description" name="description" class="form-control" style="resize:none" placeholder="Description.." ng-disabled="true"></textarea>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="description">Image
+						</label>
+						<div class="col-sm-10">
+							
+						</div>
+						<div class="col-md-4">
+							<img id="offerImage" width="200" height="100" ng-src="{{image}}">
+							</div>
+					</div>
+				</div>
+				</div>
+				</div>

@@ -1,0 +1,83 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Job Cards</h1>
+  <small class="text-muted">Manage Job cards</small>
+</div>
+
+<div class="wrapper-md" ng-init="initJobcards()">
+<div ng-init="initAllJobcards()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+      <a ui-sref="^.create" ng-show="createJobcardAccess" class="btn btn-sm btn-primary">
+      <i class="fa fa-plus space-6"></i> Create</a>        
+    </div>
+    <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+   
+      </div>
+    </form>
+  </div>
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+    {{alert.msg}}</alert>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Job Cards : {{totalJobcards}}
+    </div>
+    <div class="row">
+        <div class="col-md-3" ng-repeat = "jobcard in jobcards">
+        <!--   <div class="panel b-a"> -->
+          <div class="panel-heading no-border bg-primary jobcards">          
+            <span class="text-lt">{{jobcard.job_card_no}}</span>
+
+          <a ng-show="deleteAction" ng-click="deleteJobcard(jobcard._id)">
+          <i class="icon-trash pull-right m-xs fa-1x" style="margin-left: 2%;"></i></a>
+
+          <a ng-show="!isCustomer" href="javascript:void(0)" ui-sref="^.edit({jobcardId: jobcard._id})"><i class="icon-pencil pull-right m-xs fa-1x"></i></a>
+
+          <a ng-show="isCustomer && jobcard.job_status == 'PAID' " href="javascript:void(0)" ui-sref="^.edit({jobcardId: jobcard._id})"><button class="btn m-b-xs w-xs btn-primary pull-right jobcards">Feedback</button></a>
+
+
+             <!-- <a ng-show="deleteAction" class="icon-trash pull-right" style="font-size: initial" ng-click="deleteJobcard(jobcard._id)"></a>
+
+            <a ui-sref="^.edit({jobcardId: jobcard._id})"><button class="btn m-b-xs w-xs btn-primary pull-right jobcards">Edit</button></a> -->
+
+          </div>
+          <a ui-sref="^.view({jobcardId: jobcard._id})">
+          <div class="item m-l-n-xxs m-r-n-xxs">
+            
+            <div class="bottom wrapper bg-gd-dk text-white jobcards">            
+              <div class="text-u-c h3 m-b-sm text-primary-lter" style="color: #3A1474; font-size: initial;">{{jobcard.customer_vehicle.reg_no}}</div>
+              
+              <div>{{jobcard.service_date | date: 'yyyy-MM-dd'}}</div>
+              
+            </div>
+            <img src="assets/images/c3.jpg" class="img-full">
+            
+           <div class="label bg-{{jobCardStatus(jobcard.job_status)}} pull-right jobcards" style="position: absolute;
+              bottom: 0;right: 0;">{{jobcard.job_status}}</div>
+          </div>
+          <!-- </div> -->
+          <div class="hbox text-center b-b b-light text-sm">          
+            <div href class="col padder-v text-bold b-r b-light">
+              <i class="icon-user block m-b-xs fa-2x"></i>
+              <span>{{jobcard.customer.name}}</span>
+            </div>
+            <div href class="col padder-v text-bold b-r b-light">
+              <i class="icon-call-end block m-b-xs fa-2x"></i>
+              <span>{{jobcard.customer.phone[0]}}</span>
+            </div>
+            
+            <div href class="col padder-v text-bold">
+              <i class="fa fa-rupee block m-b-xs fa-2x"></i>
+              <span>{{jobcard.total_amt}}</span>
+            </div>
+          </div>
+          </a>
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<pagination boundary-links="true" class="pull-right" total-items="totalJobcards" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>

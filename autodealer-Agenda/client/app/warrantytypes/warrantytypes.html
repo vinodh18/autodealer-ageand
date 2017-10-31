@@ -1,0 +1,60 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Warranty Types</h1>
+  <small class="text-muted">Manage WarrantyTypes</small>
+</div>
+
+<div class="wrapper-md" ng-init="initWarranties()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary">
+      <i class="fa fa-plus space-6"></i> Create</a>
+		 
+		 <!-- <a ng-click="multiDelete()" class="btn btn-sm btn-danger"> -->
+		 	<span ng-show="{{access}}"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span>
+    </div>
+   <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+    <div class="form-group">
+           <div class="col-md-7">
+             <input type="text" ng-model="params.name"
+                id="name" name="name"
+                class="form-control" placeholder="Warranty Name">
+            </div>
+            <button type="submit" class="btn btn-sm btn-success btn-sm ">
+            <i class="fa fa-search"></i>
+               Search
+            </button>
+
+            <button type="reset" ng-click="reset()" class="btn btn-sm btn-danger btn-sm ">
+            <i class="fa fa-undo"></i>
+               Reset
+            </button>
+          </div>
+    </div>
+    </form>
+  </div>
+  
+  <div class="row" ng-init="initWarrantytypes()">
+  <div ng-repeat="warranty in warranties">
+  <div class="col-md-4 panel panel-info">
+            <div class="panel-body">
+              <div class="clear">
+                <p class="text-info block m-b-xs">{{warranty.name}}<span class="pull-right">{{warranty.period.n}} {{warranty.period.unit}}</span></p>
+                <div class="desc"   ui-jq="slimScroll" ui-options="{height:'90px', size:'3px'}">
+                <p class="m-t-xs">{{warranty.desc}}</p>
+                </div>
+                <a ng-show="deleteAction" href="javascript:void(0)" ui-sref="^.edit({warrantytypeId: warranty._id})"><span class="btn btn-sm btn-primary">Edit</span></a>
+                <a ng-show="deleteAction" ng-click="deleteWarranty(warranty._id, row)" class="btn btn-sm btn-danger">Delete</a>
+              </div>
+            </div>
+          </div>
+    </div>
+    </div>
+</div>
+<!-- <div ng-controller="PaginationDemoCtrl"> -->
+<pagination boundary-links="true" class="pull-right" total-items="totalWarranties" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>
+<!-- </div> -->
+
+

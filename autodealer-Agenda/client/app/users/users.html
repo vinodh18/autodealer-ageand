@@ -1,0 +1,98 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Users</h1>
+  <small class="text-muted">Manage Users</small>
+</div>
+<!-- <ul class="breadcrumb bg-white b-a">
+	<li>Customers</li>
+</ul> -->
+<div class="wrapper-md" ng-init="initUsers()">
+<div ng-init="initUserList()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-info">
+    	<i class="fa fa-plus"></i> Create</a>
+		 
+		 <!-- <a ng-click="multiDelete()" class="btn btn-sm btn-danger"> -->
+		<!--  	<span ng-show="{{access}}"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span> -->
+    </div>
+   <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+    <div class="form-group">
+          
+           <div class="row">
+
+             <div class="col-sm-4">
+             <select id="status" name="status" class="form-control" size="1" ng-change="initAllUsers(params.role)" ng-model="params.role">
+                <option value="">Select Role</option>
+                <option value="DEALER_ADMIN">DEALER ADMIN</option>
+                <option value="BRANCH_ADMIN">BRANCH ADMIN</option>
+                <option value="MANAGER">MANAGER</option>
+                <option value="STAFF">STAFF</option>                
+              </select>
+              </div>
+              <div class="col-sm-4">
+           <select ng-model="params.name"  id="user"
+              name="user" class="form-control" size="1"
+              ng-options="user.name as (user.name) for user in allUsers">
+              <option value="">Select Name</option>
+            </select>
+              </div>
+            <div class="col-md-4">
+            <button type="submit" class="btn btn-sm btn-success btn-sm ">
+            <i class="fa fa-search"></i>
+               Search
+            </button>
+            
+            
+            <button type="reset" ng-click="reset()" class="btn btn-sm btn-danger btn-sm ">
+            <i class="fa fa-undo"></i>
+               Reset
+            </button>
+            </div>
+            </div>
+            </div>
+       </div>
+    </form>
+    </div>
+ 
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Users : {{users.total}}
+    </div>
+
+       <div class="row">
+          <div ng-repeat="user in users">        
+         <div class="col-sm-3">
+          <div class="panel b-a">
+            <div class="panel-heading bg-info dk no-border wrapper-lg" style="background-color: rgb(29, 160, 211);">
+              <button ng-show="deleteAction" class="btn btn-sm btn-icon btn-rounded btn-danger pull-right top" style="margin-top: -10%;"><a ng-click="deleteUsers(user._id, row)"><i class="fa fa-trash"></i></a></button>
+            </div>
+            <div class="text-center m-b clearfix">
+              <div class="thumb-lg avatar m-t-n-xxl">
+                <img src="assets/images/a5.jpg" alt="..." class="b b-3x b-white">
+                <!-- <img id="userImage" ng-src="{{user.image_url}}" class="b b-3x b-white img-circle"> -->
+                <div class="h4 font-bold m-t-sm">{{user.username}}</div>
+                <div class="h6 font-bold m-t-sm">{{user.email}}</div>
+              </div>
+            </div>
+            <div class="hbox text-center b-t b-light">          
+              <div class="col padder-v text-bold">
+                <div class="h4">Role</div>
+                <span>{{user.role}}</span>
+              </div>
+              <div class="col padder-v text-bold">
+                <div class="h4">Branch</div>
+                <span>{{user.branch}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+ 
+<pagination boundary-links="true" class="pull-right" total-items="totalUsers" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>

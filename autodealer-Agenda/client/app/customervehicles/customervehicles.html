@@ -1,0 +1,108 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">CustomerVehicles</h1>
+  <small class="text-muted">Manage CustomerVehicles</small>
+</div>
+<!-- <ul class="breadcrumb bg-white b-a">
+	<li>Customers</li>
+</ul> -->
+<div class="wrapper-md" ng-init="initCustomervehicles()">
+<div ng-init="initViewCustomerVehicles()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary">
+    	<i class="fa fa-plus space-6"></i> Create</a>
+		 
+     		 <!-- <a ng-click="multiDelete()" class="btn btn-sm btn-danger"> -->
+		 	<span ng-show="{{accessCustomer}}"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span>
+    </div>
+
+    <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+    <div class="form-group ">
+         <!--  <label class="col-md-3 control-label" for="purchase_date">Purchase Date
+            </label> -->
+            <div class="col-md-9"> 
+            
+           
+            <div class="col-sm-5 pull-rgth">
+            <input type="text" ng-model="params.reg_no"
+                id="reg_no" name="reg_no"
+                class="form-control" placeholder="Reg No">
+            </div>
+            <div class="col-md-3">
+            <button type="submit" class="btn btn-sm btn-success btn-sm ">
+            <i class="fa fa-search"></i>
+               Search
+            </button>
+            </div>
+            
+            <button type="reset" ng-click="reset()" class="btn btn-danger btn-sm">
+              <i class="fa fa-undo"> Reset</i>
+            </button>
+            
+           </div>
+          </div>
+      </div>
+    
+    </form>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      CustomerVehicles : {{totalCustomervehices}}
+    </div>					
+   <div class="row">
+   <div ng-repeat="customervehicles in customervehicles track by $index">
+        <div class="col-md-3">
+      <div class="panel b-a">
+        <div class="panel-heading no-border bg-primary vehicle"> 
+        
+          <span class="text-lt">{{Make[$index]}}</span>
+          <span class="text-lt pull-right">{{model[$index]}}</span>
+        </div>
+        <div class="vehicle-hover">
+        <div class="item m-l-n-xxs m-r-n-xxs">
+          <div ng-init="x = 3" class="top text-right padder m-t-xs w-full">
+            <span class="label bg-dark">{{customervehicles.year | date: 'yyyy'}}</span>
+          </div>
+          <div class="bottom wrapper bg-gd-dk text-white vehicle">            
+            <div class="text-u-c h3 m-b-sm">{{customervehicles.reg_no}}</div>
+            <div>{{customervehicles.vehicle_type.name}}</div>
+            <div>{{customervehicles.purchase_date | date}}</div>
+          </div>
+          <img src="assets/images/c0.jpg" class="img-full">
+          <div class="vehicle-hover-div">
+          <div class="list-side-by-side" ui-jq="slimScroll" ui-options="{height:'80px', size:'3px'}">
+          <dl>
+            <dt>Insurance Expiry Date - {{customervehicles.insurance_expiry_date | date}}</dt>
+            <dt>
+            <dd>{{customervehicles.warranties.warranty_type.name}} {{customervehicles.warranties.from | date}}<br>{{customervehicles.warranties.to | date}}</dd>
+            </dt>
+           
+          </dl>
+          </div>
+          </div>
+        </div>
+        </div>
+        <div class="hbox text-center b-b b-light text-sm">          
+          <a href="javascript:void(0)" ui-sref="^.edit({customervehicleId: customervehicles._id})" class="col padder-v b-r b-light">
+            <i class="icon-pencil block m-b-xs fa-2x"></i>
+          </a>
+          <a href class="col padder-v b-r b-light">
+          </a>
+          
+          <a ng-click="deleteCustomerVehicles(customervehicles._id, row)" class="col padder-v" >
+            <i class="icon-trash block m-b-xs fa-2x"></i>
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+  </div>
+</div>
+</div>
+
+<pagination boundary-links="true" class="pull-right" total-items="totalCustomervehices" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>

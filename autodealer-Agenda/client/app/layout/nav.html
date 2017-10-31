@@ -1,0 +1,256 @@
+
+<ul class="nav" ng-controller="SidebarMenuCtrl">
+	<li ui-sref-active="active">
+		<a ui-sref="app.dashboard">
+		<i class="fa fa-dashboard icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.DASHBOARD">Dashboard</span>
+		</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.jobcards.list">
+		<i class="fa fa-cogs icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.JOBCARDS">Job Cards</span>
+		</a>
+	</li>
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.customers.list" >
+		<i class="fa fa-group icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.CUSTOMERS" >Customers</span>
+		</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.dealers.list" >
+		<i class="fa fa-user-md icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.DEALERS" >Dealers</span>
+		</a>
+	</li>	
+
+	<li ng-show="access">
+		<a href class="auto">
+		<span class="pull-right text-muted">
+		<i class="fa fa-fw fa-angle-right text"></i>
+		<i class="fa fa-fw fa-angle-down text-active"></i>
+		</span>
+		<i class="fa fa-cogs icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.services.SERVICES">SERVICES</span>
+		</a>
+		<ul class="nav nav-sub dk">
+			<li class="nav-sub-header">
+				<a href>
+				<span translate="aside.nav.services.SERVICES">SERVICES</span>
+				</a>
+			</li>			
+			<li ui-sref-active="active">
+				<a ui-sref="app.jobcards.Inprogresslist" >
+				<span translate="aside.nav.services.INPROGRESS">In Progress</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.jobcards.paymentduelist">
+				<span translate="aside.nav.services.PAYMENTDUE">Payment Due</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.jobcards.scheduledlist">
+				<span translate="aside.nav.services.SCHEDULED">Scheduled</span>
+				</a>
+			</li>
+			
+		</ul>
+	</li>
+
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.users.list">
+		<i class="fa fa-user icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.USERS">Users</span>
+		</a>
+	</li>
+	
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.searchservices.servicelist" >
+		<i class="fa fa-search icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.SEARCH" >Search</span>
+		</a>
+	</li>
+
+	<li ng-show="access">
+		<a href class="auto">
+		<span class="pull-right text-muted">
+		<i class="fa fa-fw fa-angle-right text"></i>
+		<i class="fa fa-fw fa-angle-down text-active"></i>
+		</span>
+		<i class="glyphicon glyphicon-stats icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.reports.REPORTS">REPORTS</span>
+		</a>
+		<ul class="nav nav-sub dk">
+			<li class="nav-sub-header">
+				<a href>
+				<span translate="aside.nav.reports.REPORTS">REPORTS</span>
+				</a>
+			</li>			
+			<li ui-sref-active="active">
+				<a ui-sref="app.reports.bookedlist" >
+				<span translate="aside.nav.reports.BOOKEDSERVICE">Booked Service</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.reports.revenuelist">
+				<span translate="aside.nav.reports.REVENUE">REVENUE Chart</span>
+				</a>
+			</li>
+			<!-- <li ui-sref-active="active">
+				<a ui-sref="app.reports.enginnerlist" ng-hide="{{sales}}">
+				<span translate="aside.nav.reports.ENGINEERREPORTS">ENGINEER REPORTS</span>
+				</a>
+			</li>			
+			<li ui-sref-active="active">
+				<a ui-sref="app.reports.enquirylist" ng-hide="{{sales}}">
+				<span translate="aside.nav.reports.ENQUIRYREPORTS">ENQUIRY REPORTS</span>
+				</a>
+			</li> -->
+		</ul>
+	</li>	
+
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.plans.list" >
+		<i class="fa fa-briefcase icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.PLANS" >Plans</span>
+		</a>
+	</li>
+
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.jobcardmasters.list" >
+		<i class="fa fa-gear icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.JOBCARD_MASTERS">Jobcard Masters</span>
+		</a>
+	</li>
+
+	<li ui-sref-active="active">
+		<a ui-sref="app.offers.list" >
+		<i class="fa fa-gift icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.OFFERS" >Offers</span>
+		</a>
+	</li>
+
+	<li ng-show="access">
+		<a href class="auto">
+		<span class="pull-right text-muted">
+		<i class="fa fa-fw fa-angle-right text"></i>
+		<i class="fa fa-fw fa-angle-down text-active"></i>
+		</span>
+		<i class="fa fa-money icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.charges.CHARGES">CHARGES</span>
+		</a>
+		<ul class="nav nav-sub dk">
+			<li class="nav-sub-header">
+				<a href>
+				<span translate="aside.nav.charges.CHARGES">CHARGES</span>
+				</a>
+			</li>
+			<li ui-sref-active="active" >
+				<a ui-sref="app.labourcharges.list" >				
+				<span class="font-bold" translate="aside.nav.charges.LABOUR_CHARGES">Labour Charges</span>
+				</a>
+			</li>	
+
+			<li ui-sref-active="active" >
+				<a ui-sref="app.misccharges.list" >
+				<span class="font-bold" translate="aside.nav.charges.MISC_CHARGES">Misc Charges</span>
+				</a>
+			</li>
+
+			<li ui-sref-active="active" >
+				<a ui-sref="app.accessories.list" >
+				<span class="font-bold" translate="aside.nav.charges.ACCESSORIES">Accessories</span>
+				</a>
+			</li>
+		</ul>
+	</li>
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.parts.list" >
+		<i class="fa fa-wrench icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.PARTS">Parts</span>
+		</a>
+	</li>
+	
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.partsgroup.list" >
+		<i class="fa fa-tags icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.PARTS_GROUP">Parts Group</span>
+		</a>
+	</li>
+
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.vehicles.list">
+		<i class="fa fa-taxi icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.VEHICLES" >Vehicles</span>
+		</a>
+	</li>
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.customervehicles.list" >
+		<i class="fa fa-truck icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.CUSTOMER_VEHICLES" >Customer Vehicles</span>
+		</a>
+	</li>
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.vehicletypes.list" >
+		<i class="fa fa-car icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.VEHICLE_TYPES" >Vehicle Types</span>
+		</a>
+	</li>	
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.warrantytypes.list" >
+		<i class="fa fa-ge icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.WARRANTY_TYPES" >Warranty Types</span>
+		</a>
+	</li>
+	
+	<li ui-sref-active="active">
+		<a ui-sref="app.adsmedia.list" >
+		<i class="fa fa-bullhorn icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.ADS_MEDIA" >Ads Media</span>
+		</a>
+	</li>
+
+	<li ui-sref-active="active">
+		<a ui-sref="app.newsevents.list" >
+		<i class="fa fa-youtube-play icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.NEWS_EVENTS" >News Events</span>
+		</a>
+	</li>
+
+	<li ui-sref-active="active" ng-show="accessMega">
+		<a ui-sref="app.emailtemplates.list" >
+		<i class="fa fa-envelope icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.EMAILTEMPLATES" >Email Templates</span>
+		</a>
+	</li>
+
+	<!--  -->
+	<!-- <li ui-sref-active="active" >
+		<a ui-sref="app.labourcharges.list" >
+		<i class="fa fa-tag icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.LABOUR_CHARGES">Labour Charges</span>
+		</a>
+	</li>	
+
+	<li ui-sref-active="active" >
+		<a ui-sref="app.misccharges.list" >
+		<i class="fa fa-tag icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.MISC_CHARGES">Misc Charges</span>
+		</a>
+	</li>
+
+	<li ui-sref-active="active" >
+		<a ui-sref="app.accessories.list" >
+		<i class="fa fa-tag icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.ACCESSORIES">Accessories</span>
+		</a>
+	</li> -->
+	<li ui-sref-active="active" ng-show="access">
+		<a ui-sref="app.jobcards.feedbacklist">
+		<i class="fa fa-microphone icon text-info-dker"></i>
+		<span class="font-bold" translate="aside.nav.FEEDBACK">Feed Back</span>
+		</a>
+	</li>
+</ul>

@@ -1,0 +1,58 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Plans</h1>
+  <small class="text-muted">Manage Plans</small>
+</div>
+
+<div class="wrapper-md" ng-init="initPlans()">
+<div ng-init="initAllPlans()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ng-show="accessPlan" ui-sref="^.create" class="btn btn-sm btn-primary">
+    	<i class="fa fa-plus space-6"></i> Create</a>
+		 
+		 	<!-- <span ng-show="accessPlan"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span> -->
+    </div>
+     </div>
+     
+     <div class="row">
+     <div ng-repeat="plan in plans">
+      <div class="col-md-3">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="clearfix">
+                <!-- <a href class="pull-left thumb-md avatar b-3x m-r">
+                  <img id="adsImage" width="200" height="100" ng-src="{{ads.image_url}}">
+                </a> -->
+                <div class="clear">
+                  <div class="h4 m-t-xs m-b-xs">{{plan.plan_code}}
+                    <a ng-show="accessPlan" href="javascript:void(0)" ui-sref="^.edit({planId: plan._id})">
+                    <span class="badge bg-success pull-right" style="background-color: #40AD24;"><i class="fa fa-pencil"></i></span></a>
+                  </div>
+                  <small class="text-muted">{{plan.plan_name}}</small>
+                  <a ng-show="accessPlan" ng-click="removePlan(plan._id, row)" class="badge bg-danger pull-right" style="background-color: #AD2424;"><i class="fa fa-remove"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="list-group no-radius alt">
+              <div class="list-group-item" >
+                <b>Price</b>
+                <span class="pull-right">{{plan.price}}</span>
+              </div>
+              <div class="list-group-item" href>
+                <b>Status</b>
+                <span class="pull-right">{{plan.status}}</span>
+              </div>
+              <div class="list-group-item" href>
+                <div class="desc"   ui-jq="slimScroll" ui-options="{height:'70px', size:'3px'}">
+                <p class="m-t-xs">{{plan.plan_description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+         </div>
+        </div>
+      </div>
+	</div>
+<pagination boundary-links="true" class="pull-right" total-items="totalAdsMedia" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>

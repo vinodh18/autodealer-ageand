@@ -1,0 +1,221 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="initDashboard()">
+	<!-- Begin Of initDashboard -->	
+	<div class="col dashboard">
+		<div class="bg-light lter b-b wrapper-md">
+			<div class="row m-b-sm">
+				<div class="col-sm-6 col-xs-12">
+					<h1 class="m-n font-thin h3 text-black">Dashboard</h1>
+					<small class="text-muted">AutoDealer Management</small>
+				</div>
+				<div class="col-sm-6 text-right hidden-xs">
+					<div class="form-group" ng-show="accessBranchWise">
+					    <label class="col-sm-4 control-label" for="example-text-input" style="padding: 0">Filter By
+					    </label>
+					    <div class="col-sm-8">
+					       <select ng-init="initAllBranches()" ng-change="searchByBranch(params)" ng-model="params.branch" name="branch" ng-options="branch.branch_code as branch.name for branch in allBranches" class="form-control" size="1">
+					       	<option value="">All Branch</option>             
+					    	</select>         
+					    </div>
+					</div> 
+				</div>
+			</div>
+		</div>		
+		
+		<div class="col-sm-12" ng-init="initServicesCount()" ng-show="isStaff">
+			<div class="col-sm-12 panel panel-heading">
+				<h1 class="m-n font-thin h3 text-black">Services</h1>
+			</div>
+			<!-- Begin Of Serives Count -->
+			<div class="row m-b-sm panel-body">				
+				<div class="col-md-12" >				
+					<div class="row row-sm text-center">					
+						<div class="col-md-12">
+							<div class="col-xs-2">
+							<div class="panel padder-v item bg-info item dashboard" >
+								<div class="text-white font-thin h2 text-md">TODAY</div>	
+								<div class="text-white font-thin h2">{{serviceToday}}</div>
+							</div>
+							</div>
+							<!-- <div class="col-xs-4">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">YESTERDAY</div>	
+								<div class="text-white font-thin h2">{{yesterday}}</div>	
+								</div>
+							</div> -->
+
+							<div class="col-xs-2">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">THIS MONTH</div>	
+									<div class="text-white font-thin h2">{{serviceThismonth}}</div>
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">LAST MONTH</div>	
+									<div class="text-white font-thin h2">{{serviceLastmonth}}</div>
+								</div>
+							</div>				
+							 <div class="col-xs-2" ng-repeat = "serviceCount in serviceCountsArr">
+								<div class="panel padder-v item" style="background: {{serviceCount.color}}">
+									<div class="text-white font-thin h2 text-md">{{serviceCount.name}}</div>
+									<div class="text-white font-thin h2">{{serviceCount.total}}</div>
+									<span ng-hide="isCustomer" class="bottom text-right w-full"> 
+					                  <a ui-sref="{{statusLink(serviceCount.name)}}"><i class="icon icon-list text-white m-r-sm"></i></a>
+					                </span>									
+								</div>
+							</div>											
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Of Services Count -->
+
+			<!-- Begin Of Services lineChart -->			
+    		<div class="row">
+      			<div class="col-md-12">
+        			<div class="panel panel-default">
+          			<div class="panel-heading font-bold">Last 30 Days Service Chart</div>
+	          			<div class="panel-body">
+	          				<div ui-jq="plot" ui-refresh="serviceData" ui-options="{{serviceData}}, {{serviceLineChartOptions}}" style="width:100%;height:240px"></div>
+	          			</div>
+        			</div>
+      			</div>	
+      		</div>      		
+			<!-- End Of Services lineChart -->
+		</div>
+
+
+
+		<div ng-hide="isStaff">
+		<!-- Dashboard serviceCounts and lineChart -->
+		<div class="col-md-6 bg-light lter b-b wrapper-md panel panel-default" ng-init="initServicesCount()">
+			<div class="col-sm-12 panel panel-heading">
+				<h1 class="m-n font-thin h3 text-black">Services</h1>
+			</div>
+			<!-- Begin Of Serives Count -->
+			<div class="row m-b-sm panel-body">				
+				<div class="col-md-12" >				
+					<div class="row row-sm text-center">					
+						<div class="col-md-12">
+							<div class="col-xs-4">
+							<div class="panel padder-v item bg-info item dashboard" >
+								<div class="text-white font-thin h2 text-md">TODAY</div>	
+								<div class="text-white font-thin h3">{{serviceToday}}</div>
+							</div>
+							</div>
+							<!-- <div class="col-xs-4">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">YESTERDAY</div>	
+								<div class="text-white font-thin h2">{{yesterday}}</div>	
+								</div>
+							</div> -->
+
+							<div class="col-xs-4">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">THIS MONTH</div>	
+									<div class="text-white font-thin h3">{{serviceThismonth}}</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">LAST MONTH</div>	
+									<div class="text-white font-thin h3">{{serviceLastmonth}}</div>
+								</div>
+							</div>				
+							 <div class="col-xs-4" ng-repeat = "serviceCount in serviceCountsArr">
+								<div class="panel padder-v item" style="background: {{serviceCount.color}}">
+									<div class="text-white font-thin h2 text-md">{{serviceCount.name}}</div>
+									<div class="text-white font-thin h3">{{serviceCount.total}}</div>
+									<span class="bottom text-right w-full"> 
+					                  <a ui-sref="{{statusLink(serviceCount.name)}}"><i class="icon icon-list text-white m-r-sm"></i></a>
+					                </span>									
+								</div>
+							</div>											
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Of Services Count -->
+
+			<!-- Begin Of Services lineChart -->			
+    		<div class="row">
+      			<div class="col-md-12">
+        			<div class="panel panel-default">
+          			<div class="panel-heading font-bold">Last 30 Days Service Chart</div>
+	          			<div class="panel-body">
+	          				<div ui-jq="plot" ui-refresh="serviceData" ui-options="{{serviceData}}, {{serviceLineChartOptions}}" style="width:100%;height:240px"></div>
+	          			</div>
+        			</div>
+      			</div>	
+      		</div>      		
+			<!-- End Of Services lineChart -->		
+		</div>		
+		<!-- Dashboard serviceCounts and lineChart -->			
+
+		<!-- Revenue Counts and Revenue lineChart -->
+		<div class="col-md-6 bg-light lter b-b wrapper-md panel panel-default" ng-init="initRevenueCounts()">
+			<div class="col-sm-12 panel panel-heading">
+				<h1 class="m-n font-thin h3 text-black">Revenue</h1>
+			</div>
+			<!-- Begin Of Revenue Counts -->
+			<div class="row m-b-sm panel-body">						
+				<div class="col-md-12">				
+					<div class="row row-sm text-center">					
+						<div class="col-md-12">							
+							<div class="col-xs-4">
+							<div class="panel padder-v item bg-info item dashboard" >
+								<div class="text-white font-thin h2 text-md">TODAY</div>	
+								<div class="text-white font-thin h3"><i class="fa fa-inr"></i>
+								{{todayAmount | number:2}}</div>
+							</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">YESTERDAY</div>	
+									<div class="text-white font-thin h3"><i class="fa fa-inr"></i>{{yesterdayAmount | number:2}}</div>
+								</div>
+							</div>
+
+							<div class="col-xs-4">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">THIS MONTH</div>	
+									<div class="text-white font-thin h3"><i class="fa fa-inr"></i>{{thismonthAmount | number:2}}</div>		
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="panel padder-v item bg-info item dashboard">
+									<div class="text-white font-thin h2 text-md">LAST MONTH</div>	
+									<div class="text-white font-thin h3"><i class="fa fa-inr"></i>{{lastMonthAmount | number:2}}</div>			
+								</div>
+							</div>
+
+							<div class="col-xs-4">
+								<div class="panel padder-v item bg-danger item dashboard">
+									<div class="text-white font-thin h2 text-md">PAYMENT DUE</div>	
+									<div class="text-white font-thin h3"><i class="fa fa-inr"></i>{{paymentDueAmount | number:2}}</div>
+								</div>
+							</div>						
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Of Revenue Counts -->
+
+			<!-- Begin Of Dashboard Chart -->				
+			<div class="row">
+  				<div class="col-md-12">
+    				<div class="panel panel-default">
+      				<div class="panel-heading font-bold">Last 30 Days Revenue Chart</div>
+      				<div class="panel-body">
+        				<div ui-jq="plot" ui-refresh="revenueData" ui-options="{{revenueData}}, {{revenueLineChartOptions}}" style="width:100%;height:240px"></div>
+      				</div>
+    				</div>
+  				</div>	
+  			</div>      		
+			<!-- End Of Revenue Chart -->	
+		</div>
+		<!-- End Of Revenue Counts and Revenue lineChart -->
+		</div>
+	</div>
+	<!-- End Of initDashboard -->
+</div>

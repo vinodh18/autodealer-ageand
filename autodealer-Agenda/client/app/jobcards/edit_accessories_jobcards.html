@@ -1,0 +1,99 @@
+
+<div class="modal-body wrapper-lg" ng-init="initAddAccessories()">      
+  <a class="btn btn-xs btn-dark pull-right" ng-click="cancel()"><i class="fa fa-times"></i></a>
+  <div class="row">
+    <div class="col-sm-12 b-r">
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        {{alert.type}} {{alert.msg}}</alert>
+        <h3 class="m-t-none m-b font-thin">Add Accessories Charges</h3>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+      <form name="accessoriesForm" action="#" ng-submit = "addAccessory()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+          <div class="form-group">
+          <label class="col-sm-2 control-label" style="padding-top: 10px" for="example-email-input" style="top:20px">Accessories</label>
+          <div class="col-sm-10">
+            <div class="row m-b-sm" ng-repeat="items in accessories.items">
+              <div class="col-md-2">
+                <input type="text" id="no" ng-model="items.no" name="no" class="form-control" placeholder="No">
+              </div>
+              <div class="col-md-6">    
+                <input type="text" id="desc" ng-model="items.desc" name="desc" class="form-control" placeholder="Description">
+              </div>              
+              <div class="col-md-2">
+                <input type="Number" id="rate" ng-model="items.rate" name="rate" class="form-control" placeholder="Rate" min="0">
+              </div>              
+              <div class="col-md-2">                
+                  <a href="javascript:void(0)" ng-show="{{accessories.items.length}} > 1" class="btn btn-sm btn-danger" ng-click="deleteAccessory($index)" style="color: red"><i class="fa fa-remove" title="remove"></i></a>                
+              </div>              
+            </div>
+            <a href="javascript:void(0)" class="btn btn-sm btn-dark" ng-click="addNewAccessory()"><i class="fa fa-plus"></i> Add</a>
+          </div>
+        </div>            
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="from">Discount
+          </label>
+          <div class="col-sm-10">
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" for="from">Percentage</label>
+                <div class="col-sm-9">  
+                  <input type="Number" ng-blur="discountAmount(accessories)" ng-model="accessories.discount" id="discount" name="discount"
+                  class="form-control" min="0">
+                </div> 
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" for="from">Amount</label>
+                <div class="col-sm-9">  
+                  <input type="Number" ng-disabled="true" ng-model="accessories.discount_amt" id="discount_amt" name="discount_amt" class="form-control" min="0">
+                </div> 
+              </div>
+            </div>  
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="from">Tax
+          </label>
+          <div class="col-sm-10">
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" for="from">No</label>
+                <div class="col-sm-9">  
+                  <input type="Number" ng-model="accessories.tax" id="tax" name="tax"
+                  class="form-control" min="0">
+                </div> 
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" for="from">Amount</label>
+                <div class="col-sm-9">  
+                  <input type="Number" ng-blur="totalAccessoriesAmount(accessories)" ng-model="accessories.tax_amt" id="tax_amt" name="tax_amt"
+                  class="form-control" min="0">
+                </div> 
+              </div>
+            </div>  
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div> 
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="from">Total</label>
+          <div class="col-sm-10">  
+            <input type="Number" ng-disabled="true" ng-model="accessories.total" id="total" name="total" class="form-control" min="0">
+          </div> 
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+        <div class="text-right lter">
+            <button type="submit" class="btn btn-success" ng-disabled="accessoriesForm.$invalid">
+            <i class="fa fa-edit"></i> Update</button>          
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

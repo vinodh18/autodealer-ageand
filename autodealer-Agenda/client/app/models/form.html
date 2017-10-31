@@ -1,0 +1,28 @@
+					<div class="form-group" ng-class="{'has-error':modelForm.make.$invalid && !modelForm.make.$pristine }">
+					<label class="col-sm-2 control-label" for="dealer_name">Make Name
+					<span style="color: red">*</span></label>
+					<div class="col-sm-10">
+						<select ng-init="initAllMakes()"
+							ng-model="model.make._id" id="models"
+							name="make" class="form-control" size="1"
+							ng-options="make._id as (make.name) for make in allMakes" required>
+							<option value="">Select Make Name</option>
+						</select>
+					<p ng-show="modelForm.make.$invalid && !modelForm.make.$pristine" class="help-block  m-b-none">Make Name is required.</p>
+					</div>
+				</div> 
+					<div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+					<div class="form-group" ng-class="{'has-error':modelForm.model_name.$invalid && !modelForm.model_name.$pristine }">
+						<label class="col-sm-2 control-label" for="name">Model Name
+							<span style="color: red">*</span>
+						</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="model.name" id="model_name"  ng-blur="modelChange(model)" name="model_name" class="form-control" placeholder="Model Name" required />
+			
+				<p ng-show="modelForm.model_name.$invalid && !modelForm.model_name.$pristine && modelForm.model_name.$error.required" class="help-block" >Model is required.</p>
+				<p ng-show="modelForm.model_name.$error.exists" class="help-block m-b-none">Model already exists.</p>
+				<p ng-show="modelForm.model_name.$error.available" class="help-block m-b-none">
+				<span style="color:#27c24c">Model Avaliable</span></p>	
+			</div>
+		</div>
+

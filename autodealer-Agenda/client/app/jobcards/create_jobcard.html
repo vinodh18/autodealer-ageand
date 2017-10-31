@@ -1,0 +1,43 @@
+<!-- Page content -->
+
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3 text-black">Jobcards</h1>
+        <small class="text-muted">Create New JobCard</small>
+    </div>
+     
+<ul class="breadcrumb bg-white b-a">
+  <li><a ui-sref="^.list">
+  <i class="fa fa-cogs icon text-info-dker"></i> Jobcards</a></li>
+  <li>Create New JobCard</li>
+</ul>
+    <div class="wrapper-md" ng-init="initcreateJobcard()">
+        <div ng-hide="LimitExceeds">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+        <div ng-show="LimitExceeds">
+           <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>        
+        </div>
+        <div ng-hide="LimitExceeds">
+        <form name="jobcardsForm" action="#" ng-submit = "addJobcard()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+
+        <div class="panel panel-default">
+            <div class="panel-heading font-bold">
+                Create New JobCard
+            </div>
+            <div class="panel-body">
+                                   
+                  <div ng-include='"app/jobcards/form.html"'></div>
+                                              
+                    
+            </div>
+              
+          <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="jobcardsForm.$invalid || check()"> <i class="fa fa-save"></i> Submit</button>
+               <button type="reset" class="btn btn-warning">
+                <i class="fa fa-repeat"></i> Reset</button>
+            </footer>    
+        </div>
+        </form>
+        </div>
+    </div>    
+       <!-- END Page Content -->

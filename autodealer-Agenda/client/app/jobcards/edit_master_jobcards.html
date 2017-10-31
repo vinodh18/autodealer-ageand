@@ -1,0 +1,39 @@
+
+<div class="modal-body wrapper-lg" ng-init="initAddCustomerJobCard()">      
+  <a class="btn btn-xs btn-dark pull-right" ng-click="cancel()"><i class="fa fa-times"></i></a>
+  <div class="row">
+    <div class="col-sm-12 b-r">
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        {{alert.type}} {{alert.msg}}</alert>
+        <h3 class="m-t-none m-b font-thin">Add Customer JobCards</h3>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+      <form name="customerJobcardForm" action="#" ng-submit = "addCustomerJobCard()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+          <div class="form-group">
+          <label class="col-sm-2 control-label" style="padding-top: 10px" for="example-email-input" style="top:20px">Job Cards</label>
+          <div class="col-sm-10">
+            <div class="row m-b-sm" ng-repeat="job_card in jobcard.job_card">
+              <div class="col-md-3">
+                <input type="text" id="example-registration-input"
+                  ng-model="job_card.desc" name="example-registration-input"
+                  class="form-control" placeholder="Description">
+              </div>
+              <div class="col-md-7">    
+                <input type="text" id="example-registration-input" ng-model="job_card.comments" name="example-registration-input" class="form-control" placeholder="Comments">
+              </div>
+              <div class="col-md-2">                
+                  <a href="javascript:void(0)" ng-show="{{jobcard.job_card.length}} > 1" class="btn btn-sm btn-danger" ng-click="deleteJobcard($index)" style="color: red"><i class="fa fa-remove" title="remove"></i></a>                
+              </div>              
+            </div>
+            <a href="javascript:void(0)" class="btn btn-sm btn-dark" ng-click="addNewJobcard()"><i class="fa fa-plus"></i> Add</a>
+          </div>
+        </div>            
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+        <div class="text-right lter">
+            <button type="submit" class="btn btn-success" ng-disabled="customerJobcardForm.$invalid">
+            <i class="fa fa-edit"></i> Update</button>          
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

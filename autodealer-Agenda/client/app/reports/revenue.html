@@ -1,0 +1,239 @@
+ <!-- Charts Header -->
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3 text-black">Revenue Reports</h1>
+    <small class="text-muted">Manage Reports</small>
+</div>
+<ul class="breadcrumb bg-white b-a">
+	<i class="glyphicon glyphicon-stats icon text-info-dker"></i>
+	<li> Reports</li>
+</ul>
+
+<div class="wrapper-md" ng-init="initCompStats()">
+<div class="panel panel-default">
+<div class="panel-heading font-bold">Revenue Reports</div>
+<div class="panel-body">
+
+	<form action="#" ng-submit="getRevenue()" method="post" enctype="multipart/form-data" class="form-horizontal " onsubmit="return false;">
+		
+	<div class="row">
+			<div class="col-md-12" id="services-div">
+			
+				<div class="col-md-6 pull-right">
+					<div class="form-group ">
+					<label class="col-md-3 control-label" for="service_date">Service Date
+						</label>
+						<div class="col-md-9">	
+							<date-range-picker style="cursor: default" ng-model="compleDateRange" class="btn btn-md btn-info compleDateRange pull-right" ranges="ranges">
+							<i class="fa fa-calendar fa-lg"></i>
+    						<span>{{compleDateRange.startDate | amDateFormat: 'MMM D, YYYY'}} - {{compleDateRange.endDate | amDateFormat: 'MMM D, YYYY'}}</span>
+    						<b class="caret"></b>
+							</date-range-picker>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12" id="services-div">
+			  <div class="col-md-6">
+					<div class="form-group">
+						<label class="col-md-3 control-label" for="make">Make
+						</label>
+						<div class="col-md-9">
+						<select ng-init="initAllMake()"
+							ng-model="params.make" id="make"
+							name="make" class="form-control" size="1"
+							ng-options="make._id as (make.name) for make in allMakes">
+							<option value="">Select Make</option>
+						</select>
+
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-md-3 control-label" for="service_type">Model
+						</label>
+						<div class="col-md-9">
+							<select ng-init="initAllModel()"
+							ng-model="params.model" id="model"
+							name="model" class="form-control" size="1"
+							ng-options="model._id as (model.name) for model in allModels">
+							<option value="">Select Model</option>
+						</select>
+						</div>
+					</div>
+					</div>
+				
+				</div>
+			</div>
+
+				<footer class="panel-footer text-right bg-light lter">
+	              <button type="submit" class="btn btn-success">
+	               <i class="fa fa-share"></i> Submit</button>
+	              <button type="reset" class="btn btn-warning" ng-click="resetStatus()">
+	                <i class="fa fa-repeat"></i> Reset</button>
+	            </footer>
+		
+
+			</form>
+		</div>
+  </div>
+  			
+		<div class="row m-b-sm">
+			<div class="btn btn-sm btn-dark pull-right" ng-click="revenueExport()">
+				<i class="fa fa-download"></i> Export
+			</div>
+		</div>
+	
+			<div class="wrapper-md">
+			<div class="row m-b-sm">
+				<div class="col-md-12">
+					<!-- <h1 class="m-n font-thin h3 text-black">Service Revenue</h1> -->
+				</div>
+				<div class="row" >
+				<div class="col-xs-3">
+						<div class="panel padder-v bg-info item" >
+							<div align="center"><span class="text-lg">Today</span>		
+								</div> 	
+								<div class="h1 text-white font-thin h1" align="center">{{today}}  
+								<br><span><i class="fa fa-inr"></i> 
+									{{total_amount | currency : ""}}{{todayAmount}}
+								</span></div>
+								
+							</div>
+						</div>
+
+
+						<div class="col-xs-3">
+						<div class="panel padder-v bg-info item" >
+							<div align="center"><span class="text-lg">Yesterday</span>		
+								</div> 	
+								<div class="h1 text-white font-thin h1" align="center">{{yesterday}}  
+								<br><span><i class="fa fa-inr"></i> 
+									{{total_amount | currency : ""}}{{yesterdayAmount}}
+								</span></div>
+								
+							</div>
+						</div>
+
+						<div class="col-xs-3">
+						<div class="panel padder-v bg-info item" >
+							<div align="center"><span class="text-lg">This Month</span>		
+								</div> 	
+								<div class="h1 text-white font-thin h1" align="center">{{thismonth}}  
+								<br><span><i class="fa fa-inr"></i> 
+									{{total_amount | currency : ""}}{{thismonthAmount}}		</div>						
+								</span><br>
+								<div align="center">
+								<i class="fa fa-inr"></i> {{value}}
+								<span ng-show="arrowdown" style="color:red">
+								<i class="fa fa-arrow-down"></i>
+		 						</span>
+		 						<span ng-show="arrowup"  style="color:green">
+								<i class="fa fa-arrow-up"></i>
+		 						</span><br>
+		 						vs same day last Month {{lastMonthAmount}}
+		 						</div>
+							</div>
+						</div>
+
+						<div class="col-xs-3">
+						<div class="panel padder-v bg-info item" >
+							<div align="center"><span class="text-lg">Last Month</span>		
+								</div> 	
+								<div class="h1 text-white font-thin h1" align="center">{{lastmonth}}  
+								<br><span><i class="fa fa-inr"></i> 
+									{{total_amount | currency : ""}}{{lastMonthAmount}}
+								</span></div>
+								
+							</div>
+						</div>
+						<div class="col-md-12">
+						
+					<!-- <div class="col-xs-3" align="center" ng-repeat = "engineer_stats in testRevenueReport">
+						<div class="panel padder-v item " style="background: {{engineer_stats.colors}}">
+							<span class="text-white text-lg">{{engineer_stats.name}}</span>	
+								<div class="text-white font-thin h1">
+								<span><i class="fa fa-inr"></i>
+									{{engineer_stats.amount | currency:""}}
+								</span>
+								</div>
+							</div>
+						</div> -->
+
+						<div class="col-xs-6" align="center" ng-repeat = "engineer_stats in RevenueReports">
+						<div class="panel padder-v item " 
+								style="background: {{engineer_stats.colors}}">
+							<span class="text-white text-lg">{{engineer_stats.name}}</span>	
+								<div class="text-white font-thin h1">
+								<span><i class="fa fa-inr"></i>
+									{{engineer_stats.amount | currency:""}}
+								</span>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+				<div class="panel panel-default">											
+						<div class="panel-heading font-bold">Revenue Chart
+						</div>
+						
+						<div class="panel-body" id="line_chart">
+							<div ui-jq="plot" ui-options="
+								mychart, chartOptions" ui-refresh="mychart" style="height:300px;">
+							</div>					
+						</div>	
+				</div>
+
+			
+			<div class="row">
+			<div class="wrapper-md" ng-init="initRevenue()">
+			  <div class="panel panel-default">
+			    <div class="panel-heading">
+			      Revenue: {{totalServerItems}}
+			    </div>
+			    <div class="table-responsive">
+			    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+					{{alert.msg}}</alert>
+			      <div ng-grid="gridOptions" style="min-height:420px"></div>
+			    </div>
+			  </div>
+			</div>
+			</div>
+
+			<div class="bg-light lter b-b wrapper-md">
+			<div class="row m-b-sm">
+			<div class="panel panel-default">
+				<div class="panel panel-heading font-bold">Top Vehicles
+				</div>
+			<div class="panel-body">
+			<div  ui-jq="plot" ui-refresh="pieCountReport" ui-options="pieCountReport,		  pieOptions" style="height: 500px; padding: 0px; position: relative;">
+	    	</div>
+	    	</div>
+	    	</div>
+	    	</div>
+		</div>
+    </div>
+
+		<div class="wrapper-md" ng-init="initRevenuePie()">
+		  <div class="panel panel-default">
+		    <div class="panel-heading">
+		      Revenue: {{totalServerPieItems}}
+		    </div>
+		    <div class="table-responsive">
+		    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">
+		    {{alert.type}}
+				{{alert.msg}}</alert>
+		      <div ng-grid="PiegridOptions" style="min-height:420px"></div>
+		    </div>
+		  </div>
+		</div>
+			
+
+	
+	

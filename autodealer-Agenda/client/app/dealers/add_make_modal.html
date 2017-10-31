@@ -1,0 +1,49 @@
+<div class="modal-body wrapper-lg" ng-init="initAddMake()">      
+  <a class="btn btn-xs btn-dark pull-right" ng-click="cancel()"><i class="fa fa-times"></i></a>
+  <div class="row">
+    <div class="col-sm-12 b-r">     
+        <h3 class="m-t-none m-b font-thin">Add New Make</h3>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+        <div ng-hide="LimitExceeds">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+        <div ng-show="LimitExceeds">
+           <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>        
+        </div>
+      <div ng-hide="LimitExceeds">
+      <form name="makeForm" action="#" ng-submit = "addMake()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+
+      	<div class="form-group"
+			ng-class="{'has-error':makeForm.name.$invalid && !makeForm.name.$pristine }">
+				<label class="col-md-2 control-label">Name <span style="color:red">*</span></label>
+					<div class="col-md-10">
+						<input type="text" ng-model="make.name" id="name" name="name" class="form-control" placeholder="Name" required>
+						<p ng-show="makeForm.name.$invalid && !makeForm.name.$pristine"
+						class="help-block">Name is required.</p>
+					</div>
+			</div>
+			<div class="line line-dashed b-b line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="example-email-input"> Image <span style="color:red">*</span></label>
+				<div class="col-sm-10">
+					<input id="inputImage2" type="file" accept="image/*" to-resize-image="image2" onchange="angular.element(this).scope().fileChange(this)"
+						resize-max-height="100"
+						resize-max-width="100"
+						resize-quality="0.7"/><br>
+						<div class="row-sm-12" ng-show="createImage">
+							<div class="col-sm-10">
+								<img id="makeOriginalImg" ng-show="image2" style="width: inherit; height:inherit;" ng-src="{{image2.dataURL}}" type="{{image2.file.type}}"/>
+							</div>							
+						</div>						
+				</div>
+			</div>
+
+      <div class="text-right lter">
+        <button type="submit" class="btn btn-success" ng-disabled="makeForm.$invalid">
+           <i class="fa fa-save"></i> Add</button>          
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>

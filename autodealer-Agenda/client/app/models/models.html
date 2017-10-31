@@ -1,0 +1,52 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Models</h1>
+  <small class="text-muted">Manage Models</small>
+</div>
+<div class="wrapper-md" ng-init="initModels()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary" ng-show="{{access}} || {{accessSales}}">
+    	<i class="fa fa-plus space-6"></i> Create</a>
+		 
+		 	<span ng-show="{{access}}"><a ng-click="multiDelete()"	class="btn btn-sm btn-danger" id="style-condensed"><i class="fa fa-remove"></i> Delete</a>
+		 	</span>
+    </div>
+     <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+    <div class="form-group">
+           <!-- <div class="col-md-5">
+              <input type="text" ng-model="params.name"
+                id="dealer" name="dealer"
+                class="form-control" placeholder="Model Name">
+            </div> -->
+            <div class="col-md-5"></div>
+
+            <div class="col-md-5">
+              <select ng-init="initAllMakes()"
+              ng-model="params.make" id="models"
+              name="make" class="form-control" size="1"
+              ng-options="make._id as (make.name) for make in allMakes">
+              <option value="">Select Make Name</option>
+            </select>
+            </div>
+            <button type="submit" class="btn btn-sm btn-success btn-sm ">
+            <i class="fa fa-search"></i>
+               Search
+            </button>
+          </div>
+    </div>
+    </form>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Models : {{models.total}}
+    </div>
+    <div class="table-responsive">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.type}}
+		{{alert.msg}}</alert>
+      <div ng-grid="gridOptions" style="min-height:420px"></div>
+    </div>
+  </div>
+</div>
+

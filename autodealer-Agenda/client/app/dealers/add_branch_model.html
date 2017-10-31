@@ -1,0 +1,205 @@
+
+<div class="modal-body wrapper-lg" ng-init="initAddBranch()">      
+  <a class="btn btn-xs btn-dark pull-right" ng-click="cancel()"><i class="fa fa-times"></i></a>
+  <div class="row">
+    <div class="col-sm-12 b-r">      
+        <h3 class="m-t-none m-b font-thin">Add Branch</h3>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+        <div ng-hide="LimitExceeds">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+        <div ng-show="LimitExceeds">
+           <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>        
+        </div>
+      <div ng-hide="LimitExceeds">
+      <form name="branchForm" action="#" ng-submit = "addBranch()" method="post" enctype="multipart/form-data" class="form-horizontal form-validation" onsubmit="return false;">
+         
+      <div class="form-group" ng-class="{'has-error':branchForm.branch_code.$invalid && !branchForm.branch_code.$pristine }">
+            <label class="col-sm-2 control-label"
+              for="name">Branch Code
+              <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+              <input type="text" ng-model="branch.branch_code"
+                id="branch_code" name="branch_code"
+                class="form-control" placeholder="Branch Code" required>
+              <p ng-show="branchForm.branch_code.$invalid && !branchForm.branch_code.$pristine" class="help-block  m-b-none">Branch Code is required.</p>
+            </div>
+          </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+        <div class="form-group" ng-class="{'has-error':branchForm.name.$invalid && !branchForm.name.$pristine }">
+            <label class="col-sm-2 control-label"
+              for="name">Branch Name
+              <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+              <input type="text" ng-model="branch.name"
+                id="name" name="name"
+                class="form-control" placeholder="Branch Name" required>
+              <p ng-show="branchForm.name.$invalid && !branchForm.name.$pristine" class="help-block  m-b-none">Branch Name is required.</p>
+            </div>
+          </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+          <div class="form-group" ng-class="{'has-error':branchForm.phone.$invalid &&            !branchForm.phone.$pristine}">
+            <label class="col-sm-2 control-label" for="phone">
+            <br>Phone<span style="color: red">*</span></label>
+            <div class="col-sm-10">
+             <div ng-repeat="phone in branch.phone track by $index">
+            <div class="row" >
+            <div class="col-md-11">
+              <br><input type="text" ng-model="branch.phone[$index]"
+                id="phone" name="phone" class="form-control" placeholder="phone" ng-disabled="hide" required>
+                <p ng-show="branchForm.phone.$invalid && !branchForm.phone.$pristine" class="help-block  m-b-none">
+                Phone Number is required.</p>
+                </div>
+                <div class="col-sm-1" ng-show="$index > 0">
+                 <br><a href="javascript:void(0)" ng-click="deletePhone($index)" style="color: red"><i class="fa fa-remove" title="remove"></i> </a>
+                 </div>
+                 </div>
+            </div>
+            <br><a href="javascript:void(0)" ng-click="addNewPhone()" style="color:green" class="btn btn-sm btn-dark">
+            <i class="fa fa-plus" ></i> Add</a>
+            </div>
+          </div>
+
+          <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="email">Email</label>
+            <div class="col-sm-10">
+              <input type="email" ng-model="branch.email"
+                id="email" name="email"
+                class="form-control" placeholder="Email">
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in ng-scope">
+          </div>  
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="customer-name">Address
+            </label>
+            <div class="col-sm-10">
+            <div class="row">
+            <div class="col-sm-6">
+            <input type="text" ng-model="branch.address.line1" id="line1"
+              name="line1" class="form-control m-b" placeholder="line 1"/>
+              <div ng-class="{'has-error':branchForm.city.$invalid && !branchForm.city.$pristine }">
+              </div>
+              </div>
+              <!-- <span style="color: red">*</span> -->
+              <div class="col-sm-6">
+              <input type="text" ng-model="branch.address.line2" id="line2"
+              name="line2" class="form-control m-b" placeholder="line 2"/>
+              
+              </div>
+              </div>
+            <div class="row">
+            <div class="col-sm-6">
+
+              <input type="text" ng-model="branch.address.city" id="city"
+              name="city" class="form-control m-b" placeholder="City">
+              </div>
+              <div class="col-sm-6">
+              <input type="number" ng-model="branch.address.zip" id="zip"
+              name="zip" class="form-control m-b" placeholder="zip" min="0" maxlength="6"/>
+            </div>
+            </div>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+          
+      <div class="form-group">
+      <label class="col-sm-2 control-label" >Working Hours
+        <span style="color: red">*</span></label>
+           <div calss="col-sm-10">
+          <div class="datetimepicker-input input-group">
+            <div ng-repeat="working in branch.working_hours">
+            <div class="col-md-12">
+              <div class="col-sm-5" ng-class="{'has-error':branchForm.start.$invalid && !branchForm.start.$pristine }">
+              <div class="input-group w-md">
+                <timepicker date-format="dd-MM-yyyy" ng-model="working.start" name="start" readonly-time="false" show-button-bar="false" required></timepicker>
+                <p ng-show="branchForm.start.$invalid && !branchForm.start.$pristine" class="help-block  m-b-none">Start Date is required.</p>
+              </div>
+              </div>
+             <div class="col-sm-6" ng-class="{'has-error':branchForm.end.$invalid && !branchForm.end.$pristine }">
+               <div class="input-group w-md">
+               <timepicker date-format="dd-MM-yyyy" ng-model="working.end" name="end" readonly-time="false" show-button-bar="false" 
+                required></timepicker>
+                <p ng-show="branchForm.end.$invalid && !branchForm.end.$pristine" class="help-block  m-b-none">End Date is required.</p>
+               </div> 
+             </div>
+             <div class="col-sm-1">
+             <a href="javascript:void(0)"  ng-show="($index > 0)" ng-click="deleteWorking_hours($index)" style="color: red"><i class="fa fa-remove" title="remove"></i> </a>
+             </div>
+            </div>
+          </div>
+            <a href="javascript:void(0)" ng-click="addNewWorking_hours()"  
+            style="color:green" class="btn btn-sm btn-dark">
+            <i class="fa fa-plus"></i> Add</a>
+        </div>
+      </div>
+    </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+        <div class="form-group" ng-class="{'has-error':branchForm.vehicle_type.$invalid && !branchForm.vehicle_type.$pristine }">
+          <label class="col-sm-2 control-label" for="dealer_name">
+          <br>Serviceable Vehicles
+          <span style="color: red">*</span></label>
+           <div class="col-sm-10">
+           <div ng-repeat="vehicle in branch.serviceable_vehicles">
+           <div class="row">
+
+           <div class="col-sm-11" >
+            <br><select ng-init="initAllVehicleTypes()"
+              ng-model="vehicle.vehicle_type" id="vehicle_type"
+              name="vehicle_type" class="form-control" size="1"
+              ng-options="vehicle_type._id as (vehicle_type.name) for vehicle_type in allVehicletypes" required>
+              <option value="">Select Vehicle Type</option>
+            </select>
+          <p ng-show="branchForm.vehicle_type.$invalid && !branchForm.vehicle_type.$pristine" class="help-block  m-b-none">Vehicle Type is required.</p>
+          
+          </div>
+          <div class="col-sm-1">
+          <br> <a href="javascript:void(0)" ng-show="$index > 0" ng-click="deleteServiceable_vehicles($index)" style="color: red"><i class="fa fa-remove" title="remove"></i> </a>
+          </div>
+          </div>
+          </div>
+          <br><a href="javascript:void(0)" ng-click="addNewServiceable_vehicles()"  style="color:green" class="btn btn-sm btn-dark">
+            <i class="fa fa-plus" ></i> Add</a>
+          
+          </div>
+        </div> 
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div>
+
+
+         <div class="line line-dashed b-b line-lg pull-in"></div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="latitude">Latitude</label>
+            <div class="col-sm-10">
+              <input type="text" ng-model="branch.latitude"
+                id="latitude" name="latitude"
+                class="form-control" placeholder="latitude" min="0">
+            </div>
+          </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div> 
+
+          <div class="form-group">
+          <label class="col-sm-2 control-label" for="longitude">Longitude</label>
+            <div class="col-sm-10">
+              <input type="text" ng-model="branch.longitude"
+                id="longitude" name="longitude"
+                class="form-control" placeholder="longitude" min="0">
+            </div>
+          </div>
+        <div class="line line-dashed b-b line-lg pull-in ng-scope"></div> 
+
+        <div class="text-right lter">
+            <button type="submit" class="btn btn-success" ng-disabled="branchForm.$invalid">
+            <i class="fa fa-edit"></i> Submit</button>          
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Labour Charges</h1>
+  <small class="text-muted">Manage Labour Charges</small>
+</div>
+<div class="wrapper-md" ng-init="initlabourCharges()">
+  <div class="row m-b-sm">
+    <div class="col-md-6">
+    	<a ui-sref="^.create" class="btn btn-sm btn-primary">
+    	<i class="fa fa-plus space-6"></i> Create</a>
+		 
+    </div>
+    <form action="#" ng-submit="getList()" method="post" enctype="multipart/form-data"
+            class="form-horizontal form-bordered" onsubmit="return false;">
+    <div class="col-md-6">
+   
+      </div>
+    </form>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Labour : {{totalLabourCharges}}
+    </div>
+    <div class="row">
+    <div ng-repeat="labourcharges in labourcharges">
+        <div class="col-md-3">
+          <div class="panel panel-info" style="margin: 1%">
+            <div class="panel-heading parts">
+              <div class="clearfix">
+                <div class="row">
+                <div class="col-xs-12">
+                <div class="m-t-xs m-b-xs">
+                 <a ng-show="deleteAction" ng-click="deleteLabourCharge(labourcharges._id, row)">
+                  <i class="icon-trash pull-right sm" style="font-size: initial"></i></a>
+
+                  <a ng-show="deleteAction" href="javascript:void(0)" ui-sref="^.edit({labourchargeId: labourcharges._id})"><i class="icon-pencil pull-right sm" style="font-size: initial; margin-right: 3%"></i></span></a>
+                  
+                </div>
+                </div>
+                <div class="col-xs-12">
+                  <div class="m-t-xs m-b-xs" ui-jq="slimScroll" ui-options="{height:'50px', size:'3px'}">{{labourcharges.desc}}
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-group no-radius alt" ui-jq="slimScroll" ui-options="{height:'100px', size:'3px'}">
+             
+              <div ng-repeat="rates in labourcharges.rates">
+               <span class="list-group-item" href>
+               {{rates.branch}}
+                <span class="pull-right"><i class="fa fa-rupee"></i>{{rates.rate}}
+                </span>
+              </span>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+<pagination boundary-links="true" class="pull-right" total-items="totalLabourCharges" items-per-page="numPerPage" ng-model="currentPage" ng-change="pageChanged()" data-max-size="maxPages"></pagination>
